@@ -64,14 +64,15 @@
                         </div>
                         <div class="col">
                           <!-- <div class="form-group"> -->
-                            <div class="footer text-right">
+                            <!-- <div class="footer text-right">
                                 <button class="btn btn-primary mr-1" type="submit">Simpan</button>
                                 <button class="btn btn-danger" type="reset">Kembali</button>
-                            </div>
+                            </div> -->
                           <!-- </div> -->
                           <div class="form-group">
                             <label>Pembuka</label>
-                            <input type="text" name='txt_pembuka' class="form-control" placeholder="Pembuka">
+                            <textarea type="textarea" name='txt_pembuka' class="form-control" placeholder="Pembuka"></textarea>
+                            <!-- <input type="textarea" name='txt_pembuka' class="form-control" placeholder="Pembuka"> -->
                           </div>
                           <!-- <div class="form-group">
                             <label>Nama Yang Ditugaskan</label>
@@ -122,6 +123,16 @@
                             <label>Tempat</label>
                             <input type="text" name='txt_tempat' class="form-control" placeholder="Tempat">
                           </div>
+                          <div class="form-group">
+                            <label>File Undangan (Jika Ada)</label>
+                            <input type="file" name='file_undangan' class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>File Disposisi (Jika Ada)</label>
+                            <input type="file" name="file_disposisi" class="form-control">
+                          </div>
+
+                          <!-- KHUSUS SEKDIR -->
                           <div class="form-group">
                             <label>Tanggal Surat</label>
                             <input type="date" name='date_tanggalsurat' class="form-control">
@@ -197,6 +208,10 @@
                     <button class="btn btn-primary mr-1" type="submit">Submit</button>
                     <button class="btn btn-secondary" type="reset">Reset</button>
                   </div> -->
+                  <div class="footer text-right">
+                      <button class="btn btn-primary mr-1" type="submit">Simpan</button>
+                      <button class="btn btn-danger" type="reset">Kembali</button>
+                  </div>
                  </form>
                 </div>
 </div>

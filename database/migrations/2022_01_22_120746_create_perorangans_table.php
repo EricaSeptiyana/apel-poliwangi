@@ -29,7 +29,7 @@ class CreatePerorangansTable extends Migration
             $table->string('jenis_surat');
             $table->year('tahun_surat');
             $table->string('penanda_tangan');
-            $table->string('nip_penandatangan');
+            // $table->string('nip_penandatangan');
             $table->timestamps();
         });
     }

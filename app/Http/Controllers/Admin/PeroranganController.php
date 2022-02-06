@@ -66,7 +66,7 @@ class PeroranganController extends Controller
 
         $request->validate([
             'txt_pembuka'=>'required',
-            'nama'=>'required',
+            // 'nama'=>'required',
             'nip_nipppk'=>'required', 
             'txt_jabatan'=>'required',
             'jenis_kegiatan'=>'required',
@@ -78,6 +78,7 @@ class PeroranganController extends Controller
             'int_kode'=>'required',
             'string_jenissurat' => 'required',
             'year_tahunsurat' => 'required',
+            // 'nip_penandatangan' => 'required',
         ]);
 
         $data_perorangan=new perorangan([
@@ -96,6 +97,7 @@ class PeroranganController extends Controller
             'jenis_surat' => $request->get('string_jenissurat'),
             'tahun_surat' => $request->get('year_tahunsurat'),
             'penanda_tangan' => $request->get('optionid_user'),
+            // 'nip_penandatangan' => $request->get('optionid_user'),
         ]);
 
         // $tanggal = date("d");

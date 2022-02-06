@@ -8,16 +8,22 @@ class perorangan extends Model
 {
     //
     protected $fillable=[
+        'pembuka',
+        'nama',
+        'nip_nipppk',
+        'jabatan',
         'jenis_kegiatan',
         'waktu_mulai',
         'waktu_selesai',
         'tempat',
         'file_undangan',
         'file_disposisi',
+        'tanggal_surat',
         'nomor',
         'kode_surat',
         'jenis_surat',
         'tahun_surat',
         'penanda_tangan',
+        // 'nip_penandatangan',
     ];
 }

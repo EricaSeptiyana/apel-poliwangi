@@ -90,6 +90,8 @@
                             <label>Tempat</label>
                             <input type="text" name='txt_tempat' value="{{$data->tempat}}" class="form-control" placeholder="Tempat">
                           </div>
+
+                          <!-- KHUSUS SEKDIR -->
                           <div class="form-group">
                             <label>Tanggal Surat</label>
                             <input type="date" name='date_tanggalsurat' value="{{$data->tanggal_surat}}" class="form-control">

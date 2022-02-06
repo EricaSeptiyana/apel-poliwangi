@@ -11,6 +11,25 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <!-- <div class="form-group row col-md-6 offset-md-3 text-md-center">
+                            <h6> {{ __('Aplikasi Administrasi Pelayanan Surat Kegiatan Di Politeknik Negeri Banyuwangi') }} </h6>
+                        </div> -->
+                        <div class="form-group">
+                            <div class="sidebar-brand sidebar-brand-sm text-md-center">
+                            <img alt="image" src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="150">   
+                                <a class="navbar-brand" href="./"></a>
+                            </div>
+                            <!-- <div class="col-md-6 offset-md-3 text-md-center">
+                               <h6> {{ __('Aplikasi Administrasi Pelayanan Surat Kegiatan Di Politeknik Negeri Banyuwangi') }} </h6>
+                            </div> -->
+                        </div>
+                        <div class="form-group" style="color:blue">
+                            <div class="text-md-center">
+                               <h5> {{ __('Aplikasi Administrasi Pelayanan Surat Kegiatan') }} </h5>
+                               <h5> {{ __('Di Politeknik Negeri Banyuwangi') }} </h5>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
