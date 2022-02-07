@@ -20,8 +20,10 @@ class CreateKelompoksTable extends Migration
             $table->date('waktu_mulai');
             $table->date('waktu_selesai');
             $table->string('tempat');
-            $table->file('file_undangan');
-            $table->file('file_disposisi');
+            $table->string('file_undangan')->nullable();
+            $table->string('lokasi_fileundangan')->nullable();
+            $table->string('file_disposisi')->nullable();
+            $table->string('lokasi_filedisposisi')->nullable();
             $table->date('tanggal_surat');
             $table->integer('nomor');
             $table->string('kode_surat');

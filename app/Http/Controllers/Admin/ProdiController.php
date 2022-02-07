@@ -17,8 +17,9 @@ class ProdiController extends Controller
     {
         //
         $pagename='Data Program Studi';
-        $data=prodi::all();
-        return view('admin.prodi.index', compact('data', 'pagename'));
+        $i = 0;
+        $data=prodi::all()->sortDesc();
+        return view('admin.prodi.index', compact('data', 'pagename', 'i'));
     }
 
     /**

@@ -18,8 +18,9 @@ class PeroranganController extends Controller
     {
         //
         $pagename='Data Surat Tugas Perorangan';
-        $data=perorangan::all();
-        return view('admin.perorangan.index', compact('data', 'pagename'));
+        $i = 0;
+        $data=perorangan::all()->sortDesc();
+        return view('admin.perorangan.index', compact('data', 'pagename', 'i'));
     }
 
     /**
@@ -66,7 +67,7 @@ class PeroranganController extends Controller
 
         $request->validate([
             'txt_pembuka'=>'required',
-            // 'nama'=>'required',
+            'nama'=>'required',
             'nip_nipppk'=>'required', 
             'txt_jabatan'=>'required',
             'jenis_kegiatan'=>'required',
@@ -81,9 +82,49 @@ class PeroranganController extends Controller
             // 'nip_penandatangan' => 'required',
         ]);
 
+        if($request->file_undangan || $request->file_disposisi){
+            $namafileundangan = $request->file_undangan->getClientOriginalName() . '_' . time() . '.' . $request->file_undangan->extension();
+            $namafiledisposisi = $request->file_disposisi->getClientOriginalName() . '_' . time() . '.' . $request->file_disposisi->extension();
+
+            $data_perorangan=new perorangan([
+                'pembuka' => $request->get('txt_pembuka'),
+                'nama' => $request->get('nama'),
+                'nip_nipppk' => $request->get('nip_nipppk'),
+                'jabatan' => $request->get('txt_jabatan'),
+                'jenis_kegiatan' => $request->get('jenis_kegiatan'),
+                'waktu_mulai' => $request->get('waktu_mulai'),
+                'waktu_selesai' => $request->get('waktu_selesai'),
+                'tempat' => $request->get('txt_tempat'),
+                'tanggal_surat' => $request->get('date_tanggalsurat'),
+                // 'nomor' => $request->get('int_nomor'),
+                'nomor' => $nomorfill,
+                'kode_surat' => $request->get('int_kode'),
+                'jenis_surat' => $request->get('string_jenissurat'),
+                'tahun_surat' => $request->get('year_tahunsurat'),
+                'penanda_tangan' => $request->get('optionid_user'),
+                // 'nip_penandatangan' => $request->get('optionid_user'),
+                'file_undangan' => $namafileundangan,
+                'lokasi_fileundangan' => $request->file_undangan->move(public_path('fileundangan'), $namafileundangan),
+                // 'file_undangan' => $request->get('file_undangan'),
+                'file_disposisi' => $namafiledisposisi,
+                'lokasi_filedisposisi' => $request->file_disposisi->move(public_path('filedisposisi'), $namafiledisposisi),
+            ]);
+
+            // $tanggal = date("d");
+            // $tanggalsurat = substr($request->get('date_tanggalsurat'), 8);
+            // if($tanggal == $tanggalsurat){
+            //     if($nomorfill >= 20){
+            //         return redirect('admin/perorangan/create')->with('gagal','lebih dari 20');
+            //     }
+            // }
+
+            $data_perorangan->save();
+            return redirect('admin/perorangan')->with('sukses','Surat Tugas Perorangan Berhasil Diajukan');
+        }
+
         $data_perorangan=new perorangan([
             'pembuka' => $request->get('txt_pembuka'),
-            'nama' => $request->get('txt_nama'),
+            'nama' => $request->get('nama'),
             'nip_nipppk' => $request->get('nip_nipppk'),
             'jabatan' => $request->get('txt_jabatan'),
             'jenis_kegiatan' => $request->get('jenis_kegiatan'),
@@ -97,7 +138,11 @@ class PeroranganController extends Controller
             'jenis_surat' => $request->get('string_jenissurat'),
             'tahun_surat' => $request->get('year_tahunsurat'),
             'penanda_tangan' => $request->get('optionid_user'),
-            // 'nip_penandatangan' => $request->get('optionid_user'),
+            // 'file_undangan' => $namafileundangan,
+            // 'lokasi_fileundangan' => $request->file_undangan->move(public_path('fileundangan'), $namafileundangan),
+            // 'file_undangan' => $request->get('file_undangan'),
+            // 'file_disposisi' => $namafiledisposisi,
+            // 'lokasi_filedisposisi' => $request->file_disposisi->move(public_path('filedisposisi'), $namafiledisposisi),
         ]);
 
         // $tanggal = date("d");
@@ -152,10 +197,11 @@ class PeroranganController extends Controller
         $request->validate([
             'txt_pembuka'=>'required',
             'optionid_user'=>'required', //penandatangan
-            'txt_nama'=>'required',
+            'nama'=>'required',
             'nip_nipppk'=>'required',
             'txt_jabatan'=>'required',
             'jenis_kegiatan'=>'required',
+            // 'file_undangan'=>'required',
             'waktu_mulai'=>'required',
             'waktu_selesai'=>'required',
             'txt_tempat'=>'required',
@@ -168,9 +214,10 @@ class PeroranganController extends Controller
 
         $perorangan = perorangan::find($id);
         $perorangan->pembuka = $request->get('txt_pembuka');
-        $perorangan->nama = $request->get('txt_nama');
+        $perorangan->nama = $request->get('nama');
         $perorangan->nip_nipppk = $request->get('nip_nipppk');
         $perorangan->jabatan= $request->get('txt_jabatan');
+        // $perorangan->file_undangan= $request->get('file_undangan');
         $perorangan->jenis_kegiatan = $request->get('jenis_kegiatan');
         $perorangan->waktu_mulai = $request->get('waktu_mulai');
         $perorangan->waktu_selesai = $request->get('waktu_selesai');

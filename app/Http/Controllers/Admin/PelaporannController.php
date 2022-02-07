@@ -17,8 +17,9 @@ class PelaporannController extends Controller
     {
         //
         $pagename='Data Pelaporan Hasil Perjalanan Dinas';
-        $data=pelaporann::all();
-        return view('admin.pelaporann.index', compact('data', 'pagename'));
+        $i = 0;
+        $data=pelaporan::all()->sortDesc();
+        return view('admin.pelaporann.index', compact('data', 'pagename', 'i'));
     }
 
     /**

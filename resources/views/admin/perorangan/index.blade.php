@@ -43,46 +43,46 @@
                   </div>
                   </div>
                     <div class="table-responsive">
-                      <table class="table table-striped table-md">
+                      <table id="data-table" class="table table-striped table-md">
                         <tr>
                           <th>No</th>
                           <th>nomor surat</th>
                           <th>nama</th>
-                          <!-- <th>jabatan</th> -->
+                          <th>jabatan</th>
                           <th>kegiatan</th>
                           <th>waktu pelaksanaan</th>
                           <th>tempat</th>
                           <th>tanggal surat</th>
                           <th>Aksi</th>
                         </tr>
+                        @foreach($data as $row)
                         <tr>
-                          @foreach($data as $i=>$row)
                             <td>{{++$i}}</td>
                             <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td>
                             <td>{{$row->nama}}</td>
-                            <!-- <td>{{$row->jabatan}}</td> -->
+                            <td>{{$row->jabatan}}</td>
                             <td>{{$row->jenis_kegiatan}}</td>
                             <td>{{$row->waktu_mulai}} sampai {{$row->waktu_selesai}}</td>
                             <td>{{$row->tempat}}</td>
                             <td>{{$row->tanggal_surat}}</td>
                             <!-- <td><div class="badge badge-success">Active</div></td>
                             <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
-                            <td>
-                                <div class="buttons">
+                              <td>
+                                <div class="d-flex justify-content-evenly">
                                   <a href="{{route('perorangan.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                  <a href="#" class="btn btn-info"> Cetak </a>
+                                  <a href="#" class="btn btn-info mx-2"> Cetak </a>
                                   <a href="#" class="btn btn-success"> Download </a>
                                   <form action="{{route('perorangan.destroy', $row->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"> Hapus </button>
+                                        <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
                                   </form>
                                   <!-- <a href="#" class="btn btn-info"> Cetak </a>
                                   <a href="#" class="btn btn-success"> Download </a> -->
                                 </div>
-                             </td>
-                          @endforeach
-                        </tr>
+                              </td>
+                            </tr>
+                            @endforeach
                         <!-- <tr>
                           <td>2</td>
                           <td>Hasan Basri</td>
@@ -125,7 +125,7 @@
 
 
 <!-- General JS Scripts -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
@@ -142,4 +142,14 @@
   <!-- Page Specific JS File -->
   <script src="{{ asset('public/assets/js/page/components-table.js')}}"></script>
 
+  <!-- js add -->
+  <script>
+    $(document).ready(function(){
+      var table = $('#data-table').DataTable({
+        scrollY: "300px",
+        scrollX: true,
+        scrollCollapse: true,
+      });
+    });
+  </script>
 @endsection

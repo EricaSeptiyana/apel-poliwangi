@@ -25,5 +25,9 @@ class perorangan extends Model
         'tahun_surat',
         'penanda_tangan',
         // 'nip_penandatangan',
+        'file_undangan',
+        'lokasi_fileundangan',
+        'file_disposisi',
+        'lokasi_filedisposisi',
     ];
 }

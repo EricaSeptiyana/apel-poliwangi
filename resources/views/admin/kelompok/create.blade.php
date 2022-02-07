@@ -71,7 +71,7 @@
                           <!-- </div> -->
                           <div class="form-group">
                             <label>Pembuka</label>
-                            <input type="text" name='txt_pembuka' class="form-control" placeholder="Pembuka">
+                            <textarea type="textarea" name='txt_pembuka' value="Yang bertanda tangan dibawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut:" class="form-control">Yang bertanda tangan dibawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut:</textarea>
                           </div>
                           <div class="form-group">
                             <label>Jenis Kegiatan</label>
@@ -110,6 +110,24 @@
                             <label>File Disposisi (Jika Ada)</label>
                             <input type="file" name="file_disposisi" class="form-control">
                           </div>
+                          <div class="form-group">
+                            <label>Anggota 1</label>
+                            <select name='nama' class="form-control">
+                                @foreach($data_User as $User)
+                                    <option value={{$User->name}}>
+                                        {{$User->name}} / {{$User->nip}}</option>    
+                                @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label>Anggota 2</label>
+                            <select name='nama1' class="form-control">
+                                @foreach($data_User as $User)
+                                    <option value={{$User->name}}>
+                                        {{$User->name}} / {{$User->nip}}</option>    
+                                @endforeach
+                            </select>
+                          </div>
 
                           <!-- KHUSUS SEKDIR -->
                           <div class="form-group">
@@ -144,16 +162,13 @@
                                 <option>Option 3</option> -->
                             </select>
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label>Anggota 1</label>
                             <select name='nama' class="form-control">
                                 @foreach($data_User as $User)
                                     <option value={{$User->id}}>
                                         {{$User->name}} / {{$User->nip}}</option>    
                                 @endforeach
-                                <!-- <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option> -->
                             </select>
                           </div>
                           <div class="form-group">
@@ -163,11 +178,8 @@
                                     <option value={{$User->id}}>
                                         {{$User->name}} / {{$User->nip}}</option>    
                                 @endforeach
-                                <!-- <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option> -->
                             </select>
-                          </div>
+                          </div> -->
                           <!-- <div class="form-group">
                             <label>NIP/NIPPK</label>
                             <input type="text" name='nip_nipppk' class="form-control" placeholder="NIP/NIPPPK">
@@ -221,14 +233,14 @@
                   </div> -->
                   <div class="footer text-right">
                       <button class="btn btn-primary mr-1" type="submit">Simpan</button>
-                      <button class="btn btn-danger" type="reset">Kembali</button>
+                      <a class="btn btn-danger text-white" href="{{route('kelompok.index')}}" type="reset">Kembali</a>
                   </div>
                  </form>
                 </div>
 </div>
 
  <!-- General JS Scripts -->
- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>

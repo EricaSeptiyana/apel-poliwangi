@@ -17,8 +17,9 @@ class JabatanController extends Controller
     {
         //
         $pagename='Data Jabatan';
-        $data=jabatan::all();
-        return view('admin.jabatan.index', compact('data', 'pagename'));
+        $i = 0;
+        $data=jabatan::all()->sortDesc();
+        return view('admin.jabatan.index', compact('data', 'pagename', 'i'));
         // return view('admin.jabatan.index', );
     }
 

@@ -55,8 +55,8 @@
                           <th>Tanggal Surat</th>
                           <th>Aksi</th>
                         </tr>
+                        @foreach($data as $row)
                         <tr>
-                          @foreach($data as $i=>$row)
                             <td>{{++$i}}</td>
                             <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td>
                             <td>{{$row->nama}}</td>
@@ -68,22 +68,22 @@
                             <!-- <td><div class="badge badge-success">Active</div></td>
                             <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
                             <td>
-                                <div class="buttons">
+                                <div class="d-flex justify-content-evenly">
                                   <a href="{{route('kelompok.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
                                   <!-- <a href="#" class="btn btn-info"> View </a> -->
-                                  <a href="#" class="btn btn-info"> Cetak </a>
+                                  <a href="#" class="btn btn-info mx-2"> Cetak </a>
                                   <a href="#" class="btn btn-success"> Download </a>
                                   <form action="{{route('kelompok.destroy', $row->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"> Hapus </button>
+                                        <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
                                   </form>
                                   <!-- <a href="#" class="btn btn-info"> Cetak </a>
                                   <a href="#" class="btn btn-success"> Download </a> -->
                                 </div>
                             </td>
+                          </tr>
                           @endforeach
-                        </tr>
                         <!-- </tr>
                         <tr>
                           <td class="p-0 text-center">
@@ -174,6 +174,23 @@
                       </table>
                     </div>
                   </div>
+                  <div class="card-footer text-right">
+                    <nav class="d-inline-block">
+                      <ul class="pagination mb-0">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                        </li>
+                      </ul>
+                    </nav>
+                </div>
                 </div>
               </div>
             </div>
@@ -181,7 +198,7 @@
 
 
 <!-- General JS Scripts -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>

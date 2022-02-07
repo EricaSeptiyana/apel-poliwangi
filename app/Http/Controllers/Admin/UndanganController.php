@@ -18,8 +18,9 @@ class UndanganController extends Controller
     {
         //
         $pagename='Data Surat Undangan';
-        $data=undangan::all();
-        return view('admin.undangan.index', compact('data', 'pagename'));
+        $i = 0;
+        $data=undangan::all()->sortDesc();
+        return view('admin.undangan.index', compact('data', 'pagename', 'i'));
     }
 
     /**

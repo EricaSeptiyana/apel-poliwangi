@@ -61,19 +61,28 @@
                         </div>
                         <div class="col">
                           <!-- <div class="form-group"> -->
-                            <div class="footer text-right">
+                            <!-- <div class="footer text-right">
                                 <button class="btn btn-primary mr-1" type="submit">Update</button>
                                 <button class="btn btn-danger" type="reset">Kembali</button>
-                            </div>
+                            </div> -->
                           <!-- </div> -->
                           <div class="form-group">
                             <label>Pembuka</label>
-                            <textarea type="textarea" name='txt_pembuka' class="form-control" placeholder="Pembuka"></textarea>
+                            <textarea type="textarea" name='txt_pembuka' class="form-control" placeholder="Pembuka">{{$data->pembuka}}</textarea>
                             <!-- <input type="textarea" name='txt_pembuka' value="{{$data->pembuka}}" class="form-control" placeholder="Pembuka"> -->
                           </div>
                           <div class="form-group">
                             <label>Nama Yang Ditugaskan</label>
-                            <input type="text" name='txt_nama' value="{{$data->nama}}" class="form-control" placeholder="Nama">
+                            <!-- <input type="text" name='txt_nama' value="{{$data->nama}}" class="form-control" placeholder="Nama"> -->
+                            <select name='nama' class="form-control">
+                                @foreach($data_User as $User)
+                                    <option value={{$User->name}}>
+                                        {{$User->name}}</option>
+                                @endforeach
+                                <!-- <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option> -->
+                            </select>
                           </div>
                           <div class="form-group">
                             <label>NIP/NIPPPK</label>
@@ -101,11 +110,11 @@
                           </div>
                           <div class="form-group">
                             <label>File Undangan (Jika Ada)</label>
-                            <input type="file" name='file_undangan' class="form-control">
+                            <input type="file" name='file_undangan' value="{{$data->file_undangan}}" class="form-control">
                           </div>
                           <div class="form-group">
                             <label>File Disposisi (Jika Ada)</label>
-                            <input type="file" name="file_disposisi" class="form-control">
+                            <input type="file" name="file_disposisi" value="{{$data->file_disposisi}}" class="form-control">
                           </div>
 
                           <!-- KHUSUS SEKDIR -->
@@ -115,7 +124,7 @@
                           </div>
                           <div class="form-group">
                             <label>Nomor</label>
-                            <input type="int" name='int_nomor' value="{{$data->nomormax}}" class="form-control">
+                            <input type="int" name='int_nomor' disabled value="{{$data->nomor}}" class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Kode</label>
@@ -176,12 +185,16 @@
                     <button class="btn btn-primary mr-1" type="submit">Submit</button>
                     <button class="btn btn-secondary" type="reset">Reset</button>
                   </div>-->
+                  <div class="footer text-right">
+                      <button class="btn btn-primary mr-1" type="submit">Update</button>
+                      <a class="btn btn-danger text-white" href="{{route('perorangan.index')}}" type="reset">Kembali</a>
+                  </div>
                  </form>
                 </div>
 </div>
 
  <!-- General JS Scripts -->
- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
