@@ -92,11 +92,11 @@
                           </div>
                           <div class="form-group">
                             <label>NIP/NIPPK</label>
-                            <input type="text" name='nip_nipppk' class="form-control" placeholder="NIP/NIPPPK">
+                            <input type="text" name='nip_nipppk' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Jabatan</label>
-                            <input type="text" name='txt_jabatan' class="form-control" placeholder="Jabatan">
+                            <input type="text" name='txt_jabatan' class="form-control">
                           </div>
                           <!-- <div class="form-group">
                             <label>Jabatan</label>
@@ -109,19 +109,19 @@
                           </div> -->
                           <div class="form-group">
                             <label>Jenis Kegiatan</label>
-                            <input type="text" name='jenis_kegiatan' class="form-control" placeholder="kegiatan">
+                            <input type="text" name='jenis_kegiatan' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Waktu Mulai</label>
-                            <input type="date" name='waktu_mulai' class="form-control" placeholder="WIB">
+                            <input type="date" name='waktu_mulai' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Waktu Selesai</label>
-                            <input type="date" name='waktu_selesai' class="form-control" placeholder="WIB">
+                            <input type="date" name='waktu_selesai' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Tempat</label>
-                            <input type="text" name='txt_tempat' class="form-control" placeholder="Tempat">
+                            <input type="text" name='txt_tempat' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>File Undangan (Jika Ada)</label>

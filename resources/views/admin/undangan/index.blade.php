@@ -8,6 +8,10 @@
 
   <!-- CSS Libraries -->
 
+  <!-- Boostrap core CSS -->
+  <!-- <link rel="stylesheet" href="{{ asset('public/assets/css/boostrap.css')}}"> -->
+  <!-- <link rel="stylesheet" href="{{ asset('public/assets/dataTables/dataTables.min.css')}}"> -->
+
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{ asset('public/assets/css/components')}}.css">
@@ -152,6 +156,7 @@
   <!-- Template JS File -->
   <script src="{{ asset('public/assets/js/scripts.js')}}"></script>
   <script src="{{ asset('public/assets/js/custom.js')}}"></script>
+  <!-- <script src="{{ asset('public/assets/dataTables/datatables.min.js')}}"></script> -->
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('public/assets/js/page/components-table.js')}}"></script>

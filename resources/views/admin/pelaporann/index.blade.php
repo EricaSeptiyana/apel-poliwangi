@@ -16,8 +16,18 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
+              @if(session()->get('sukses'))
+                <div class="alert alert-succes" style="color:green">
+                  {{session()->get('sukses')}}
+                </div>
+              @endif
                 <div class="card-header">
                   <h4>{{$pagename}}</h4>
+                  <div class="card-header-action">
+                        <div class="input-group">
+                          <a href="{{route('pelaporann.create')}}" class="btn btn-primary pull-right"> Tambah </a>
+                        </div>
+                  </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
@@ -35,15 +45,16 @@
                     <div class="table-responsive">
                       <table class="table table-striped table-md">
                         <tr>
-                          <th>#</th>
-                          <th>judul laporan</th>
+                          <th>No</th>
+                          <th>Judul Laporan</th>
                           <th>Dasar Pelaksanaan Dinas</th>
-                          <th>instansi</th>
-                          <th>waktu pelaksanaan</th>
-                          <th>tanggal surat</th>
+                          <th>Instansi</th>
+                          <th>Waktu Pelaksanaan</th>
+                          <th>Tanggal Surat</th>
+                          <th>Aksi</th>
                         </tr>
+                        @foreach($data as $row)
                         <tr>
-                          @foreach($data as $row)
                             <td>{{++$i}}</td>
                             <td>{{$row->judul_laporan}}</td>
                             <td>{{$row->dasar_pelaksanaan}}</td>
@@ -52,8 +63,22 @@
                             <td>{{$row->tanggal_surat}}</td>
                             <!-- <td><div class="badge badge-success">Active</div></td>
                             <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
-                          @endforeach
-                        </tr>
+                            <td>
+                                <div class="d-flex justify-content-evenly">
+                                  <a href="{{route('pelaporann.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                  <a href="#" class="btn btn-info mx-2"> Cetak </a>
+                                  <a href="#" class="btn btn-success"> Upload </a>
+                                  <form action="{{route('pelaporann.destroy', $row->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
+                                  </form>
+                                  <!-- <a href="#" class="btn btn-info"> Cetak </a>
+                                  <a href="#" class="btn btn-success"> Download </a> -->
+                                </div>
+                              </td>
+                          </tr>
+                        @endforeach
                         <!-- <tr>
                           <td>2</td>
                           <td>Hasan Basri</td>

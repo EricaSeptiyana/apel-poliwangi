@@ -206,7 +206,7 @@ class PeroranganController extends Controller
             'waktu_selesai'=>'required',
             'txt_tempat'=>'required',
             'date_tanggalsurat'=>'required',
-            'int_nomor'=>'required',
+            // 'int_nomor'=>'required',
             'int_kode'=>'required',
             'string_jenissurat' => 'required',
             'year_tahunsurat' => 'required',
@@ -217,13 +217,16 @@ class PeroranganController extends Controller
         $perorangan->nama = $request->get('nama');
         $perorangan->nip_nipppk = $request->get('nip_nipppk');
         $perorangan->jabatan= $request->get('txt_jabatan');
-        // $perorangan->file_undangan= $request->get('file_undangan');
+        $perorangan->file_undangan= $request->get('file_undangan');
+        // $perorangan->lokasi_fileundangan= $request->get('lokasi_fileundangan');
+        $perorangan->file_disposisi= $request->get('file_disposisi');
+        // $perorangan->lokasi_filedisposisi= $request->get('lokasi_filedisposisi');
         $perorangan->jenis_kegiatan = $request->get('jenis_kegiatan');
         $perorangan->waktu_mulai = $request->get('waktu_mulai');
         $perorangan->waktu_selesai = $request->get('waktu_selesai');
         $perorangan->tempat = $request->get('txt_tempat');
         $perorangan->tanggal_surat = $request->get('date_tanggalsurat');
-        $perorangan->nomor = $request->get('int_nomor');
+        // $perorangan->nomor = $request->get('int_nomor');
         $perorangan->kode_surat = $request->get('int_kode');
         $perorangan->jenis_surat = $request->get('string_jenissurat');
         $perorangan->tahun_surat = $request->get('year_tahunsurat');

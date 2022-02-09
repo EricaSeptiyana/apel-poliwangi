@@ -237,7 +237,7 @@ class KelompokController extends Controller
             // 'waktu_selesai'=>'required',
             // 'txt_tempat'=>'required',
             'date_tanggalsurat'=>'required',
-            'int_nomor'=>'required',
+            // 'int_nomor'=>'required',
             'int_kode'=>'required',
             'string_jenissurat' => 'required',
             'year_tahunsurat' => 'required',
@@ -254,7 +254,7 @@ class KelompokController extends Controller
         $kelompok->waktu_selesai = $request->get('waktu_selesai');
         $kelompok->tempat = $request->get('txt_tempat');
         $kelompok->tanggal_surat = $request->get('date_tanggalsurat');
-        $kelompok->nomor = $request->get('int_nomor');
+        // $kelompok->nomor = $request->get('int_nomor');
         $kelompok->kode_surat = $request->get('int_kode');
         $kelompok->jenis_surat = $request->get('string_jenissurat');
         $kelompok->tahun_surat = $request->get('year_tahunsurat');

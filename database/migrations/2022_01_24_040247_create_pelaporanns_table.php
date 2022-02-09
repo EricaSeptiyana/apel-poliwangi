@@ -24,9 +24,9 @@ class CreatePelaporannsTable extends Migration
             $table->string('hasil');
             $table->date('tanggal_surat');
             $table->string('penanda_tangan');
-            $table->string('nama');
-            $table->string('nip_nipppk');
-            $table->string('jabatan');
+            // $table->string('nama');
+            // $table->string('nip_nipppk');
+            // $table->string('jabatan');
             $table->timestamps();
         });
     }

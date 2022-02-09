@@ -57,13 +57,13 @@
               </li> -->
               <li class="menu-header">Permohonan</li>
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Pengajuan Surat Tugas</span></a>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Permohonan Surat Tugas</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="layout-default.html">Perorangan</a></li>
                   <li><a class="nav-link" href="layout-transparent.html">Kelompok</a></li>
                 </ul>
               </li>
-              <li class="active"><a class="nav-link" href="#"><i class="fas fa-pencil-ruler"></i> <span>Pengajuan Surat Undangan</span></a></li>
+              <li class="active"><a class="nav-link" href="#"><i class="fas fa-pencil-ruler"></i> <span>Permohonan Surat Undangan</span></a></li>
               <!-- <li class="active"><a class="nav-link" href="#"><i class="fas fa-building"></i> <span>Pengajuan Surat Keputusan</span></a></li> -->
               <li class="menu-header">Riwayat Surat</li>
               <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="fas fa-database"></i> <span>Kelola User</span></a></li> -->
@@ -72,7 +72,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="layout-default.html">Perorangan</a></li>
                   <li><a class="nav-link" href="layout-transparent.html">Kelompok</a></li>
-                  <li><a class="nav-link" href="layout-top-navigation.html">Laporan</a></li>
+                  <li><a class="nav-link" href="layout-top-navigation.html">Pelaporan</a></li>
                 </ul>
               </li>
               <li class="active"><a class="nav-link" href="blank.html"><i class="fas fa-file-signature"></i> <span>Riwayat Surat Undangan</span></a></li>

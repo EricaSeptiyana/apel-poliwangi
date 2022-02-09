@@ -157,7 +157,7 @@ class UndanganController extends Controller
             'time_pukul'=>'required',
             'txt_tempat'=>'required',
             'date_tanggalsurat'=>'required',
-            'int_nomor'=>'required',
+            // 'int_nomor'=>'required',
             'int_kode'=>'required',
             'string_jenissurat' => 'required',
             'year_tahunsurat' => 'required',
@@ -171,7 +171,7 @@ class UndanganController extends Controller
         $undangan->pukul = $request->get('time_pukul');
         $undangan->tempat = $request->get('txt_tempat');
         $undangan->tanggal_surat = $request->get('date_tanggalsurat');
-        $undangan->nomor = $request->get('int_nomor');
+        // $undangan->nomor = $request->get('int_nomor');
         $undangan->kode_surat = $request->get('int_kode');
         $undangan->jenis_surat = $request->get('string_jenissurat');
         $undangan->tahun_surat = $request->get('year_tahunsurat');

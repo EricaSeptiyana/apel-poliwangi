@@ -33,7 +33,7 @@
                         </div>
                     </div>
                   @endif
-                  <form action="{{route('perorangan.update', $data->id)}}" method="post" enctype="multipart/form-data" class="form=horizontal">
+                  <form action="{{route('pelaporann.update', $data->id)}}" method="post" enctype="multipart/form-data" class="form=horizontal">
                     @method('PATCH')
                     @csrf
                   <div class="container">
@@ -67,62 +67,60 @@
                             </div> -->
                           <!-- </div> -->
                           <div class="form-group">
-                            <label>Pembuka</label>
-                            <textarea type="textarea" name='txt_pembuka' class="form-control" placeholder="Pembuka">{{$data->pembuka}}</textarea>
+                            <label>Judul Laporan</label>
+                            <textarea type="textarea" name='judul_laporan' class="form-control">{{$data->judul_laporan}}</textarea>
                             <!-- <input type="textarea" name='txt_pembuka' value="{{$data->pembuka}}" class="form-control" placeholder="Pembuka"> -->
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label>Nama Yang Ditugaskan</label>
-                            <!-- <input type="text" name='txt_nama' value="{{$data->nama}}" class="form-control" placeholder="Nama"> -->
                             <select name='nama' class="form-control">
                                 @foreach($data_User as $User)
                                     <option value={{$User->nama}}>
                                         {{$User->name}}</option>
                                 @endforeach
-                                <!-- <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option> -->
                             </select>
+                          </div> -->
+                          <div class="form-group">
+                            <label>Dasar Pelaksanaan</label>
+                            <textarea type="textarea" name='dasar_pelaksanaan' class="form-control">{{$data->dasar_pelaksanaan}}</textarea>
+                            <!-- <input type="text" name='dasar_pelaksanaan' value="{{$data->dasar_pelaksanaan}}" class="form-control"> -->
                           </div>
                           <div class="form-group">
-                            <label>NIP/NIPPPK</label>
-                            <input type="text" name='nip_nipppk' value="{{$data->nip_nipppk}}" class="form-control" placeholder="NIP/NIPPPK">
+                            <label>Maksud Perjalanan Dinas</label>
+                            <input type="text" name='maksud_perjalanandinas' value="{{$data->maksud_perjalanandinas}}" class="form-control">
                           </div>
                           <div class="form-group">
-                            <label>Jabatan</label>
-                            <input type="text" name='txt_jabatan' value="{{$data->jabatan}}" class="form-control" placeholder="Jabatan">
-                          </div>
-                          <div class="form-group">
-                            <label>Jenis Kegiatan</label>
-                            <input type="text" name='jenis_kegiatan' value="{{$data->jenis_kegiatan}}" class="form-control" placeholder="Kegiatan">
+                            <label>Dinas / Instansi yang Dikunjungi</label>
+                            <input type="text" name='instansi' value="{{$data->instansi}}" class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Waktu Mulai</label>
-                            <input type="date" name='waktu_mulai' value="{{$data->waktu_mulai}}" class="form-control" placeholder="WIB">
+                            <input type="date" name='waktu_mulai' value="{{$data->waktu_mulai}}" class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Waktu Selesai</label>
-                            <input type="date" name='waktu_selesai' value="{{$data->waktu_selesai}}" class="form-control" placeholder="WIB">
+                            <input type="date" name='waktu_selesai' value="{{$data->waktu_selesai}}" class="form-control">
                           </div>
                           <div class="form-group">
-                            <label>Tempat</label>
-                            <input type="text" name='txt_tempat' value="{{$data->tempat}}" class="form-control" placeholder="Tempat">
+                            <label>Hasil</label>
+                            <textarea type="textarea" name='hasil' class="form-control">{{$data->hasil}}</textarea>
+                            <!-- <input type="text" name='txt_tempat' value="{{$data->tempat}}" class="form-control" placeholder="Tempat"> -->
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label>File Undangan (Jika Ada)</label>
                             <input type="file" name='file_undangan' value="{{$data->file_undangan}}" class="form-control">
                           </div>
                           <div class="form-group">
                             <label>File Disposisi (Jika Ada)</label>
                             <input type="file" name="file_disposisi" value="{{$data->file_disposisi}}" class="form-control">
-                          </div>
+                          </div> -->
 
                           <!-- KHUSUS SEKDIR -->
                           <div class="form-group">
                             <label>Tanggal Surat</label>
                             <input type="date" name='date_tanggalsurat' value="{{$data->tanggal_surat}}" class="form-control">
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label>Nomor</label>
                             <input type="int" name='int_nomor' disabled value="{{$data->nomor}}" class="form-control">
                           </div>
@@ -137,7 +135,7 @@
                           <div class="form-group">
                             <label>Tahun Surat</label>
                             <input type="year" name='year_tahunsurat' value="{{$data->tahun_surat}}" class="form-control">
-                          </div>
+                          </div> -->
                           <div class="form-group">
                             <label>Nama / NIP Penanda Tangan</label>
                             <select name='optionid_user' class="form-control">
@@ -187,7 +185,7 @@
                   </div>-->
                   <div class="footer text-right">
                       <button class="btn btn-primary mr-1" type="submit">Update</button>
-                      <a class="btn btn-danger text-white" href="{{route('perorangan.index')}}" type="reset">Kembali</a>
+                      <a class="btn btn-danger text-white" href="{{route('pelaporann.index')}}" type="reset">Kembali</a>
                   </div>
                  </form>
                 </div>

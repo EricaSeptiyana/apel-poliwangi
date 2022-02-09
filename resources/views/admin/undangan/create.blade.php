@@ -72,15 +72,15 @@
                           <!-- </div> -->
                           <div class="form-group">
                             <label>Tertuju</label>
-                            <input type="text" name='txt_tertuju' class="form-control" placeholder="Tertuju">
+                            <input type="text" name='txt_tertuju' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Instansi</label>
-                            <input type="text" name='txt_instansi' class="form-control" placeholder="Instansi">
+                            <input type="text" name='txt_instansi' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Agenda</label>
-                            <input type="text" name='txt_agenda' class="form-control" placeholder="Agenda">
+                            <input type="text" name='txt_agenda' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Hari/Tanggal</label>
@@ -88,11 +88,11 @@
                           </div>
                           <div class="form-group">
                             <label>Pukul</label>
-                            <input type="time" name='time_pukul' class="form-control" placeholder="WIB">
+                            <input type="time" name='time_pukul' class="form-control">
                           </div>
                           <div class="form-group">
                             <label>Tempat</label>
-                            <input type="text" name='txt_tempat' class="form-control" placeholder="Tempat">
+                            <input type="text" name='txt_tempat' class="form-control">
                           </div>
 
                           <!-- KHUSUS SEKDIR -->
