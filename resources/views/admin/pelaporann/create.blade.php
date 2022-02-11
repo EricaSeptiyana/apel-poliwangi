@@ -109,11 +109,27 @@
                             <textarea type="textarea" name='hasil' class="form-control"></textarea>
                             <!-- <input type="textarea" name='hasil' class="form-control"> -->
                           </div>
-                          <!-- <div class="form-group">
-                            <label>File Undangan (Jika Ada)</label>
-                            <input type="file" name='file_undangan' class="form-control">
-                          </div>
                           <div class="form-group">
+                            <label>Foto Kegiatan</label>
+                            <input type="file" name='foto_kegiatan' class="form-control">
+                          </div>
+                          <!-- <div class="row">
+                            <div class="col-12">
+                              <div class="card">
+                                <div class="card-header">
+                                  <h4>Foto Kegiatan</h4>
+                                </div>
+                                <div class="card-body">
+                                  <form action="#" class="dropzone" id="mydropzone">
+                                    <div class="fallback">
+                                      <input name="foto_kegiatan" type="file" multiple />
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label>File Disposisi (Jika Ada)</label>
                             <input type="file" name="file_disposisi" class="form-control">
                           </div> -->

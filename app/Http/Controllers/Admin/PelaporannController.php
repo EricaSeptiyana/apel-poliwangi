@@ -65,28 +65,35 @@ class PelaporannController extends Controller
             'optionid_user'=>'required',
         ]);
 
-        $data_pelaporann=new pelaporann([
-            'judul_laporan' => $request->get('judul_laporan'),
-            'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
-            'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
-            'instansi' => $request->get('instansi'),
-            'waktu_mulai' => $request->get('waktu_mulai'),
-            'waktu_selesai' => $request->get('waktu_selesai'),
-            'hasil' => $request->get('hasil'),
-            'tanggal_surat' => $request->get('date_tanggalsurat'),
-            'penanda_tangan' => $request->get('optionid_user'),
-        ]);
+        if($request->foto_kegiatan){
+            $namafotokegiatan = $request->foto_kegiatan->getClientOriginalName() . '_' . time() . '.' . $request->foto_kegiatan->extension();
+            // $namafiledisposisi = $request->file_disposisi->getClientOriginalName() . '_' . time() . '.' . $request->file_disposisi->extension();
 
-        // $tanggal = date("d");
-        // $tanggalsurat = substr($request->get('date_tanggalsurat'), 8);
-        // if($tanggal == $tanggalsurat){
-        //     if($nomorfill >= 20){
-        //         return redirect('admin/pelaporann/create')->with('gagal','lebih dari 20');
-        //     }
-        // }
+            $data_pelaporann=new pelaporann([
+                'judul_laporan' => $request->get('judul_laporan'),
+                'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
+                'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
+                'instansi' => $request->get('instansi'),
+                'waktu_mulai' => $request->get('waktu_mulai'),
+                'waktu_selesai' => $request->get('waktu_selesai'),
+                'hasil' => $request->get('hasil'),
+                'foto_kegiatan' => $namafotokegiatan,
+                'lokasi_fotokegiatan' => $request->foto_kegiatan->move(public_path('fotokegiatan'), $namafotokegiatan),
+                'tanggal_surat' => $request->get('date_tanggalsurat'),
+                'penanda_tangan' => $request->get('optionid_user'),
+            ]);
 
-        $data_pelaporann->save();
-        return redirect('admin/pelaporann')->with('sukses','Pelaporan Hasil Perjalanan Dinas Berhasil Diajukan');
+            // $tanggal = date("d");
+            // $tanggalsurat = substr($request->get('date_tanggalsurat'), 8);
+            // if($tanggal == $tanggalsurat){
+            //     if($nomorfill >= 20){
+            //         return redirect('admin/pelaporann/create')->with('gagal','lebih dari 20');
+            //     }
+            // }
+
+            $data_pelaporann->save();
+            return redirect('admin/pelaporann')->with('sukses','Pelaporan Hasil Perjalanan Dinas Berhasil Diajukan');
+        }
     }
 
     /**

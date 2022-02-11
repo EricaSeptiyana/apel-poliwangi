@@ -16,6 +16,8 @@ class pelaporann extends Model
         'waktu_selesai',
         'hasil',
         'tempat',
+        'foto_kegiatan',
+        'lokasi_fotokegiatan',
         // 'file_undangan',
         // 'file_disposisi',
         'tanggal_surat',

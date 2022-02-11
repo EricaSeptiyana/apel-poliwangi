@@ -106,11 +106,21 @@
                             <textarea type="textarea" name='hasil' class="form-control">{{$data->hasil}}</textarea>
                             <!-- <input type="text" name='txt_tempat' value="{{$data->tempat}}" class="form-control" placeholder="Tempat"> -->
                           </div>
-                          <!-- <div class="form-group">
-                            <label>File Undangan (Jika Ada)</label>
-                            <input type="file" name='file_undangan' value="{{$data->file_undangan}}" class="form-control">
-                          </div>
                           <div class="form-group">
+                            <label>Foto Kegiatan</label>
+                            <input type="file" name='foto_kegiatan' value="{{$data->foto_kegiatan}}" class="form-control">
+                          </div>
+                          <!-- <div class="form-group">
+                            <label>Foto Kegiatan</label>
+                            <div class="form-control">
+                                  <form action="#" class="dropzone" id="mydropzone">
+                                    <div class="fallback">
+                                      <input name="foto_kegiatan" type="file" multiple />
+                                    </div>
+                                  </form>
+                                </div>
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label>File Disposisi (Jika Ada)</label>
                             <input type="file" name="file_disposisi" value="{{$data->file_disposisi}}" class="form-control">
                           </div> -->

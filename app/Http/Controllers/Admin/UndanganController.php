@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use App\undangan;
 use APP\User;
 
@@ -20,6 +21,7 @@ class UndanganController extends Controller
         $pagename='Data Surat Undangan';
         $i = 0;
         $data=undangan::all()->sortDesc();
+        // $data=undangan::paginate(3)->sortDesc();
         return view('admin.undangan.index', compact('data', 'pagename', 'i'));
     }
 

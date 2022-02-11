@@ -24,6 +24,8 @@ class CreatePelaporannsTable extends Migration
             $table->string('hasil');
             $table->date('tanggal_surat');
             $table->string('penanda_tangan');
+            $table->string('foto_kegiatan')->nullable();
+            $table->string('lokasi_fotokegiatan')->nullable();
             // $table->string('nama');
             // $table->string('nip_nipppk');
             // $table->string('jabatan');
