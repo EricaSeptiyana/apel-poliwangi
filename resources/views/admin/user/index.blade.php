@@ -8,10 +8,6 @@
 
   <!-- CSS Libraries -->
 
-  <!-- Boostrap core CSS -->
-  <!-- <link rel="stylesheet" href="{{ asset('public/assets/css/boostrap.css')}}"> -->
-  <!-- <link rel="stylesheet" href="{{ asset('public/assets/dataTables/dataTables.min.css')}}"> -->
-
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{ asset('public/assets/css/components')}}.css">
@@ -31,11 +27,11 @@
                   <h4>{{$pagename}}</h4>
                   <div class="card-header-action">
                         <div class="input-group">
-                          <a href="{{route('undangan.create')}}" class="btn btn-primary pull-right"> Tambah </a>
+                          <a href="{{route('user.create')}}" class="btn btn-primary pull-right"> Tambah </a>
                         </div>
                   </div>
                 </div>
-                <div class="col-12 col-md-12 col-lg-12">
+                <div class="col-12 col-md-12 col-lg-12 col-">
                 <div class="card">
                   <div class="card-header">
                     <h4>Full Width</h4>
@@ -52,44 +48,56 @@
                       <table class="table table-striped table-md">
                         <tr>
                           <th>No</th>
-                          <th>Nomor Surat</th>
-                          <th>Tertuju</th>
-                          <th>Instansi</th>
-                          <th>Agenda</th>
-                          <th>Hari/Tanggal</th>
-                          <!-- <th>Pukul</th> -->
-                          <th>Tempat</th>
-                          <th>Tanggal Surat</th>
+                          <th>Nama</th>
+                          <th>NIP/NIPPPK</th>
+                          <th>Role</th>
                           <th>Aksi</th>
                           <!-- <th>Delete</th>
                           <th>Cetak</th>
                           <th>Download</th> -->
                         </tr>
                         <!-- <tr> -->
-                          @foreach($data as $row)
-                           <tr>
+                          @foreach($allUser as $row)
+                           <tr> 
                               <td>{{++$i}}</td>
-                              <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td>
-                              <td>{{$row->tertuju}}</td>
-                              <td>{{$row->instansi}}</td>
-                              <td>{{$row->agenda}}</td>
-                              <td>{{$row->hari_tanggal}}</td>
-                              <!-- <td>{{$row->pukul}}</td> -->
-                              <td>{{$row->tempat}}</td>
-                              <td>{{$row->tanggal_surat}}</td>
+                              <td>{{$row->name}}</td>
+                              <td>{{$row->nip}}</td>
                               <td>
-                                <div class="d-flex justify-content-evenly">
-                                  <a href="{{route('undangan.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                  <a href="#" class="btn btn-info mx-2"> Cetak </a>
-                                  <a href="#" class="btn btn-success"> Download </a>
-                                  <form action="{{route('undangan.destroy', $row->id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
-                                  </form>
-                                  <!-- <a href="#" class="btn btn-info"> Cetak </a>
-                                  <a href="#" class="btn btn-success"> Download </a> -->
-                                </div>
+                                @if (!empty($row->getRoleNames()))
+                                    @foreach ($row->getRoleNames() as $role)
+                                        <label class="badge badge-success">{{ $role }}</label>
+                                    @endforeach
+                                @endif
+                              </td>
+                              <!-- <td>{{$row->instansi}}</td> -->
+                              <!-- <td>{{$row->agenda}}</td> -->
+                              <!-- <td>{{$row->hari_tanggal}}</td> -->
+                              <!-- <td>{{$row->pukul}}</td> -->
+                              <!-- <td>{{$row->tempat}}</td> -->
+                              <!-- <td>{{$row->tanggal_surat}}</td> -->
+                              <td>
+                                <!-- <div class="row"> -->
+                                  <!-- <div class="col-md-2 d-grid"> -->
+
+                                    <div class="d-flex justify-content-evenly">
+                                      <a href="{{route('user.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                      <form action="{{route('user.destroy', $row->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
+                                      </form>
+                                      <!-- <a href="#" class="btn btn-info"> Cetak </a> -->
+                                      <!-- <a href="#" class="btn btn-success"> Download </a> -->
+                                    </div>
+                                    <!-- <div class="col-md-2">
+                                      
+                                      <form action="{{route('user.destroy', $row->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit"> Hapus </button>
+                                      </form>
+                                  </div> -->
+                                <!-- </div> -->
                               </td>
                                 
                                 <!-- <a href="#" class="btn btn-danger"> Hapus </a></td> -->
@@ -116,7 +124,6 @@
                           <td><a href="#" class="btn btn-secondary">Detail</a></td>
                         </tr> -->
                       </table>
-                      
                     </div>
                   </div>
                   <div class="card-footer text-right">
@@ -157,7 +164,6 @@
   <!-- Template JS File -->
   <script src="{{ asset('public/assets/js/scripts.js')}}"></script>
   <script src="{{ asset('public/assets/js/custom.js')}}"></script>
-  <!-- <script src="{{ asset('public/assets/dataTables/datatables.min.js')}}"></script> -->
 
   <!-- Page Specific JS File -->
   <script src="{{ asset('public/assets/js/page/components-table.js')}}"></script>

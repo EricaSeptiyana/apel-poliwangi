@@ -26,6 +26,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::resource('/jabatan', 'Admin\JabatanController');
     Route::resource('/prodi', 'Admin\ProdiController');
     Route::resource('/roles', 'Admin\RoleController');
+    Route::resource('/user', 'Admin\UserController');
     Route::resource('/perorangan', 'Admin\PeroranganController');
     Route::resource('/kelompok', 'Admin\KelompokController');
     Route::resource('/pelaporann', 'Admin\PelaporannController');

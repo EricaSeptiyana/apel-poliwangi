@@ -18,12 +18,14 @@
               <li class="nav-item"><a class="nav-link" href="{{url('/admin/prodi')}}"><i class="fas fa-fire"></i> <span>Program Studi</span></a></li>
               <li class="nav-item"><a class="nav-link" href="{{url('/admin/jabatan')}}"><i class="fas fa-fire"></i> <span>Jabatan</span></a></li>
               <li class="nav-item"><a class="nav-link" href="{{url('/admin/roles')}}"><i class="fas fa-fire"></i> <span>Role</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url('/admin/user')}}"><i class="fas fa-fire"></i> <span>User</span></a></li>
               <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-fire"></i> <span>Pelaporan</span></a></li>
               <li class="menu-header">Pengajuan</li>
               <!-- <li class="active"><a class="nav-link" href="blank.html"><i class="fas fa-database"></i> <span>Kelola User</span></a></li> -->
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Surat Tugas</span></a>
                 <ul class="dropdown-menu">
+                  <li></li>
                   <li><a class="nav-link" href="{{url('/admin/perorangan')}}">Perorangan</a></li>
                   <li><a class="nav-link" href="{{url('/admin/kelompok')}}">Kelompok</a></li>
                   <li><a class="nav-link" href="{{url('/admin/pelaporann')}}">Pelaporan</a></li>

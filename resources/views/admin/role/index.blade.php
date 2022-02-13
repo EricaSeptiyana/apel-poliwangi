@@ -31,7 +31,7 @@
                   <h4>{{$pagename}}</h4>
                   <div class="card-header-action">
                         <div class="input-group">
-                          <a href="{{route('undangan.create')}}" class="btn btn-primary pull-right"> Tambah </a>
+                          <a href="{{route('roles.create')}}" class="btn btn-primary pull-right"> Tambah </a>
                         </div>
                   </div>
                 </div>
@@ -52,37 +52,35 @@
                       <table class="table table-striped table-md">
                         <tr>
                           <th>No</th>
-                          <th>Nomor Surat</th>
-                          <th>Tertuju</th>
-                          <th>Instansi</th>
-                          <th>Agenda</th>
-                          <th>Hari/Tanggal</th>
-                          <!-- <th>Pukul</th> -->
-                          <th>Tempat</th>
-                          <th>Tanggal Surat</th>
+                          <th>Nama</th>
+                          <th>Permission</th>
                           <th>Aksi</th>
                           <!-- <th>Delete</th>
                           <th>Cetak</th>
                           <th>Download</th> -->
                         </tr>
                         <!-- <tr> -->
-                          @foreach($data as $row)
+                          @foreach($role_permission as $i=>$row)
                            <tr>
                               <td>{{++$i}}</td>
-                              <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td>
-                              <td>{{$row->tertuju}}</td>
-                              <td>{{$row->instansi}}</td>
-                              <td>{{$row->agenda}}</td>
-                              <td>{{$row->hari_tanggal}}</td>
-                              <!-- <td>{{$row->pukul}}</td> -->
-                              <td>{{$row->tempat}}</td>
-                              <td>{{$row->tanggal_surat}}</td>
+                              <!-- <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td> -->
+                              <td>{{$row->name}}</td>
+                              <td>
+                                @if($row->permissions())
+                                  <ul style="margin-left: 20px">
+                                    @foreach ($row->permissions()->get() as $permission)
+                                      <li> {{ $permission->name }}</li>
+                                    @endforeach
+                                  </ul>
+                                @endif
+                                <!-- {{$row->instansi}} -->
+                              </td>
                               <td>
                                 <div class="d-flex justify-content-evenly">
-                                  <a href="{{route('undangan.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                  <a href="#" class="btn btn-info mx-2"> Cetak </a>
-                                  <a href="#" class="btn btn-success"> Download </a>
-                                  <form action="{{route('undangan.destroy', $row->id)}}" method="post">
+                                  <a href="{{route('roles.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                  <!-- <a href="#" class="btn btn-info mx-2"> Cetak </a> -->
+                                  <!-- <a href="#" class="btn btn-success"> Download </a> -->
+                                  <form action="{{route('roles.destroy', $row->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
@@ -116,7 +114,6 @@
                           <td><a href="#" class="btn btn-secondary">Detail</a></td>
                         </tr> -->
                       </table>
-                      
                     </div>
                   </div>
                   <div class="card-footer text-right">
