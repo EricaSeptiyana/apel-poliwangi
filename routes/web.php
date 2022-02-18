@@ -28,6 +28,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::resource('/roles', 'Admin\RoleController');
     Route::resource('/user', 'Admin\UserController');
     Route::resource('/perorangan', 'Admin\PeroranganController');
+    Route::get('/perorangan/cetakperorangan', 'Admin\PeroranganController@cetak')->name('perorangan.cetak');
     Route::resource('/kelompok', 'Admin\KelompokController');
     Route::resource('/pelaporann', 'Admin\PelaporannController');
     Route::resource('/undangan', 'Admin\UndanganController');

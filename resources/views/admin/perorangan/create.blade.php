@@ -91,7 +91,7 @@
                             </select>
                           </div>
                           <div class="form-group">
-                            <label>NIP/NIPPK</label>
+                            <label>NIP/NIPPPK</label>
                             <input type="text" name='nip_nipppk' class="form-control">
                           </div>
                           <div class="form-group">

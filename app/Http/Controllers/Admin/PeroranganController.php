@@ -166,6 +166,9 @@ class PeroranganController extends Controller
     public function show($id)
     {
         //
+        $perorangan=perorangan::find($id);
+
+        return view('admin.perorangan.cetak', compact('perorangan'));
     }
 
     /**
@@ -179,9 +182,10 @@ class PeroranganController extends Controller
         //
         $data_perorangan=perorangan::all();
         $data_User=User::all();
+        $selectUser=perorangan::find($id);
         $pagename='Update Surat Tugas Perorangan';
         $data=perorangan::find($id);
-        return view('admin.perorangan.edit', compact('data', 'pagename', 'data_perorangan' , 'data_User'));
+        return view('admin.perorangan.edit', compact('data', 'pagename', 'selectUser', 'data_perorangan' , 'data_User'));
     }
 
     /**
@@ -250,4 +254,12 @@ class PeroranganController extends Controller
         $perorangan->delete();
         return redirect('admin/perorangan')->with('sukses','Surat Tugas Perorangan Berhasil Dihapus');
     }
+
+    // public function cetak()
+    // {
+    //     //
+    //     $perorangan=perorangan::find($id);
+
+    //     return view('admin.perorangan.cetak', compact('perorangan'));
+    // }
 }

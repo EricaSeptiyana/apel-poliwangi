@@ -75,10 +75,14 @@
                             <label>Nama Yang Ditugaskan</label>
                             <!-- <input type="text" name='txt_nama' value="{{$data->nama}}" class="form-control" placeholder="Nama"> -->
                             <select name='nama' class="form-control">
-                                @foreach($data_User as $User)
-                                    <option value={{$User->nama}}>
-                                        {{$User->name}}</option>
-                                @endforeach
+                                    @foreach($data_User as $User)
+                                      <option value={{$User->name}}
+                                      @if($User->name==$data->nama)
+                                            selected
+                                      @endif
+                                      >{{$User->name}}</option>
+                                    @endforeach
+                                <!-- {{ $selectUser }} -->
                                 <!-- <option>Option 1</option>
                                 <option>Option 2</option>
                                 <option>Option 3</option> -->
@@ -142,8 +146,8 @@
                             <label>Nama / NIP Penanda Tangan</label>
                             <select name='optionid_user' class="form-control">
                                 @foreach($data_User as $User)
-                                    <option value={{$User->id}}
-                                        @if($User->id==$data->penanda_tangan)
+                                    <option value={{$User->name}}
+                                        @if($User->name==$data->penanda_tangan)
                                             selected
                                         @endif
                                     >

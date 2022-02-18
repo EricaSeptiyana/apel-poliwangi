@@ -82,7 +82,7 @@
                           </div> -->
                           <div class="form-group">
                             <label>Dasar Pelaksanaan</label>
-                            <textarea type="textarea" name='dasar_pelaksanaan' class="form-control">{{$data->dasar_pelaksanaan}}</textarea>
+                            <textarea type="textarea" name='dasar_pelaksanaan' class="form-control" style="height: 100px">{{$data->dasar_pelaksanaan}}</textarea>
                             <!-- <input type="text" name='dasar_pelaksanaan' value="{{$data->dasar_pelaksanaan}}" class="form-control"> -->
                           </div>
                           <div class="form-group">

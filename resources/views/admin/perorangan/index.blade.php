@@ -70,7 +70,7 @@
                               <td>
                                 <div class="d-flex justify-content-evenly">
                                   <a href="{{route('perorangan.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                  <a href="#" class="btn btn-info mx-2"> Cetak </a>
+                                  <a href="{{route('perorangan.show',$row->id)}}" class="btn btn-info mx-2"> Cetak </a>
                                   <a href="#" class="btn btn-success"> Download </a>
                                   <form action="{{route('perorangan.destroy', $row->id)}}" method="post">
                                         @csrf

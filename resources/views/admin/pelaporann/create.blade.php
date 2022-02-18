@@ -76,7 +76,7 @@
                           </div>
                           <div class="form-group">
                             <label>Dasar Pelaksanaan</label>
-                            <textarea type="textarea" name='dasar_pelaksanaan' class="form-control"></textarea>
+                            <textarea type="textarea" name='dasar_pelaksanaan' class="form-control" rows="10"></textarea>
                             <!-- <input type="text" name='dasar_pelaksanaan' class="form-control"> -->
                           </div>
                           <!-- <div class="form-group">
