@@ -2,17 +2,15 @@
 
 @section('content')
 
- <!-- General CSS Files -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-  <!-- CSS Libraries -->
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
-  <link rel="stylesheet" href="{{ asset('public/assets/css/components.css')}}">
-
 <div class="section-body">
+<div class="section-header">
+    <h5>{{$pagename}}</h5>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="{{route('perorangan.index')}}">Surat Tugas</a></div>
+      <div class="breadcrumb-item">{{ $pagename }}</div>
+    </div>
+</div>
 <div class="col-12">
     <div class="card">
         <div class="card-body card-block">
@@ -60,20 +58,63 @@
                     </div>
                         </div>
                         <div class="col">
-                          <!-- <div class="form-group"> -->
-                            <!-- <div class="footer text-right">
-                                <button class="btn btn-primary mr-1" type="submit">Update</button>
-                                <button class="btn btn-danger" type="reset">Kembali</button>
-                            </div> -->
-                          <!-- </div> -->
-                          <div class="form-group">
+                        <div class="row form-group">
+                                <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Pembuka</label></div>
+                                <div class="col-12 col-md-9"><textarea name="txt_pembuka" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->pembuka}}</textarea></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Yang Ditugaskan</label></div>
+                            <div class="col-6 col-md-6">
+                            <select name='nama' class="form-control">
+                                @foreach($data_User as $User)
+                                <option value={{$User->name}}
+                                @if($User->name==$data->nama)
+                                        selected
+                                @endif
+                                >{{$User->name}}</option>
+                                @endforeach
+                        
+                            </select>
+                            </small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIP/NIPPPK</label></div>
+                            <div class="col-4 col-md-4"><input type="text" id="text-input" name="nip_nipppk" value="{{$data->nip_nipppk}}" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jabatan</label></div>
+                            <div class="col-4 col-md-4"><input type="text" id="text-input" name="txt_jabatan" value="{{$data->jabatan}}"class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Kegiatan</label></div>
+                            <div class="col-6 col-md-6"><input type="text" id="text-input" name="jenis_kegiatan" value="{{$data->jenis_kegiatan}}" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Waktu Mulai</label></div>
+                            <div class="col-3 col-md-3"><input type="date" id="text-input" name="waktu_mulai" value="{{$data->waktu_mulai}}" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Waktu Selesai</label></div>
+                            <div class="col-3 col-md-3"><input type="date" id="text-input" name="waktu_selesai" value="{{$data->waktu_selesai}}" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tempat</label></div>
+                            <div class="col-6 col-md-6"><input type="text" id="text-input" name="txt_tempat" value="{{$data->tempat}}" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">File Undangan (Jika Ada)</label></div>
+                            <div class="col-12 col-md-9"><input type="file" id="file-input" name="file_undangan"  value="{{$data->file_undangan}}" class="form-control-file"></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="file-input" class=" form-control-label">File Disposisi (Jika Ada)</label></div>
+                            <div class="col-12 col-md-9"><input type="file" id="file-input" name="file_disposisi" value="{{$data->file_disposisi}}" class="form-control-file"></div>
+                        </div>
+                          <!-- <div class="form-group">
                             <label>Pembuka</label>
                             <textarea type="textarea" name='txt_pembuka' class="form-control" placeholder="Pembuka">{{$data->pembuka}}</textarea>
-                            <!-- <input type="textarea" name='txt_pembuka' value="{{$data->pembuka}}" class="form-control" placeholder="Pembuka"> -->
                           </div>
                           <div class="form-group">
                             <label>Nama Yang Ditugaskan</label>
-                            <!-- <input type="text" name='txt_nama' value="{{$data->nama}}" class="form-control" placeholder="Nama"> -->
                             <select name='nama' class="form-control">
                                     @foreach($data_User as $User)
                                       <option value={{$User->name}}
@@ -82,13 +123,9 @@
                                       @endif
                                       >{{$User->name}}</option>
                                     @endforeach
-                                <!-- {{ $selectUser }} -->
-                                <!-- <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option> -->
                             </select>
-                          </div>
-                          <div class="form-group">
+                          </div> -->
+                          <!-- <div class="form-group">
                             <label>NIP/NIPPPK</label>
                             <input type="text" name='nip_nipppk' value="{{$data->nip_nipppk}}" class="form-control" placeholder="NIP/NIPPPK">
                           </div>
@@ -119,10 +156,48 @@
                           <div class="form-group">
                             <label>File Disposisi (Jika Ada)</label>
                             <input type="file" name="file_disposisi" value="{{$data->file_disposisi}}" class="form-control">
-                          </div>
+                          </div> -->
 
                           <!-- KHUSUS SEKDIR -->
-                          <div class="form-group">
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="date" id="text-input" name="date_tanggalsurat" value="{{$data->tanggal_surat}}" class="form-control"><small class="form-text text-muted"></small></div>
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nomor</label></div>
+                              <div class="col-3 col-md-3"><input type="int" id="text-input" name="int_nomor" disabled value="{{$data->nomor}}" class="form-control"><small class="form-text text-muted"></small></div>
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="string" id="text-input" name="string_jenissurat" value="{{$data->kode_surat}}"  class="form-control"><small class="form-text text-muted"></small></div>
+                  
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kode Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="int" id="text-input" name="int_kode" value="{{$data->jenis_surat}}" class="form-control"><small class="form-text text-muted"></small></div>
+                  
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tahun Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="year" id="text-input" name="year_tahunsurat" value="{{$data->tahun_surat}}" class="form-control"><small class="form-text text-muted"></small></div>
+                  
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama / NIP Penanda Tangan</label></div>
+                              <div class="col-6 col-md-6">
+                              <select name='optionid_user' class="form-control">
+                                  @foreach($data_User as $User)
+                                      <option value={{$User->name}}
+                                          @if($User->name==$data->penanda_tangan)
+                                              selected
+                                          @endif
+                                      >
+                                          {{$User->name}} / {{$User->nip}}</option>    
+                                  @endforeach
+                              </select>
+                              </small></div>
+                          </div>
+                          <!-- <div class="form-group">
                             <label>Tanggal Surat</label>
                             <input type="date" name='date_tanggalsurat' value="{{$data->tanggal_surat}}" class="form-control">
                           </div>
@@ -153,11 +228,8 @@
                                     >
                                         {{$User->name}} / {{$User->nip}}</option>    
                                 @endforeach
-                                <!-- <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>-->
                             </select>
-                          </div>
+                          </div> -->
                         </div>
                         <!-- <div class="col">
                           <div class="form-group">
@@ -196,19 +268,5 @@
                  </form>
                 </div>
 </div>
-
- <!-- General JS Scripts -->
- <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="{{ asset('public/assets/js/stisla.js')}}"></script>
-
-  <!-- JS Libraies -->
-
-  <!-- Template JS File -->
-  <script src="{{ asset('public/assets/js/scripts.js')}}"></script>
-  <script src="{{ asset('public/assets/js/custom.js')}}"></script>
 
 @endsection

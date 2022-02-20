@@ -36,7 +36,7 @@ class PelaporannController extends Controller
         // $nomorfill = pelaporann::max('nomor');
         // $nomormax = $nomorfill + 1;
         // $cek = count($pelaporann);
-        $pagename="Form Input Pelaporan Hasil PerjalanaN Dinas";
+        $pagename="Form Input Pelaporan Hasil Perjalanan Dinas";
         return view('admin.pelaporann.create', compact('pagename', 'data_User'));
     }
 

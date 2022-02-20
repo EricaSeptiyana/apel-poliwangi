@@ -2,17 +2,16 @@
 
 @section('content')
 
- <!-- General CSS Files -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-  <!-- CSS Libraries -->
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
-  <link rel="stylesheet" href="{{ asset('public/assets/css/components.css')}}">
 
 <div class="section-body">
+<div class="section-header">
+    <h5>{{$pagename}}</h5>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="{{route('undangan.index')}}">Surat Undangan</a></div>
+      <div class="breadcrumb-item">{{ $pagename }}</div>
+    </div>
+</div>
 <div class="col-12">
     <div class="card">
         <div class="card-body card-block">
@@ -43,34 +42,34 @@
                   <div class="container">
                       <div class="row align-items-start">
                         <div class="col">
-                          <!-- <div class="form-group">
-                            <label>Foto</label>
-                            <input type="file" class="form-control">
-                          </div>
-                          <div class="form-group">
-                            <label class="d-block">Jenis Kelamin</label>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" checked>
-                              <label class="form-check-label" for="exampleRadios1">
-                                Perempuan
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" checked>
-                              <label class="form-check-label" for="exampleRadios2">
-                                Laki-Laki
-                              </label> -->
                       </div>
                     </div>
-                        </div>
                         <div class="col">
-                          <!-- <div class="form-group"> -->
-                            <!-- <div class="footer text-right">
-                                <button class="btn btn-primary mr-1" type="submit">Simpan</button>
-                                <button class="btn btn-danger" type="reset">Kembali</button>
-                            </div> -->
-                          <!-- </div> -->
-                          <div class="form-group">
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tertuju</label></div>
+                            <div class="col-6 col-md-6"><input type="text" id="text-input" name="txt_tertuju" placeholder="Nama Tujuan" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Instansi</label></div>
+                            <div class="col-6 col-md-6"><input type="text" id="text-input" name="txt_instansi" placeholder="Nama Instansi" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Agenda</label></div>
+                            <div class="col-6 col-md-6"><input type="text" id="text-input" name="txt_agenda" placeholder="Agenda" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Hari/Tanggal</label></div>
+                            <div class="col-3 col-md-3"><input type="date" id="text-input" name="date_haritanggal" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pukul</label></div>
+                            <div class="col-3 col-md-3"><input type="time" id="text-input" name="time_pukul" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tempat</label></div>
+                            <div class="col-6 col-md-6"><input type="text" id="text-input" name="txt_tempat" placeholder="Nama Lokasi" class="form-control"><small class="form-text text-muted"></small></div>
+                        </div>
+                          <!-- <div class="form-group">
                             <label>Tertuju</label>
                             <input type="text" name='txt_tertuju' class="form-control">
                           </div>
@@ -93,10 +92,44 @@
                           <div class="form-group">
                             <label>Tempat</label>
                             <input type="text" name='txt_tempat' class="form-control">
-                          </div>
+                          </div> -->
 
                           <!-- KHUSUS SEKDIR -->
-                          <div class="form-group">
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="date" id="text-input" name="date_tanggalsurat" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nomor</label></div>
+                              <div class="col-3 col-md-3"><input type="int" id="text-input" name="int_nomor" disabled value="{{$nomormax}}" class="form-control"><small class="form-text text-muted"></small></div>
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="string" id="text-input" name="string_jenissurat" class="form-control"><small class="form-text text-muted"></small></div>
+                  
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kode Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="int" id="text-input" name="int_kode" class="form-control"><small class="form-text text-muted"></small></div>
+                  
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tahun Surat</label></div>
+                              <div class="col-3 col-md-3"><input type="year" id="text-input" name="year_tahunsurat" placeholder="YYYY" class="form-control"><small class="form-text text-muted"></small></div>
+                  
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama / NIP Penanda Tangan</label></div>
+                              <div class="col-6 col-md-6">
+                              <select name='optionid_user' class="form-control">
+                                  @foreach($data_User as $User)
+                                      <option value={{$User->name}}>
+                                          {{$User->name}} / {{$User->nip}}</option>    
+                                  @endforeach
+                              </select>
+                              </div>
+                          </div>
+                          <!-- <div class="form-group">
                             <label>Tanggal Surat</label>
                             <input type="date" name='date_tanggalsurat' class="form-control">
                           </div>
@@ -122,36 +155,10 @@
                                 @foreach($data_User as $User)
                                     <option value={{$User->id}}>
                                         {{$User->name}} / {{$User->nip}}</option>    
-
                                 @endforeach
-                                <!-- <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option> -->
                             </select>
-                          </div>
+                          </div> -->
                         </div>
-                        <!-- <div class="col">
-                          <div class="form-group">
-                            <label>NIDN</label>
-                            <input type="text" class="form-control" placeholder="NIDN">
-                          </div>
-                          <div class="form-group">
-                            <label>NIP/NIPPPK</label>
-                            <input type="text" class="form-control" placeholder="NIP/NIPPPK">
-                          </div>
-                          <div class="form-group">
-                            <label>Nama Pangkat</label>
-                            <input type="text" class="form-control" placeholder="Nama Pangkat">
-                          </div>
-                          <div class="form-group">
-                            <label>Nama Jabatan</label>
-                            <input type="text" class="form-control" placeholder="Nama Jabatan">
-                          </div>
-                          <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea class="form-control"></textarea>
-                          </div>
-                        </div> -->
                       </div>
 
                     </div>
@@ -164,22 +171,9 @@
                       <button class="btn btn-primary mr-1" type="submit">Simpan</button>
                       <a class="btn btn-danger text-white" href="{{route('undangan.index')}}" type="reset">Kembali</a>
                   </div>
+                  </div>
                  </form>
                 </div>
 </div>
-
- <!-- General JS Scripts -->
- <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="{{ asset('public/assets/js/stisla.js')}}"></script>
-
-  <!-- JS Libraies -->
-
-  <!-- Template JS File -->
-  <script src="{{ asset('public/assets/js/scripts.js')}}"></script>
-  <script src="{{ asset('public/assets/js/custom.js')}}"></script>
 
 @endsection

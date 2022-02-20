@@ -18,7 +18,7 @@ class RoleController extends Controller
     public function index()
     {
         //
-        $pagename="Role";
+        $pagename="Role Permission";
         $role_permission=Role::with('permissions')->get();
         return view('admin.role.index', compact('pagename','role_permission'));
     }
@@ -57,6 +57,8 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->input('nama_role')]);
         $role->syncPermissions($request->input('optionid_permission'));
+
+        // $role->save();
 
         return redirect()->action('Admin\RoleController@index')->with('sukses', 'Role berhasil dibuat');
     }

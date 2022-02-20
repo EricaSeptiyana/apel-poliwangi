@@ -1,21 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('content')
-
-
- <!-- General CSS Files -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-  <!-- CSS Libraries -->
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('public/assets/css/style.css')}}">
-  <link rel="stylesheet" href="{{ asset('public/assets/css/components.css')}}">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> 
-
+ 
   <script>
     $(document).ready(function() {
         $(".mul-select").select2({
@@ -29,6 +15,14 @@
   </script>
 
 <div class="section-body">
+<div class="section-header">
+    <h5>{{$pagename}}</h5>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="{{route('roles.index')}}">Role</a></div>
+      <div class="breadcrumb-item">{{ $pagename }}</div>
+    </div>
+</div>
 <div class="col-12">
     <div class="card">
         <div class="card-body card-block">
@@ -56,39 +50,39 @@
                   <form action="{{route('roles.update', $role->id)}}" method="post" enctype="multipart/form-data" class="form-horizontal">
                     @method('PATCH')          
                     @csrf
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Role</label></div>
-                                <div class="col-12 col-md-9"><input type="text" valu="{{$role->name}}" id="text-input" name="nama_role" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
-                            </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Role</label></div>
+                        <div class="col-12 col-md-9"><input type="text"  id="text-input" name="nama_role" value="{{$role->name}}" class="form-control"><small class="form-text text-muted"></small></div>
+                    </div>
 
-                            <div class="row form-group">
-                                <div class="col col-md-3"><label for="select" class=" form-control-label">Permission</label></div>
-                                <div class="col-12 col-md-9">
-                                    <select name="optionid_permission[]" id="select" class="mul-select" multiple='true'>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">Permission</label></div>
+                        <div class="col-12 col-md-9">
+                            <select name="optionid_permission[]" id="select" class="mul-select" multiple='true'>
 
-                                        @foreach($allPermission as $permission)
+                                @foreach($allPermission as $permission)
 
-                                        <option value={{$permission->id}}
-                                            @if (in_array($permission->id, $rolePermission))
-                                                selected
-                                            @endif
-                                        
-                                        >
-                                            {{$permission -> name}}</option>
+                                <option value={{$permission->id}}
+                                    @if (in_array($permission->id, $rolePermission))
+                                        selected
+                                    @endif
+                                
+                                >
+                                    {{$permission -> name}}</option>
 
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
-                            <!-- <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Simpan
-                            </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
-                                <i class="fa fa-ban"></i> Reset
-                            </button> -->
+                    <!-- <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fa fa-dot-circle-o"></i> Simpan
+                    </button>
+                    <button type="reset" class="btn btn-danger btn-sm">
+                        <i class="fa fa-ban"></i> Reset
+                    </button> -->
 
-                        </form>
+                </form>
                   <!-- <form action="{{route('roles.store')}}" method="post" enctype="multipart/form-data" class="form=horizontal">
                    @csrf -->
                   <!-- <div class="container">
@@ -129,22 +123,5 @@
                  </form>
                 </div>
 </div>
-
- <!-- General JS Scripts -->
- <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="{{ asset('public/assets/js/stisla.js')}}"></script>
-
-  <!-- JS Libraies -->
-
-  <!-- Template JS File -->
-  <script src="{{ asset('public/assets/js/scripts.js')}}"></script>
-  <script src="{{ asset('public/assets/js/custom.js')}}"></script>
-
-  <script src="{{ asset('public/admin/vendors/jquery/dist/jquery.min.js')}}"></script>
-  <script src="{{ asset('public/admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
 
 @endsection
