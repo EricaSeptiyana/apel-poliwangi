@@ -15,7 +15,7 @@
   </script>
 
 <div class="section-body">
-<div class="section-header">
+<div class="section-header" style="top: 0; position: sticky; z-index: 890">
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
@@ -54,27 +54,27 @@
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Role</label></div>
                         <div class="col-12 col-md-9"><input type="text"  id="text-input" name="nama_role" value="{{$role->name}}" class="form-control"><small class="form-text text-muted"></small></div>
                     </div>
-
+                    
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="select" class=" form-control-label">Permission</label></div>
-                        <div class="col-12 col-md-9">
-                            <select name="optionid_permission[]" id="select" class="mul-select" multiple='true'>
-
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Permission</label></div>
+                              <div class="col-6 col-md-6">
+                              <select name='optionid_permission[]' class="form-control">
                                 @foreach($allPermission as $permission)
 
-                                <option value={{$permission->id}}
-                                    @if (in_array($permission->id, $rolePermission))
-                                        selected
-                                    @endif
-                                
-                                >
-                                    {{$permission -> name}}</option>
+                                    <option value={{$permission->id}}
+                                        @if (in_array($permission->id, $rolePermission))
+                                            selected
+                                        @endif
+                                        
+                                        >
+                                        {{$permission -> name}}</option>
 
                                 @endforeach
-                            </select>
-                        </div>
-                    </div>
+                              </select>
+                              </small></div>
+                          </div>
 
+ 
                     <!-- <button type="submit" class="btn btn-primary btn-sm">
                         <i class="fa fa-dot-circle-o"></i> Simpan
                     </button>
@@ -82,7 +82,6 @@
                         <i class="fa fa-ban"></i> Reset
                     </button> -->
 
-                </form>
                   <!-- <form action="{{route('roles.store')}}" method="post" enctype="multipart/form-data" class="form=horizontal">
                    @csrf -->
                   <!-- <div class="container">

@@ -50,11 +50,11 @@ class JabatanController extends Controller
     {
         //
         $request->validate([
-            'txt_jabatan'=>'required',
+            'nama_jabatan'=>'required',
         ]);
 
         $data_jabatan=new jabatan([
-            'nama_jabatan' => $request->get('txt_jabatan'),
+            'nama_jabatan' => $request->get('nama_jabatan'),
         ]);
 
         // $tanggal = date("d");
@@ -107,11 +107,11 @@ class JabatanController extends Controller
     {
         //
         $request->validate([
-            'txt_jabatan'=>'required',
+            'nama_jabatan'=>'required',
         ]);
 
         $jabatan = jabatan::find($id);
-        $jabatan->nama_jabatan = $request->get('txt_jabatan');
+        $jabatan->nama_jabatan = $request->get('nama_jabatan');
 
         $jabatan->save();
         return redirect('admin/jabatan')->with('sukses','Jabatan Berhasil Diupdate');

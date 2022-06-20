@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="section-body">
-<div class="section-header">
+<div class="section-header" style="top: 0; position: sticky; z-index: 890">
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
@@ -75,7 +75,30 @@
                               <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIP/NIPPPK</label></div>
                               <div class="col-12 col-md-9"><input type="text" id="text-input" name="txt_nip" placeholder="Isi NIP/NIPPPK Anda" class="form-control"><small class="form-text text-muted"></small></div>
                           </div>
-
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Jabatan</label></div>
+                              <div class="col-6 col-md-6">
+                              <select data-placeholder="Pilih Jabatan" name='jabatan_id' class="form-control">
+                              <option value="" label="pilih jabatan"></option>
+                                  @foreach($data_jabatan as $jabatan)
+                                      <option value={{$jabatan->id}}>
+                                          {{$jabatan->nama_jabatan}}</option>    
+                                  @endforeach
+                              </select>
+                              </div>
+                          </div>
+                          <div class="row form-group">
+                              <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Program Studi</label></div>
+                              <div class="col-6 col-md-6">
+                              <select name='prodi_id' class="form-control">
+                              <option value="" label="pilih program studi"></option>
+                                  @foreach($data_prodi as $prodi)
+                                      <option value={{$prodi->id}}>
+                                          {{$prodi->nama_prodi}}</option>    
+                                  @endforeach
+                              </select>
+                              </div>
+                          </div>
                           <div class="row form-group">
                               <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email User</label></div>
                               <div class="col-12 col-md-9"><input type="text" id="text-input" name="txtemail_user" placeholder="Isi Email User Anda" class="form-control"><small class="form-text text-muted"></small></div>
@@ -95,17 +118,12 @@
                               <div class="col col-md-3"><label for="select" class=" form-control-label">Role</label></div>
                                   <div class="col-12 col-md-9">
                                   <select name="role_user" id="select" class="form-control">
-                                  
+                                  <option value="" label="pilih role"></option>
                                   @foreach($allRoles as $role)
                                   <option value={{$role->id}}>
                                       {{$role -> name}}
                                   </option>
-
                                   @endforeach                                            
-                                          <!-- <option value="0">Please select</option>
-                                          <option value="1">Option #1</option>
-                                          <option value="2">Option #2</option>
-                                          <option value="3">Option #3</option> -->
                                   </select>
                                 </div>
                           </div>

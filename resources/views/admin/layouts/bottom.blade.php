@@ -8,15 +8,16 @@
   <script src="{{ asset('public/assets/dataTables/datatables.min.js')}}"></script>
 
   <!-- JS Libraies -->
-  <script src="{{ asset('public/node_modules/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
-  <script src="{{ asset('public/node_modules/chart.js/dist/Chart.min.js')}}"></script>
-  <script src="{{ asset('public/node_modules/owl.carousel/dist/owl.carousel.min.js')}}"></script>
-  <script src="{{ asset('public/node_modules/summernote/dist/summernote-bs4.js')}}"></script>
-  <script src="{{ asset('public/node_modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script>
-  <script src="{{ asset('public/assets/node_modules/jquery-ui-dist/jquery-ui.min.js')}}"></script>
+  <!-- <script src="{{ asset('public/node_modules/jquery-sparkline/jquery.sparkline.min.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/node_modules/chart.js/dist/Chart.min.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/node_modules/owl.carousel/dist/owl.carousel.min.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/node_modules/summernote/dist/summernote-bs4.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/node_modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/assets/node_modules/jquery-ui-dist/jquery-ui.min.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/node_modules/prismjs/prism.js')}}"></script> -->
 
-    <!-- JS Libraies -->
-    <script src="{{ asset('public/assets/node_modules/jquery-ui-dist/jquery-ui.min.js')}}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('public/assets/js/page/bootstrap-modal.js')}}"></script>
 
   <!-- Template JS File -->
   <script src="{{ asset('public/assets/js/scripts.js')}}"></script>
@@ -24,15 +25,62 @@
   
 
   <!-- Page Specific JS File -->
-  <script src="{{ asset('public/assets/js/page/index.js')}}"></script>
-  <script src="{{ asset('public/assets/js/page/components-table.js')}}"></script>
+  <!-- <script src="{{ asset('public/assets/js/page/index.js')}}"></script> -->
+  <!-- <script src="{{ asset('public/assets/js/page/components-table.js')}}"></script> -->
 
   <!-- js add -->
   <script type="text/javascript">
     $(document).ready(function(){
-      $('#datatables').DataTable();
+      // $('#datatables').DataTable({
+      //   paging: false,
+      //   searching: false
+      // });
     });
   </script>
+
+<script type="text/javascript">
+          // $(document).ready(function(){
+          //   $("#coba").click(function(){
+          //     $('.modal-backdrop').hide();
+          //   })
+
+            // $('#closecoba').click(function(){
+            //   $('#tampilan').hide();
+            // }) 
+          // })
+
+          // var tes = $('#')
+        </script>
+
+  <!-- <script type="text/javascript">
+     $(document).ready(function (){
+         let baris = 1
+
+         $(document).on('click', '#p', function (){
+             baris= baris + 1
+             var html = "<tr td= 'baris'" +baris+ ">"
+                html += " <td contenteditable="true" class="nama"></td>"
+                html += " <td contenteditable="true" class="nip"></td> "
+                html += " <td contenteditable="true" class="jabatan"></td>"
+                html += "<td> <button class="btn-sm btn-danger"id="hapus">-</button></td>"
+                html += "</tr>"
+
+                $('#tabel1').append(html)
+         })
+     })
+</script> -->
+
+  <!-- js button modal -->
+  <!-- <script type="text/javascript">
+    if () {
+      
+    }
+    $(document).ready(function(){
+      $('#datatables').DataTable();
+      paging: false,
+      searching: false
+    });
+  </script> --> -->
 
   <!-- <script>
     $(document).ready(function(){
@@ -44,6 +92,23 @@
     });
   </script> -->
 
+  
+
 
   <!-- <script src="{{ asset('public/admin/vendors/jquery/dist/jquery.min.js')}}"></script> -->
-  <script src="{{ asset('public/admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script>
+  <script type="text/javascript">
+    // $('.addkaryawan').on('click', function(){
+    //     addkaryawan();
+    // });
+    // function addkaryawan(){
+    //     var karyawan = '<div><div class="row form-group"><div class="col col-md-3"><label for="text-input" class=" form-control-label">Tempat</label></div><div class="col-6 col-md-6"><input type="text" id="text-input" name="tempat" class="form-control"><small class="form-text text-muted"></small></div></div></div>';
+    //     $('.karyawan').append(karyawan);
+    // };
+    // $('.remove').live('click', function(){
+    //     $(this).parent().parent().parent().remove();
+    // });
+</script>
+
+  <!-- <script src="{{ asset('public/admin/vendors/popper.js/dist/umd/popper.min.js')}}"></script> -->
+
+

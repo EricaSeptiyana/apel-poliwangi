@@ -3,11 +3,11 @@
 @section('content')
 
 <section class="section">
-<div class="section-header">
+<div class="section-header" style="top: 0; position: sticky; z-index: 890">
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
-      <div class="breadcrumb-item"><a href="{{route('kelompok.index')}}">Jabatan</a></div>
+      <div class="breadcrumb-item"><a href="{{route('jabatan.index')}}">Jabatan</a></div>
       <div class="breadcrumb-item">{{ $pagename }}</div>
     </div>
 </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-12 col-md-12 col-lg-12 col-">
                 <div class="card">
-                  <div class="card-header">
+                  <!-- <div class="card-header">
                     <h4>Full Width</h4>
                     <div class="card-header-action">
                         <div class="input-group">
@@ -41,68 +41,62 @@
                           </div>
                         </div>
                     </div>
-                  </div>
+                  </div> -->
                     <div class="table-responsive">
-                      <table class="table table-striped table-md">
-                        <tr>
-                          <th>No</th>
-                          <th>Nama Jabatan</th>
-                          <!-- <th>Tertuju</th> -->
-                          <!-- <th>Instansi</th> -->
-                          <!-- <th>Agenda</th> -->
-                          <!-- <th>Hari/Tanggal</th> -->
-                          <!-- <th>Pukul</th> -->
-                          <!-- <th>Tempat</th> -->
-                          <!-- <th>Tanggal Surat</th> -->
-                          <th>Aksi</th>
-                          <!-- <th>Delete</th>
-                          <th>Cetak</th>
-                          <th>Download</th> -->
-                        </tr>
-                        <!-- <tr> -->
-                          @foreach($data as $row)
-                           <tr> 
-                              <td>{{++$i}}</td>
-                              <td>{{$row->nama_jabatan}}</td>
-                              <!-- <td>{{$row->instansi}}</td> -->
-                              <!-- <td>{{$row->agenda}}</td> -->
-                              <!-- <td>{{$row->hari_tanggal}}</td> -->
-                              <!-- <td>{{$row->pukul}}</td> -->
-                              <!-- <td>{{$row->tempat}}</td> -->
-                              <!-- <td>{{$row->tanggal_surat}}</td> -->
-                              <td>
-                                <!-- <div class="row"> -->
-                                  <!-- <div class="col-md-2 d-grid"> -->
-
-                                    <div class="d-flex justify-content-evenly">
-                                      <a href="{{route('jabatan.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                      <form action="{{route('jabatan.destroy', $row->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
-                                      </form>
-                                      <!-- <a href="#" class="btn btn-info"> Cetak </a> -->
-                                      <!-- <a href="#" class="btn btn-success"> Download </a> -->
-                                    </div>
-                                    <!-- <div class="col-md-2">
-                                      
-                                      <form action="{{route('jabatan.destroy', $row->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger" type="submit"> Hapus </button>
-                                      </form>
-                                  </div> -->
-                                <!-- </div> -->
-                              </td>
-                                
-                                <!-- <a href="#" class="btn btn-danger"> Hapus </a></td> -->
-                              <!-- <td><a href="#" class="btn btn-info"> Cetak </a></td>
-                              <td><a href="#" class="btn btn-success"> Download </a></td> -->
-                              <!-- <td><a href="#" class="btn btn-icon btn-dark"> <i class="far fa-file"></i> </a></td> -->
-                              <!-- <td><div class="badge badge-success">Active</div></td>
-                              <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
+                      <table id="datatables" class="table table-striped table-md ">
+                        <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Nama Jabatan</th>
+                              <th>Aksi</th>
                             </tr>
-                          @endforeach
+                        </thead>
+                        <tbody>
+                            <!-- <tr> -->
+                              @foreach($data as $row)
+                              <tr> 
+                                  <td>{{++$i}}</td>
+                                  <td>{{$row->nama_jabatan}}</td>
+                                  <!-- <td>{{$row->instansi}}</td> -->
+                                  <!-- <td>{{$row->agenda}}</td> -->
+                                  <!-- <td>{{$row->hari_tanggal}}</td> -->
+                                  <!-- <td>{{$row->pukul}}</td> -->
+                                  <!-- <td>{{$row->tempat}}</td> -->
+                                  <!-- <td>{{$row->tanggal_surat}}</td> -->
+                                  <td>
+                                    <!-- <div class="row"> -->
+                                      <!-- <div class="col-md-2 d-grid"> -->
+    
+                                        <div class="d-flex justify-content-evenly">
+                                          <a href="{{route('jabatan.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                          <form action="{{route('jabatan.destroy', $row->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
+                                          </form>
+                                          <!-- <a href="#" class="btn btn-info"> Cetak </a> -->
+                                          <!-- <a href="#" class="btn btn-success"> Download </a> -->
+                                        </div>
+                                        <!-- <div class="col-md-2">
+                                          
+                                          <form action="{{route('jabatan.destroy', $row->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger" type="submit"> Hapus </button>
+                                          </form>
+                                      </div> -->
+                                    <!-- </div> -->
+                                  </td>
+                                    
+                                    <!-- <a href="#" class="btn btn-danger"> Hapus </a></td> -->
+                                  <!-- <td><a href="#" class="btn btn-info"> Cetak </a></td>
+                                  <td><a href="#" class="btn btn-success"> Download </a></td> -->
+                                  <!-- <td><a href="#" class="btn btn-icon btn-dark"> <i class="far fa-file"></i> </a></td> -->
+                                  <!-- <td><div class="badge badge-success">Active</div></td>
+                                  <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
+                                </tr>
+                              @endforeach
+                        </tbody>
                         <!-- </tr> -->
                         <!-- <tr>
                           <td>2</td>
@@ -120,7 +114,7 @@
                         </tr> -->
                       </table>
                     </div>
-                  </div>
+                  <!-- </div>
                   <div class="card-footer text-right">
                     <nav class="d-inline-block">
                       <ul class="pagination mb-0">
@@ -137,7 +131,7 @@
                         </li>
                       </ul>
                     </nav>
-                </div>
+                </div> -->
               </div>
               </div>
             </div>

@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="section">
-<div class="section-header">
+<div class="section-header" style="top: 0; position: sticky; z-index: 890">
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
@@ -30,9 +30,9 @@
                   </div>
                 </div>
                 <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Full Width</h4>
+                <!-- <div class="card"> -->
+                  <!-- <div class="card-header"> -->
+                    <!-- <h4>Full Width</h4>
                     <div class="card-header-action">
                         <div class="input-group">
                           <input type="text" class="form-control" placeholder="Search">
@@ -40,59 +40,60 @@
                             <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                           </div>
                         </div>
-                    </div>
-                  </div>
+                    </div> -->
+                  <!-- </div> -->
                     <div class="table-responsive">
-                      <table class="table table-striped table-md">
-                        <tr>
-                          <th>No</th>
-                          <th>Nama</th>
-                          <th>Permission</th>
-                          <th>Aksi</th>
-                          <!-- <th>Delete</th>
-                          <th>Cetak</th>
-                          <th>Download</th> -->
-                        </tr>
-                        <!-- <tr> -->
-                          @foreach($role_permission as $i=>$row)
-                           <tr>
-                              <td>{{++$i}}</td>
-                              <!-- <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td> -->
-                              <td>{{$row->name}}</td>
-                              <td>
-                                @if($row->permissions())
-                                  <ul style="margin-left: 20px">
-                                    @foreach ($row->permissions()->get() as $permission)
-                                      <li> {{ $permission->name }}</li>
-                                    @endforeach
-                                  </ul>
-                                @endif
-                                <!-- {{$row->instansi}} -->
-                              </td>
-                              <td>
-                                <div class="d-flex justify-content-evenly">
-                                  <a href="{{route('roles.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                  <!-- <a href="#" class="btn btn-info mx-2"> Cetak </a> -->
-                                  <!-- <a href="#" class="btn btn-success"> Download </a> -->
-                                  <form action="{{route('roles.destroy', $row->id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
-                                  </form>
-                                  <!-- <a href="#" class="btn btn-info"> Cetak </a>
-                                  <a href="#" class="btn btn-success"> Download </a> -->
-                                </div>
-                              </td>
-                                
-                                <!-- <a href="#" class="btn btn-danger"> Hapus </a></td> -->
-                              <!-- <td><a href="#" class="btn btn-info"> Cetak </a></td>
-                              <td><a href="#" class="btn btn-success"> Download </a></td> -->
-                              <!-- <td><a href="#" class="btn btn-icon btn-dark"> <i class="far fa-file"></i> </a></td> -->
-                              <!-- <td><div class="badge badge-success">Active</div></td>
-                              <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
+                      <table id="datatables" class="table table-striped table-md">
+                        <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Nama</th>
+                              <th>Permission</th>
+                              <th>Aksi</th>
                             </tr>
-                          @endforeach
-                        <!-- </tr> -->
+                        </thead>
+                        <tbody>
+                            <!-- <tr> -->
+                              @foreach($role_permission as $i=>$row)
+                              <tr>
+                                  <td>{{++$i}}</td>
+                                  <!-- <td>{{$row->nomor}}/{{$row->kode_surat}}/{{$row->jenis_surat}}/{{$row->tahun_surat}}</td> -->
+                                  <td>{{$row->name}}</td>
+                                  <td>
+                                    @if($row->permissions())
+                                      <ul style="margin-left: 20px">
+                                        @foreach ($row->permissions()->get() as $permission)
+                                          <li> {{ $permission->name }}</li>
+                                        @endforeach
+                                      </ul>
+                                    @endif
+                                    <!-- {{$row->instansi}} -->
+                                  </td>
+                                  <td>
+                                    <div class="d-flex justify-content-evenly">
+                                      <a href="{{route('roles.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                      <!-- <a href="#" class="btn btn-info mx-2"> Cetak </a> -->
+                                      <!-- <a href="#" class="btn btn-success"> Download </a> -->
+                                      <form action="{{route('roles.destroy', $row->id)}}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
+                                      </form>
+                                      <!-- <a href="#" class="btn btn-info"> Cetak </a>
+                                      <a href="#" class="btn btn-success"> Download </a> -->
+                                    </div>
+                                  </td>
+                                    
+                                    <!-- <a href="#" class="btn btn-danger"> Hapus </a></td> -->
+                                  <!-- <td><a href="#" class="btn btn-info"> Cetak </a></td>
+                                  <td><a href="#" class="btn btn-success"> Download </a></td> -->
+                                  <!-- <td><a href="#" class="btn btn-icon btn-dark"> <i class="far fa-file"></i> </a></td> -->
+                                  <!-- <td><div class="badge badge-success">Active</div></td>
+                                  <td><a href="#" class="btn btn-secondary">Detail</a></td> -->
+                                </tr>
+                              @endforeach
+                            <!-- </tr> -->
+                        </tbody>
                         <!-- <tr>
                           <td>2</td>
                           <td>Hasan Basri</td>
@@ -110,7 +111,7 @@
                       </table>
                     </div>
                   </div>
-                  <div class="card-footer text-right">
+                  <!-- <div class="card-footer text-right">
                     <nav class="d-inline-block">
                       <ul class="pagination mb-0">
                         <li class="page-item disabled">
@@ -126,7 +127,7 @@
                         </li>
                       </ul>
                     </nav>
-                </div>
+                </div> -->
               </div>
               </div>
             </div>

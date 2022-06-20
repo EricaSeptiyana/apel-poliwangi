@@ -17,7 +17,7 @@ class PelaporannController extends Controller
     public function index()
     {
         //
-        $pagename='Data Pelaporan Hasil Perjalanan Dinas';
+        $pagename='Data Laporan Hasil Perjalanan Dinas';
         $i = 0;
         $data=pelaporann::all()->sortDesc();
         return view('admin.pelaporann.index', compact('data', 'pagename', 'i'));
@@ -36,7 +36,7 @@ class PelaporannController extends Controller
         // $nomorfill = pelaporann::max('nomor');
         // $nomormax = $nomorfill + 1;
         // $cek = count($pelaporann);
-        $pagename="Form Input Pelaporan Hasil Perjalanan Dinas";
+        $pagename="Form Input Laporan Hasil Perjalanan Dinas";
         return view('admin.pelaporann.create', compact('pagename', 'data_User'));
     }
 
@@ -46,6 +46,7 @@ class PelaporannController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         //
@@ -60,42 +61,94 @@ class PelaporannController extends Controller
             'waktu_mulai'=>'required',
             'waktu_selesai'=>'required',
             'hasil'=>'required',
-            // 'txt_tempat'=>'required',
+            'penutup'=>'required',
             'date_tanggalsurat'=>'required',
             'optionid_user'=>'required',
         ]);
 
-        if($request->foto_kegiatan){
-            $namafotokegiatan = $request->foto_kegiatan->getClientOriginalName() . '_' . time() . '.' . $request->foto_kegiatan->extension();
-            // $namafiledisposisi = $request->file_disposisi->getClientOriginalName() . '_' . time() . '.' . $request->file_disposisi->extension();
+        // if(empty($imgName)){
+        //     $data_pelaporann=new pelaporann([
+        //         'judul_laporan' => $request->get('judul_laporan'),
+        //         'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
+        //         'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
+        //         'instansi' => $request->get('instansi'),
+        //         'waktu_mulai' => $request->get('waktu_mulai'),
+        //         'waktu_selesai' => $request->get('waktu_selesai'),
+        //         'hasil' => $request->get('hasil'),
+        //         'foto_kegiatan2' => $imgName2,
+        //         'foto_kegiatan3' => $imgName3,
+        //         'tanggal_surat' => $request->get('date_tanggalsurat'),
+        //         'penanda_tangan' => $request->get('optionid_user'),
+        //     ]);
+        // }
 
-            $data_pelaporann=new pelaporann([
-                'judul_laporan' => $request->get('judul_laporan'),
-                'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
-                'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
-                'instansi' => $request->get('instansi'),
-                'waktu_mulai' => $request->get('waktu_mulai'),
-                'waktu_selesai' => $request->get('waktu_selesai'),
-                'hasil' => $request->get('hasil'),
-                'foto_kegiatan' => $namafotokegiatan,
-                'lokasi_fotokegiatan' => $request->foto_kegiatan->move(public_path('fotokegiatan'), $namafotokegiatan),
-                'tanggal_surat' => $request->get('date_tanggalsurat'),
-                'penanda_tangan' => $request->get('optionid_user'),
-            ]);
+        // if(empty($imgName2)){
+        //     $data_pelaporann=new pelaporann([
+        //         'judul_laporan' => $request->get('judul_laporan'),
+        //         'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
+        //         'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
+        //         'instansi' => $request->get('instansi'),
+        //         'waktu_mulai' => $request->get('waktu_mulai'),
+        //         'waktu_selesai' => $request->get('waktu_selesai'),
+        //         'hasil' => $request->get('hasil'),
+        //         'foto_kegiatan' => $imgName,
+        //         'foto_kegiatan3' => $imgName3,
+        //         'tanggal_surat' => $request->get('date_tanggalsurat'),
+        //         'penanda_tangan' => $request->get('optionid_user'),
+        //     ]);
+        // }
 
-            // $tanggal = date("d");
-            // $tanggalsurat = substr($request->get('date_tanggalsurat'), 8);
-            // if($tanggal == $tanggalsurat){
-            //     if($nomorfill >= 20){
-            //         return redirect('admin/pelaporann/create')->with('gagal','lebih dari 20');
-            //     }
-            // }
+        // if(empty($imgName3)){
+        //     $data_pelaporann=new pelaporann([
+        //         'judul_laporan' => $request->get('judul_laporan'),
+        //         'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
+        //         'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
+        //         'instansi' => $request->get('instansi'),
+        //         'waktu_mulai' => $request->get('waktu_mulai'),
+        //         'waktu_selesai' => $request->get('waktu_selesai'),
+        //         'hasil' => $request->get('hasil'),
+        //         'foto_kegiatan' => $imgName,
+        //         'foto_kegiatan2' => $imgName2,
+        //         'tanggal_surat' => $request->get('date_tanggalsurat'),
+        //         'penanda_tangan' => $request->get('optionid_user'),
+        //     ]);
+        // }
 
-            $data_pelaporann->save();
-            return redirect('admin/pelaporann')->with('sukses','Pelaporan Hasil Perjalanan Dinas Berhasil Diajukan');
-        }
+        // $imgName = $request->foto_kegiatan->getClientOriginalName() . '-' . time()
+        // . '-' . $request->foto_kegiatan->extension();
+
+        // $request->foto_kegiatan->move(public_path() . '/fotokegiatan', $imgName);
+
+        // $imgName2 = $request->foto_kegiatan2->getClientOriginalName() . '-' . time()
+        // . '-' . $request->foto_kegiatan2->extension();
+        
+        // $request->foto_kegiatan2->move(public_path() . '/fotokegiatan2', $imgName2);
+
+        // $imgName3 = $request->foto_kegiatan3->getClientOriginalName() . '-' . time()
+        // . '-' . $request->foto_kegiatan3->extension();
+        
+        // $request->foto_kegiatan3->move(public_path() . '/fotokegiatan3', $imgName3);
+
+        $data_pelaporann=new pelaporann([
+            'judul_laporan' => $request->get('judul_laporan'),
+            'dasar_pelaksanaan' => $request->get('dasar_pelaksanaan'),
+            'maksud_perjalanandinas' => $request->get('maksud_perjalanandinas'),
+            'instansi' => $request->get('instansi'),
+            'waktu_mulai' => $request->get('waktu_mulai'),
+            'waktu_selesai' => $request->get('waktu_selesai'),
+            'hasil' => $request->get('hasil'),
+            'penutup' => $request->get('penutup'),
+            // 'foto_kegiatan' => $imgName,
+            // 'foto_kegiatan2' => $imgName2,
+            // 'foto_kegiatan3' => $imgName3,
+            'tanggal_surat' => $request->get('date_tanggalsurat'),
+            'penanda_tangan' => $request->get('optionid_user'),
+        ]);
+
+        $data_pelaporann->save();
+        return redirect('admin/pelaporann')->with('sukses','Pelaporan Hasil Perjalanan Dinas Berhasil Diajukan');
     }
-
+        
     /**
      * Display the specified resource.
      *
@@ -105,6 +158,23 @@ class PelaporannController extends Controller
     public function show($id)
     {
         //
+        $data=pelaporann::find($id);
+        // $pagename="Form Input Surat Tugas Kelompok";
+        $data_tanggal= $data->waktu_pelaksanaan;
+        $tanggal=date('d F Y', strtotime($data_tanggal));
+        $day = date('D', strtotime($data_tanggal));
+        $list_hari =  array(
+            'Sun' => 'Minggu',
+            'Mon' => 'Senin',
+            'Tue' => 'Selasa',
+            'Wed' => 'Rabu',
+            'Thu' => 'Kamis',
+            'Fri' => 'Jumat',
+            'Sat' => 'Sabtu',
+        );
+        $hari=$list_hari[$day];
+
+        return view('admin.pelaporann.show', compact('data', 'hari', 'tanggal'));
     }
 
     /**
@@ -120,7 +190,7 @@ class PelaporannController extends Controller
         $data_User=User::all();
         // $nomorfill = pelaporann::max('nomor');
         // $nomormax = $nomorfill + 1;
-        $pagename='Update Pelaporan Hasil Perjalanan Dinas';
+        $pagename='Update Laporan Hasil Perjalanan Dinas';
         $data=pelaporann::find($id);
         return view('admin.pelaporann.edit', compact('data', 'pagename', 'data_pelaporann' , 'data_User'));
     }
@@ -144,6 +214,7 @@ class PelaporannController extends Controller
             'waktu_mulai'=>'required',
             'waktu_selesai'=>'required',
             'hasil'=>'required',
+            'penutup'=>'required',
             'date_tanggalsurat'=>'required',
             // 'int_nomor'=>'required',
             // 'int_kode'=>'required',
@@ -159,6 +230,7 @@ class PelaporannController extends Controller
         $pelaporann->waktu_mulai = $request->get('waktu_mulai');
         $pelaporann->waktu_selesai = $request->get('waktu_selesai');
         $pelaporann->hasil = $request->get('hasil');
+        $pelaporann->penutup = $request->get('penutup');
         $pelaporann->tanggal_surat = $request->get('date_tanggalsurat');
         // $pelaporann->nomor = $request->get('int_nomor');
         // $pelaporann->kode_surat = $request->get('int_kode');

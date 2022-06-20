@@ -48,11 +48,11 @@ class ProdiController extends Controller
     {
         //
         $request->validate([
-            'txt_prodi'=>'required',
+            'nama_prodi'=>'required',
         ]);
 
         $data_prodi = new prodi([
-            'nama_prodi' => $request->get('txt_prodi'),
+            'nama_prodi' => $request->get('nama_prodi'),
         ]);
 
         // $tanggal = date("d");
@@ -105,11 +105,11 @@ class ProdiController extends Controller
     {
         //
         $request->validate([
-            'txt_prodi'=>'required',
+            'nama_prodi'=>'required',
         ]);
 
         $prodi = prodi::find($id);
-        $prodi->nama_prodi = $request->get('txt_prodi');
+        $prodi->nama_prodi = $request->get('nama_prodi');
 
         $prodi->save();
         return redirect('admin/prodi')->with('sukses','Program Studi Berhasil Diupdate');

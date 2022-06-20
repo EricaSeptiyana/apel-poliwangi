@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="section-body">
-<div class="section-header">
+<div class="section-header" style="top: 0; position: sticky; z-index: 890">
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
@@ -48,7 +48,41 @@
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIP/NIPPPK</label></div>
                         <div class="col-12 col-md-9"><input type="text" value="{{$user->nip}}" id="text-input" name="txt_nip" placeholder="Isi NIP/NIPPPK Anda" class="form-control"><small class="form-text text-muted"></small></div>
                     </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Jabatan</label></div>
+                        <div class="col-6 col-md-6">
+                            <select name='nama_jabatan' class="form-control">
+                            @if(is_array($data_jabatan) || $data_jabatan instanceof Traversable)
+                                @foreach($data_jabatan as $jabatan)
+                                    <option value={{$jabatan->nama_jabatan}}
+                                        @if($jabatan->nama_jabatan==$data->nama_jabatan)
+                                            selected
+                                        @endif
+                                    >
+                                        {{$jabatan->nama_jabatan}}
+                                    </option>    
+                                @endforeach
+                            @endif
+                            </select>
+                        </div>
+                    </div>
 
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Prodi</label></div>
+                        <div class="col-6 col-md-6">
+                            <select name='nama_prodi' class="form-control">
+                                @foreach((array) $data_prodi as $prodi)
+                                    <option value={{$prodi->nama_prodi}}
+                                        @if($prodi->nama_prodi==$data->nama_prodi)
+                                            selected
+                                        @endif
+                                    >
+                                        {{$prodi->nama_prodi}}</option>    
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email User</label></div>
                         <div class="col-12 col-md-9"><input type="text" value="{{$user->email}}" id="text-input" name="txtemail_user" placeholder="Isi Email User Anda" class="form-control"><small class="form-text text-muted"></small></div>
@@ -70,7 +104,7 @@
                             <select name="role_user" id="select" class="form-control">
                             
                             @foreach($allRoles as $role)
-                            <option value={{$role->id}}>
+                            <option value={{$role->id}} >
                                 @if(in_array($role->id, $userRole))
                                     <!-- selected -->
                                 @endif
@@ -79,10 +113,6 @@
                             </option>
 
                             @endforeach                                            
-                                    <!-- <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option> -->
                             </select>
                           </div>
                         </div>
@@ -94,29 +124,6 @@
                         </div>
                       </div>
                         </div>
-                       
-                        <!-- <div class="col">
-                          <div class="form-group">
-                            <label>NIDN</label>
-                            <input type="text" class="form-control" placeholder="NIDN">
-                          </div>
-                          <div class="form-group">
-                            <label>NIP/NIPPPK</label>
-                            <input type="text" class="form-control" placeholder="NIP/NIPPPK">
-                          </div>
-                          <div class="form-group">
-                            <label>Nama Pangkat</label>
-                            <input type="text" class="form-control" placeholder="Nama Pangkat">
-                          </div>
-                          <div class="form-group">
-                            <label>Nama user</label>
-                            <input type="text" class="form-control" placeholder="Nama user">
-                          </div>
-                          <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea class="form-control"></textarea>
-                          </div>
-                        </div> -->
                       </div>
 
                     </div>

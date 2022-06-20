@@ -176,6 +176,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+         // Batch
+         Mavinoo\Batch\BatchServiceProvider::class,
     ],
 
     /*
@@ -228,6 +230,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // Batch
+        'Batch' => Mavinoo\Batch\BatchFacade::class,
     ],
 
 ];

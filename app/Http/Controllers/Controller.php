@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function index()
+    {
+        // $datalogin=Auth::user();
+        // return view('home', compact('datalogin'));
+        return view('home');
+    }
 }

@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UserTemplateExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facedes\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UserImport;
 use App\User;
-use Hash;
-use DB;
+use App\jabatan;
+use App\prodi;
 
 class UserController extends Controller
 {
@@ -17,6 +22,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
         //
@@ -36,8 +47,10 @@ class UserController extends Controller
         //
         $pagename="Tambah User";
         $allRoles=Role::all();
+        $data_jabatan=jabatan::all();
+        $data_prodi=prodi::all();
 
-        return view('admin.user.create', compact('pagename', 'allRoles'));
+        return view('admin.user.create', compact('pagename', 'allRoles', 'data_jabatan', 'data_prodi'));
     }
 
     /**
@@ -50,8 +63,10 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'txtnama_user' => 'required',
-            'txt_username' => 'required',
+            // 'txt_username' => 'required',
             'txt_nip' => 'required',
+            // 'nama_jabatan' => 'required',
+            // 'nama_prodi' => 'required',
             'txtemail_user' => 'required|email|unique:users,email',
             'txtpassword_user' => 'required|same:txtkonfirmasipassword_user',
             'role_user' => 'required'
@@ -61,6 +76,8 @@ class UserController extends Controller
         $user->name=$request->txtnama_user;
         $user->username=$request->txt_username;
         $user->nip=$request->txt_nip;
+        $user->jabatan_id=$request->jabatan_id;
+        $user->prodi_id=$request->prodi_id;
         $user->email=$request->txtemail_user;
         $user->password=Hash::make($request->txtpassword_user);
         $user->save();
@@ -111,10 +128,12 @@ class UserController extends Controller
         //
         $pagename='Edit User';
         $user=User::find($id);
+        $data_jabatan=jabatan::find($id);
+        $data_prodi=prodi::find($id);
         $allRoles=Role::all();
         $userRole=$user->roles->pluck('id')->all();
 
-        return view('admin.user.edit', compact('pagename', 'user', 'allRoles', 'userRole'));
+        return view('admin.user.edit', compact('pagename', 'data_jabatan', 'data_prodi','user', 'allRoles', 'userRole'));
     }
 
     /**
@@ -129,8 +148,10 @@ class UserController extends Controller
         //
         $this->validate($request, [
             'txtnama_user' => 'required',
-            'txt_username' => 'required',
+            // 'txt_username' => 'required',
             'txt_nip' => 'required',
+            // 'nama_jabatan' => 'required',
+            // 'nama_prodi' => 'required',
             'txtemail_user' => 'required|email',
             //'txtpassword_user' => 'required|same:txtkonfirmasipassword_user',
             'role_user' => 'required'
@@ -140,6 +161,8 @@ class UserController extends Controller
         $user->name=$request->txtnama_user;
         $user->username=$request->txt_username;
         $user->nip=$request->txt_nip;
+        $user->jabatan=$request->nama_jabatan;
+        $user->prodi=$request->nama_prodi;
         $user->email=$request->txtemail_user;
         if($request->txtpassword_user !=null){
             $user->password=Hash::make($request->txtpassword_user);
@@ -175,4 +198,27 @@ class UserController extends Controller
 
     //     return view('user.profile', compact('tittle', 'user'));
     // }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function importUser(Request $request)
+    {
+        // dd($request->file('excel-karyawan'));
+        // $request->validate([
+        //     'file' => 'required|max:10000|mimes:xlsx,xls',
+        // ]);
+        $file=$request->file('excel-karyawan');
+        // dd($file);
+        Excel::import(new UserImport    , $file);
+        return redirect()->back();
+    }
+
+    public function exportTemplate()
+    {
+        return Excel::download(new UserTemplateExport, 'template.xlsx');
+    }
 }

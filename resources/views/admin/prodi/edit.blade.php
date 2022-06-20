@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="section-body">
-<div class="section-header">
+<div class="section-header" style="top: 0; position: sticky; z-index: 890">
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
@@ -66,7 +66,7 @@
                           <!-- </div> -->
                           <div class="form-group">
                             <label>Program Studi</label>
-                            <input type="text" name='txt_prodi' value="{{$data->nama_prodi}}" class="form-control">
+                            <input type="text" name='nama_prodi' value="{{$data->nama_prodi}}" class="form-control">
                           </div>
                         </div>
                         <!-- <div class="col">

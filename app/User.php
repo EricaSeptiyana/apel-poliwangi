@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'nip', 'email','password',
+        'name', 'username', 'nip', 'jabatan_id', 'prodi_id', 'email','password',
     ];
 
     /**
@@ -38,4 +38,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function perorangann()
+    {
+        return $this->hasMany(perorangann::class);
+    }
+
+    public function kelompokk()
+    {
+        return $this->hasMany(kelompokk::class);
+    }
+
+    public function jabatan()
+    {
+        return $this->belongsTo(jabatan::class);
+    }
+
+    public function prodi()
+    {
+        return $this->belongsTo(prodi::class);
+    }
+
+
+    // public function getFullNameAttribute()
+    // {
+    //     if (is_null($this->last_name)) {
+    //         return "{$this->name}";
+    //     }
+
+    //     return "{$this->name} {$this->username}";
+    // }
+
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = bcrypt($value);
+    // }
 }
