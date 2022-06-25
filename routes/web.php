@@ -28,8 +28,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::resource('/jabatan', 'Admin\JabatanController');
     Route::resource('/prodi', 'Admin\ProdiController');
     Route::resource('/roles', 'Admin\RoleController');
-    Route::get('/user/{user}', 'Admin\UserController@show')->name('show-user');
-    Route::get('/user/download-template', 'Admin\UserController@exportTemplate')->name('download-template');
+    Route::get('/user/download-template/', 'Admin\UserController@exportTemplate')->name('download-template');
+    Route::get('/user/{user}/', 'Admin\UserController@show')->name('show-user');
     Route::resource('/user', 'Admin\UserController');
     Route::post('/user', 'Admin\UserController@importUser')->name('importuser');
 

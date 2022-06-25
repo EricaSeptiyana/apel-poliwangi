@@ -218,7 +218,6 @@ class UserController extends Controller
 
     public function exportTemplate()
     {
-        return 1;
-        // return Excel::download(new UserTemplateExport, 'template.xlsx');
+        return Excel::download(new UserTemplateExport, 'template.xlsx');
     }
 }
