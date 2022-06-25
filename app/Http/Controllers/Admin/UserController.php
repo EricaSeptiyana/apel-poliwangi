@@ -127,8 +127,8 @@ class UserController extends Controller
         //
         $pagename='Edit User';
         $user=User::find($id);
-        $data_jabatan=jabatan::find($id);
-        $data_prodi=prodi::find($id);
+        $data_jabatan=jabatan::all();
+        $data_prodi=prodi::all();
         $allRoles=Role::all();
         $userRole=$user->roles->pluck('id')->all();
 
@@ -160,8 +160,8 @@ class UserController extends Controller
         $user->name=$request->txtnama_user;
         $user->username=$request->txt_username;
         $user->nip=$request->txt_nip;
-        $user->jabatan=$request->nama_jabatan;
-        $user->prodi=$request->nama_prodi;
+        $user->jabatan_id = $request->jabatan_id;
+        $user->prodi_id = $request->prodi_id;
         $user->email=$request->txtemail_user;
         if($request->txtpassword_user !=null){
             $user->password=Hash::make($request->txtpassword_user);
