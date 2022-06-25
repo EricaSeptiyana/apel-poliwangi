@@ -34,11 +34,11 @@ class DisposisiController extends Controller
     {
         //
         // $data_User=User::all();
-        $disposisi = disposisi::all();
+        // $disposisi = disposisi::all();
         $pagename="Form Input Surat Disposisi";
-        // $data=kelompokk::all();
+        $data=kelompokk::all();
 
-        return view('admin.disposisi.create', compact('pagename', 'disposisi'));
+        return view('admin.disposisi.create', compact('pagename', 'data'));
     }
 
     /**
@@ -49,27 +49,19 @@ class DisposisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // $data = Disposisi::all();
         $request->validate([
             'nomor_agenda'=>'required',
             'tanggal_terima'=>'required',
-            // 'jabatan_penandatangan' => 'required',
-            // 'nomor_permohonan'=>'required',
-            // 'tanggal_permohonan'=>'required', 
-            // 'lampiran'=>'required',
-            // 'hal'=>'required',
         ]);
+
         $data_disposisi=new disposisi([
-            'kelompokk_id' => $request->get('kelompokk_id'),
-            'nomor_agenda' => $request->get('nomor_agenda'),
-            'tanggal_terima' => $request->get('tanggal_terima'),
-            // 'nomor_permohonan' => $request->get('nomor_permohonan'),
-            // 'tanggal_permohonan' => $request->get('tanggal_permohonan'),
-            // 'lampiran' => $request->get('lampiran'),
-            // 'hal' => $request->get('hal'),
+            'kelompokk_id' => $request->kelompokk_id,
+            'nomor_agenda' => $request->nomor_agenda,
+            'tanggal_terima' => $request->tanggal_terima,
         ]);
+
         $data_disposisi->save();
+
         return redirect('admin/kelompokk')->with('sukses','Surat Disposisi Berhasil Dibuat');
     }
 
@@ -83,7 +75,7 @@ class DisposisiController extends Controller
     {
         //
         //
-        // $perorangann=perorangann::find($id);
+        $disposisi=disposisi::find($id);
         $data=kelompokk::find($id);
         // $data=perorangann::With('user')->get();
         // $data=perorangann::With('user')->get();
@@ -102,7 +94,7 @@ class DisposisiController extends Controller
         );
         $hari=$list_hari[$day];
 
-        return view('admin.disposisi.show', compact('data', 'hari', 'tanggal'));
+        return view('admin.disposisi.show', compact('data', 'hari', 'tanggal', 'disposisi'));
     }
 
     /**

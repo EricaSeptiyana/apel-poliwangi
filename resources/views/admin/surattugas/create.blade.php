@@ -63,7 +63,7 @@
                                     </textarea>
                                 </div>
                             </div>
-                            <div class="row form-group">
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="textarea-input" class=" form-control-label">Kegiatan</label>
                                 </div>
@@ -106,7 +106,7 @@
                                     <input type="text" id="text-input" name="tempat" disabled value="$data->tempat" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="textarea-input" class=" form-control-label">Penutup</label>
@@ -126,32 +126,16 @@
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
-                            <!-- <div class="row form-group">
+                            <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nama Direktur</label>
+                                    <label for="text-input" class=" form-control-label">Nama Atasan</label>
                                 </div>
                                 <div class="col-6 col-md-6">
                                     <select name='namattd_surattugas' class="form-control">
-                                        <option value="" label="pilih nama penanda tangan">
-                                        </option>
-                                        @foreach($data_User as $User)
-                                            <option value="{{$User->name}}">
-                                                {{ $User->name }}
-                                            </option>     
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> -->
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nama Penanda Tangan</label>
-                                </div>
-                                <div class="form-control col-6 col-md-6">
-                                    <select name='namattd_surattugas' class="namapenandatangan_surattugas">
                                         <option value="" label="pilih nama penanda tangan"></option>
                                         @foreach($data_User as $User)
-                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                            <option value="{{$User->name}}">
+                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                            <option value="{{$User->id}}">
                                                 {{ $User->name }}
                                             </option>  
                                         @endif   
@@ -159,7 +143,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row form-group">
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
                                 </div>
@@ -176,7 +160,7 @@
                                     <input type="text" id="text-input" name="jabatanttd_surattugas" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="footer text-right">
                             <button class="btn btn-primary mr-1" type="submit">Simpan</button>

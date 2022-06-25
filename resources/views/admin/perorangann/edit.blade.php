@@ -381,12 +381,14 @@
                                 <div class="form-control col-6 col-md-6">
                                     <select name='nama_penandatangan' class="namapenandatangan">
                                         @foreach($data_User as $User)
-                                            <option value={{$User->name}}
+                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                            <option value="{{$User->id}}"
                                                 @if($User->name==$data->nama_penandatangan)
                                                     selected
                                                 @endif
                                             >
-                                                {{$User->name}}</option>    
+                                                {{$User->name}}</option> 
+                                        @endif   
                                         @endforeach
                                     </select>
                                 </div>

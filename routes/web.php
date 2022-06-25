@@ -28,6 +28,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     Route::resource('/jabatan', 'Admin\JabatanController');
     Route::resource('/prodi', 'Admin\ProdiController');
     Route::resource('/roles', 'Admin\RoleController');
+    Route::get('/user/{user}', 'Admin\UserController@show')->name('show-user');
     Route::get('/user/download-template', 'Admin\UserController@exportTemplate')->name('download-template');
     Route::resource('/user', 'Admin\UserController');
     Route::post('/user', 'Admin\UserController@importUser')->name('importuser');
@@ -38,7 +39,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     
     // KEUANGAN
     Route::resource('/pelaporann', 'Admin\PelaporannController');
-    Route::resource('/undangan', 'Admin\UndanganController');
+    // Route::resource('/undangan', 'Admin\UndanganController');
     
     // KARYAWAN
     Route::resource('/perorangann', 'Admin\PerorangannController');
@@ -52,13 +53,16 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     //KAJUR
     Route::post('/perorangann/disetujui/{id}', 'Admin\PerorangannController@acc')->name('acc');
     Route::post('/kelompokk/disetujui/{id}', 'Admin\KelompokkController@acc')->name('acckelompokk');
-
+    
     // SEKDIR
     Route::resource('/disposisi', 'Admin\disposisiController');
-
+    
     // KEPEG
     Route::resource('/surattugas', 'Admin\surattugasController');
 
+    //KEUANGAN
+    Route::post('/pelaporann/disetujui/{id}', 'Admin\PelaporannController@acc')->name('accpelaporann');
+    
     // PROFILE
     Route::resource('/profile', 'Admin\ProfileController');
     // Route::get('/profile', 'UserController@index')->name('profile');

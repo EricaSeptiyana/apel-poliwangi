@@ -51,32 +51,45 @@
     <br>
     <table border="1" cellpadding="5" width="625">
         <tr>
-          <td>Tanggal Terima : 22 Februari 2022</td>
-          <td>Nomor Agenda</td>
-          <td>123</td>
+          <td>Tanggal Terima : 
+            <!-- 22 Februari 2022 -->
+            {{$disposisi->tanggal_terima}}
+          </td>
+          <td>Nomor Agenda :</td>
+          <td>{{$disposisi->nomor_agenda}}</td>
         </tr>
     </table>
     <br>
     <table cellpadding="5" width="625">
         <tr>
           <td>Jenis Disposisi &emsp;:</td>
-          <td>Pengirim : Ketua Unit Kerjasama dan Urusan International</td>
+          <td>Pengirim : 
+            {{$data->jabatan_penandatangan}}
+          </td>
         </tr>
         <tr>
             <td>Rahasia</td>
-            <td>Nomor Surat : 01/KUI/POLIWANGI/II/2022</td>
+            <td>Nomor Surat : 
+              {{$data->nomor_permohonan}}
+            </td>
         </tr>
         <tr>
             <td>Penting</td>
-            <td>Tanggal Surat : 22 Februari 2022</td>
+            <td>Tanggal Surat : 
+              {{$data->tanggal_permohonan}}
+            </td>
         </tr>
         <tr>
             <td>Segera</td>
-            <td>Lampiran : 1 berkas</td>
+            <td>Lampiran : 
+              {{$data->lampiran}}
+            </td>
         </tr>
         <tr>
             <td>Biasa</td>
-            <td>Perihal Surat : Permohonan Surat Tugas Panitia Kegiatan Penandatanganan MOU dan Peran Perguruan Tinggi dalam Mendukung Geoprak di Banyuwangi</td>
+            <td>Perihal Surat : 
+              {{$data->hal}}
+            </td>
         </tr>
     </table>
     <br>

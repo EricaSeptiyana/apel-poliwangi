@@ -8,6 +8,8 @@ class penugasankaryawan extends Model
 {
     //
     protected $fillable=[
+        'kelompokk_id',
+        'user_id',
         'name',
         'nip',
         'jabatan',

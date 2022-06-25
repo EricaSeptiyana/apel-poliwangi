@@ -39,8 +39,8 @@ class CreatePerorangannsTable extends Migration
             $table->string('file_surattugas')->nullable();
             $table->string('lokasi_filesurattugas')->nullable();
             $table->string('nama_penandatangan');
-            $table->string('nip_penandatangan');
-            $table->string('jabatan_penandatangan');
+            // $table->string('nip_penandatangan');
+            // $table->string('jabatan_penandatangan');
             $table->string('tipe_surat')->nullable();
 
             $table->string('status')->nullable();

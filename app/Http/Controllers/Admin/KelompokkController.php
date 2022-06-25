@@ -78,8 +78,8 @@ class KelompokkController extends Controller
             'tempat'=>'required',
             'penutup'=>'required',
             'nama_penandatangan' => 'required',
-            'nip_penandatangan' => 'required',
-            'jabatan_penandatangan' => 'required',
+            // 'nip_penandatangan' => 'required',
+            // 'jabatan_penandatangan' => 'required',
             
             // 'nama'=>'required',
             // 'nip'=>'required', 
@@ -248,8 +248,8 @@ class KelompokkController extends Controller
                     'tempat'=>'required',
                     'penutup'=>'required',
                     'nama_penandatangan' => 'required',
-                    'nip_penandatangan' => 'required',
-                    'jabatan_penandatangan' => 'required',
+                    // 'nip_penandatangan' => 'required',
+                    // 'jabatan_penandatangan' => 'required',
                 ]);
                 $kelompokk = kelompokk::find($id);
                 $kelompokk->nomor_permohonan = $request->get('nomor_permohonan');

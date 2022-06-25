@@ -25,8 +25,8 @@ class perorangann extends Model
         'tempat',
         'penutup',
         'nama_penandatangan',
-        'nip_penandatangan',
-        'jabatan_penandatangan',
+        // 'nip_penandatangan',
+        // 'jabatan_penandatangan',
         'tipe_surat',
     ];
 

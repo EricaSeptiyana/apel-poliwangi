@@ -235,22 +235,6 @@
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
-                            <!-- <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nama Direktur</label>
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <select name='namattd_surattugas' class="form-control">
-                                        <option value="" label="pilih nama penanda tangan">
-                                        </option>
-                                        @foreach($data_User as $User)
-                                            <option value="{{$User->name}}">
-                                                {{ $User->name }}
-                                            </option>     
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> -->
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="text-input" class=" form-control-label">Nama Penanda Tangan</label>
@@ -259,8 +243,8 @@
                                     <select name='namattd_surattugas' class="form-control">
                                         <option value="" label="pilih nama penanda tangan"></option>
                                         @foreach($data_User as $User)
-                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                            <option value="{{$User->name}}">
+                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                            <option value="{{$User->id}}">
                                                 {{ $User->name }}
                                             </option>  
                                         @endif   
@@ -422,8 +406,8 @@
                                     <div class="form-control col-6 col-md-6">
                                         <select name='nama_penandatangan' class="namapenandatangan">
                                             @foreach($data_User as $User)
-                                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                                <option value={{$User->name}}
+                                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                                <option value="{{$User->id}}"
                                                     @if($User->name==$data->nama_penandatangan)
                                                         selected
                                                     @endif
@@ -501,7 +485,7 @@
                                             <tbody id="karyawan">
                                                 @foreach($datapenugasan as $penugasan)
                                                 <tr>
-                                                    <td>{{++$i}}</td>
+                                                    <td class="index-number">{{++$i}}</td>
                                                     <td>
                                                         {{$penugasan->name}}
                                                         <input 
@@ -533,7 +517,7 @@
                                                         {{$penugasan->nip}}
                                                     </td>
                                                     <td><input type="text" name="jabatan[]" value="{{$penugasan->jabatan}}" class="form-control"></td>
-                                                    <th><a href="javascript:void(0)" id="remove" class="btn btn-danger deleteRow">-</a></th>
+                                                    <th><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></th>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -673,12 +657,14 @@
                                     <div class="form-control col-6 col-md-6">
                                         <select name='nama_penandatangan' class="namapenandatangan">
                                             @foreach($data_User as $User)
-                                                <option value={{$User->name}}
+                                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                                <option value="{{$User->id}}"
                                                     @if($User->name==$data->nama_penandatangan)
                                                         selected
                                                     @endif
                                                 >
-                                                    {{$User->name}}</option>    
+                                                    {{$User->name}}</option> 
+                                            @endif   
                                             @endforeach
                                         </select>
                                     </div>
@@ -692,23 +678,6 @@
                                         <small class="form-text text-muted"></small>
                                     </div>
                                 </div>
-                                <!-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <select name='nip_penandatangan' class="form-control">
-                                            @foreach($data_User as $User)
-                                                <option value={{$User->nip}}
-                                                    @if($User->nip==$data->nip_penandatangan)
-                                                        selected
-                                                    @endif
-                                                >
-                                                    {{$User->nip}}</option>    
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Jabatan Penanda Tangan</label>
@@ -797,26 +766,29 @@
 
 <!-- penugasan karyawan -->
 <script type="text/javascript">
+
+    let currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
+
     $('#addkaryawan').on('click', function(){
         addkaryawan();
     });
     function addkaryawan(){
-        // var karyawan = '<div><div class="form-group col-md-12 flex"><table class="table table-striped" id="tabel1"><thead><tr><th>No</th><th>Nama</th><th>NIP/NIK</th><th>Jabatan</th><th>Aksi</th></tr><tr><td>1</td><td><div class="col"><select name='anggota3' id="select" class="form-control"><option value="" label="pilih karyawan"></option>@foreach($data_User as $User)<option value={{$User->name}}>{{$User->name}}</option>@endforeach</select></div></td><td><div class="col"><input type="string" id="text-input" placeholder="{{$datalogin->nip}}" name="nip3" disabled value="{{$datalogin->nip}}" class="form-control">
-        // <small class="form-text text-muted"></small>
-        // </div></td><td><div class="col"><input type="string" id="text-input" name="jabatan3" class="form-control">
-        // <small class="form-text text-muted"></small>
-        // </div>   </td><td> <button class="btn-sm btn-danger" id="hapus">-</button></td></tr></thead></table></div></div>'
+
+        console.log(currentIndex);
+
         var karyawan = `
             <tr>
-                <td>{{++$i}}</td>
+                <td class="index-number">${currentIndex++}</td>
                     <td>
                         <div class='col'>
                             <select name='name[]' id='select' class='form-control'>
                                 <option value='' label='pilih karyawan'></option>
                                 @foreach($data_User as $User)
+                                @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
                                     <option value="{{$User->name}}">
                                         {{$User->name}}
                                     </option>  
+                                @endif
                                 @endforeach
                             </select>
                         </div>
@@ -837,15 +809,21 @@
                     <td>
                         <input type='text' name='jabatan[]' class='form-control'></td>
                     <th>
-                        <a href='javascript:void(0)' id='deleteRow' class='btn btn-danger'>-</a>
+                        <a href='javascript:void(0)' class='btn btn-danger deleteRow'>-</a>
                     </th>
                 </td>
             </tr>
         `;
         $('#karyawan').append(karyawan);
+        $('.deleteRow').unbind().on('click', function(){
+            console.log(parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1);
+            $(this).parent().parent().remove();
+            currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
+        });
     };
-    $('#deleteRow').on('click', function(){
+    $('.deleteRow').on('click', function(){
         $(this).parent().parent().remove();
+        currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
     });
 
 </script>

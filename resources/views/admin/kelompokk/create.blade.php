@@ -161,8 +161,8 @@
                                         <select name='nama_penandatangan' class="namapenandatangan">
                                             <option value="" label="pilih nama penanda tangan"></option>
                                             @foreach($data_User as $User)
-                                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                                <option value="{{$User->name}}">
+                                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                                <option value="{{$User->id}}">
                                                     {{ $User->name }}
                                                 </option>  
                                             @endif   
@@ -179,21 +179,6 @@
                                         <small class="form-text text-muted"></small>
                                     </div>
                                 </div>
-                                <!-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <select name='nip_penandatangan' class="form-control">
-                                            <option value=""></option>
-                                            @foreach($data_User as $User)
-                                                <option value="{{$User->nip}}">
-                                                    {{$User->nip}}
-                                                </option>    
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Jabatan Penanda Tangan</label>
@@ -228,7 +213,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-2 col-form-label"></label>
                                                         <div class="col-sm-12">
-                                                            <button type="button" id="addkaryawan" class="btn btn-success" style="float: right" @click="addkaryawan()"> + </a>
+                                                            <button type="button" id="addkaryawan" class="btn btn-success" style="float: right"> + </a>
                                                         </div>
                                                     </div>
                                                     </th>
@@ -255,20 +240,6 @@
                                                         >
                                                         {{$datalogin->nip}}
                                                     </td>
-                                                    <!-- <td>{{$datalogin->jabatan}}</td> -->
-                                                    <!-- <td>
-                                                        <div class="col">
-                                                            <select name='name' id="select" class="form-control">
-                                                            <option value="" label="pilih karyawan"></option>
-                                                                @foreach($data_User as $User)
-                                                                    <option value={{$User->name}}>
-                                                                        {{$User->name}}</option>    
-                                                                        
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td><input type="text" name="nip[]" class="form-control"></td> -->
                                                     <td><input type="text" name="jabatan[]" class="form-control"></td>
                                                     <th><a href="javascriipt:void(0)" id="remove" class="btn btn-danger deleteRow">-</a></th>
                                                 </tr>
@@ -295,30 +266,17 @@
 
 <!-- penandatangan / atasan -->
 <script type="text/javascript">
-    let data_user = JSON.parse('{!! $data_User !!}')
+    let data_user_1 = JSON.parse('{!! $data_User !!}')
     $(document).ready(function(){
         $(document).on('change', '.namapenandatangan', function(){
 
-
-            // var cat_id=$(this).val();
-            // console.log(cat_id);
-        // });
-
-        // $(document).on('change', '.namapenandatangan', function(){
-            // var nip_id=$(this).val();
-
             let namapenandatangan = $('.namapenandatangan option').filter(':selected').val()
-            let nip = data_user.filter(data => data.name == namapenandatangan)[0].nip
-            let jabatan = data_user.filter(data => data.name == namapenandatangan)[0].jabatan
+            let nip = data_user_1.filter(data => data.name == namapenandatangan)[0].nip
+            let jabatan = data_user_1.filter(data => data.name == namapenandatangan)[0].jabatan
             console.log('jabatan', jabatan);
-            console.log('data_user', data_user);
+            console.log('data_user_1', data_user_1);
             $('[name="nip_penandatangan"]').val(nip)
             $('[name="jabatan_penandatangan"]').val(jabatan)
-            
-            // console.log(namapenandatangan, $('[name="nip_penandatangan"]'));
-            // console.log(namapenandatangan, $('[name="jabatan_penandatangan"]'));
-            // console.log(data_user.nip);
-            // console.log(data_user.jabatan);
 
         });
     });
@@ -341,11 +299,6 @@
         addkaryawan();
     });
     function addkaryawan(){
-        // var karyawan = '<div><div class="form-group col-md-12 flex"><table class="table table-striped" id="tabel1"><thead><tr><th>No</th><th>Nama</th><th>NIP/NIK</th><th>Jabatan</th><th>Aksi</th></tr><tr><td>1</td><td><div class="col"><select name='anggota3' id="select" class="form-control"><option value="" label="pilih karyawan"></option>@foreach($data_User as $User)<option value={{$User->name}}>{{$User->name}}</option>@endforeach</select></div></td><td><div class="col"><input type="string" id="text-input" placeholder="{{$datalogin->nip}}" name="nip3" disabled value="{{$datalogin->nip}}" class="form-control">
-        // <small class="form-text text-muted"></small>
-        // </div></td><td><div class="col"><input type="string" id="text-input" name="jabatan3" class="form-control">
-        // <small class="form-text text-muted"></small>
-        // </div>   </td><td> <button class="btn-sm btn-danger" id="hapus">-</button></td></tr></thead></table></div></div>'
         var karyawan = `
             <tr>
                 <td>{{++$i}}</td>
@@ -354,7 +307,7 @@
                             <select name='name[]' id='select' class='form-control'>
                                 <option value='' label='pilih karyawan'></option>
                                 @foreach($data_User as $User)
-                                @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
+                                @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
                                     <option value="{{$User->name}}">
                                         {{$User->name}}
                                     </option> 

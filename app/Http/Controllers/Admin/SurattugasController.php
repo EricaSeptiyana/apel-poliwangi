@@ -56,8 +56,8 @@ class SurattugasController extends Controller
             'penutup' => 'required',
             'tanggal_surattugas'=>'required',
             'namattd_surattugas'=>'required', 
-            'nipttd_surattugas'=>'required', 
-            'jabatanttd_surattugas'=>'required', 
+            // 'nipttd_surattugas'=>'required', 
+            // 'jabatanttd_surattugas'=>'required', 
             // 'lampiran'=>'required',
             // 'hal'=>'required',
         ]);

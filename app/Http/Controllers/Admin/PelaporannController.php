@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\pelaporann;
 use APP\User;
 
@@ -20,7 +21,14 @@ class PelaporannController extends Controller
         $pagename='Data Laporan Hasil Perjalanan Dinas';
         $i = 0;
         $data=pelaporann::all()->sortDesc();
-        return view('admin.pelaporann.index', compact('data', 'pagename', 'i'));
+        $acc='disetujui';
+        $role=Auth::user()->name;
+        if($role=='keuangan'){
+            $acc='disetujui';
+            $data=pelaporann::all()->where('status',$acc)->sortDesc();
+            return view('admin.pelaporann.index', compact('data', 'pagename', 'i', 'role'));
+        }
+        return view('admin.pelaporann.index', compact('data', 'pagename', 'i', 'acc', 'role'));
     }
 
     /**
@@ -256,5 +264,19 @@ class PelaporannController extends Controller
 
         $pelaporann->delete();
         return redirect('admin/pelaporann')->with('sukses','Pelaporan Hasil Perjalanan Dinas Berhasil Dihapus');
+    }
+
+    public function acc(Request $request, $id)
+    {
+        //
+        $pagename='Data Laporan Perjalanan Dinas Disetujui';
+        $i = 0;
+        $acc='disetujui';
+        $data=pelaporann::all()->where('status',$acc)->sortDesc();
+        $pelaporann=pelaporann::find($id);
+        $pelaporann->status='disetujui';
+        $pelaporann->save();
+
+        return redirect()->back();
     }
 }

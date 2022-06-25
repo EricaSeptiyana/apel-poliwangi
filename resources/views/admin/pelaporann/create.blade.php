@@ -102,9 +102,9 @@
                               <select name='optionid_user' class="form-control">
                               <option value="" label="pilih penanda tangan"></option>
                                   @foreach($data_User as $User)
-                                    @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                      <option value={{$User->name}}>
-                                          {{$User->name}} / {{$User->nip}} / {{$User->nama_jabatan}}
+                                    @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                      <option value="{{$User->id}}">
+                                          {{$User->name}}
                                       </option>    
                                     @endif
                                   @endforeach

@@ -28,8 +28,8 @@ class CreateSuratpermohonansTable extends Migration
             $table->string('tempat');
             $table->string('penutup');
             $table->string('nama_penandatangan');
-            $table->string('nip_penandatangan');
-            $table->string('jabatan_penandatangan');
+            // $table->string('nip_penandatangan');
+            // $table->string('jabatan_penandatangan');
             $table->string('tipe_surat');
 
             $table->string('status')->nullable();

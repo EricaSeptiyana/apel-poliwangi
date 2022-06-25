@@ -16,10 +16,6 @@ class CreateKelompokksTable extends Migration
         Schema::create('kelompokks', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            // $table->integer('nomor_agenda')->unique()->nullable();
-            // $table->string('nama');
-            // $table->string('nip');
-            // $table->string('jabatan');
             $table->string('nomor_permohonan')->unique();
             $table->string('lampiran');
             $table->string('hal');
@@ -29,16 +25,11 @@ class CreateKelompokksTable extends Migration
             $table->date('waktu_pelaksanaan');
             $table->time('pukul_pelaksanaan')->nullable();
             $table->date('waktu_selesai')->nullable();
-            // $table->time('pukul_pelaksanaan')->nullable();
             $table->string('tempat');
             $table->string('penutup');
-            // $table->string('file_disposisi')->nullable();
-            // $table->string('lokasi_filedisposisi')->nullable();
-            // $table->string('file_surattugas')->nullable();
-            // $table->string('lokasi_filesurattugas')->nullable();
             $table->string('nama_penandatangan');
-            $table->string('nip_penandatangan');
-            $table->string('jabatan_penandatangan');
+            // $table->string('nip_penandatangan');
+            // $table->string('jabatan_penandatangan');
             $table->string('tipe_surat');
 
             $table->string('status')->nullable();

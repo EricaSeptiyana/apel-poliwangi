@@ -63,10 +63,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'txtnama_user' => 'required',
-            // 'txt_username' => 'required',
             'txt_nip' => 'required',
-            // 'nama_jabatan' => 'required',
-            // 'nama_prodi' => 'required',
             'txtemail_user' => 'required|email|unique:users,email',
             'txtpassword_user' => 'required|same:txtkonfirmasipassword_user',
             'role_user' => 'required'
@@ -112,9 +109,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user)
     {
-        //
+        return response()->json([
+            'user' => User::with('jabatan')->find($user)
+        ]);
     }
 
     /**
@@ -219,6 +218,7 @@ class UserController extends Controller
 
     public function exportTemplate()
     {
-        return Excel::download(new UserTemplateExport, 'template.xlsx');
+        return 1;
+        // return Excel::download(new UserTemplateExport, 'template.xlsx');
     }
 }

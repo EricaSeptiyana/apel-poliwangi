@@ -92,17 +92,17 @@
                               <div class="col-3 col-md-3"><input type="date" id="text-input" name="date_tanggalsurat" value="{{$data->tanggal_surat}}" class="form-control"><small class="form-text text-muted"></small></div>
                           </div>
                           <div class="row form-group">
-                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama / NIP Penanda Tangan</label></div>
+                            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Penanda Tangan</label></div>
                             <div class="col-6 col-md-6">
                             <select name='optionid_user' class="form-control">
                             @foreach($data_User as $User)
-                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                <option value={{$User->name}}
+                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                <option value="{{$User->id}}"
                                     @if($User->name==$data->penanda_tangan)
                                         selected
                                     @endif
                                 >
-                                    {{$User->name}} / {{$User->nip}}
+                                    {{$User->name}}
                                 </option>
                             @endif    
                             @endforeach

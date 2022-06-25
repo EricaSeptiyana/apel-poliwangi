@@ -175,9 +175,10 @@
                                     <select name='nama_penandatangan' class="namapenandatangan">
                                     <option value="" label="pilih nama penanda tangan"></option>
                                         @foreach($data_User as $User)
-                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin']))
-                                            <option value={{$User->name}}>
-                                                {{$User->name}}</option>    
+                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                            <option value="{{$User->id}}">
+                                                {{$User->name}}
+                                            </option>    
                                         @endif
                                         @endforeach
                                     </select>
@@ -188,7 +189,7 @@
                                     <label for="text-input" class="nippenandatangan">NIP Penanda Tangan</label>
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <input type="string" id="text-input" name="nip_penandatangan"  class="form-control">
+                                    <input type="string" id="text-input" disabled name="nip_penandatangan"  class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -197,7 +198,7 @@
                                     <label for="text-input" class="jabatanpenandatangan">Jabatan Penanda Tangan</label>
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <input type="string" id="text-input" name="jabatan_penandatangan"  class="form-control">
+                                    <input type="string" id="text-input" disabled name="jabatan_penandatangan"  class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -220,28 +221,21 @@
 <script type="text/javascript">
     let data_user = JSON.parse('{!! $data_User !!}')
     $(document).ready(function(){
-        $(document).on('change', '.namapenandatangan', function(){
 
+        $('.namapenandatangan').on('change', async function() {
 
-            // var cat_id=$(this).val();
-            // console.log(cat_id);
-        // });
+            const res = await $.ajax({
+                url: `${$('meta[name=base-url]').attr('content')}/admin/user/${$(this).val()}`,
+                dataType: 'json',
+            });
 
-        // $(document).on('change', '.namapenandatangan', function(){
-            // var nip_id=$(this).val();
-
-            let namapenandatangan = $('.namapenandatangan option').filter(':selected').val()
-            let nip = data_user.filter(data => data.name == namapenandatangan)[0].nip
-            let jabatan = data_user.filter(data => data.name == namapenandatangan)[0].jabatan
-            $('[name="nip_penandatangan"]').val(nip)
-            $('[name="jabatan_penandatangan"]').val(jabatan)
-            
-            console.log(namapenandatangan, $('[name="nip_penandatangan"]'));
-            console.log(namapenandatangan, $('[name="jabatan_penandatangan"]'));
-            console.log(data_user.nip);
-            console.log(data_user.jabatan);
+            if (res.user) {
+                $('input[name=nip_penandatangan]').val(res.user.nip);
+                $('input[name=jabatan_penandatangan]').val(res.user.jabatan.nama_jabatan);
+            }
 
         });
+
     });
 </script>
 

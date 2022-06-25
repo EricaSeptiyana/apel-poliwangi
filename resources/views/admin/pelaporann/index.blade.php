@@ -24,101 +24,78 @@
 
                   @role('karyawan')
                   <div class="card-header-action">
-                        <div class="input-group">
-                          <a href="{{route('pelaporann.create')}}" class="btn btn-primary pull-right"> Tambah </a>
-                        </div>
+                    <div class="input-group">
+                      <a href="{{route('pelaporann.create')}}" class="btn btn-primary pull-right"> Tambah </a>
+                    </div>
                   </div>
                   @endrole
                 </div>
                 <div class="col-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="table-responsive">
-                      <table id="datatables" class="table table-striped table-md table-responsive">
-                        <thead>
-                            <tr>
-                              <th>No</th>
-                              <th>Judul Laporan</th>
-                              <th>Dasar Pelaksanaan Dinas</th>
-                              <th>Instansi</th>
-                              <th>Waktu Pelaksanaan</th>
-                              <th>Tanggal Surat</th>
-                              <th>Aksi</th>
+                  <div class="table-responsive">
+                    <table id="datatables" class="table table-striped table-md table-responsive">
+                      <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Judul Laporan</th>
+                            <th>Dasar Pelaksanaan Dinas</th>
+                            <th>Instansi</th>
+                            <th>Waktu Pelaksanaan</th>
+                            <th>Tanggal Surat</th>
+                            <th>Status Surat</th>
+                            <th>Aksi</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach($data as $row)
+                          <tr>
+                              <td>{{++$i}}</td>
+                              <td>{{$row->judul_laporan}}</td>
+                              <td>{{$row->dasar_pelaksanaan}}</td>
+                              <td>{{$row->instansi}}</td>
+                              <td>{{$row->waktu_mulai}} sampai {{$row->waktu_selesai}}</td>
+                              <td>{{$row->tanggal_surat}}</td>
+                              <td>{{$row->status}}</td>
+
+                              @role('karyawan')
+                              <td>
+                                  <div class="d-flex justify-content-evenly">
+                                    <a href="{{route('pelaporann.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                    <a href="{{route('pelaporann.show',$row->id)}}" class="btn btn-info mx-2"> Cetak </a>
+                                    <!-- <a href="#" class="btn btn-success"> Upload </a> -->
+                                    <form action="{{route('pelaporann.destroy', $row->id)}}" method="post">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button class="btn btn-danger" type="submit"> Hapus </button>
+                                    </form>
+                                    <!-- <a href="#" class="btn btn-info"> Cetak </a>
+                                    <a href="#" class="btn btn-success"> Download </a> -->
+                                  </div>
+                              </td>
+                              @endrole
+
+                              @role('keuangan')
+                              <td>
+                                  <div class="d-flex justify-content-evenly align-items-center">
+                                    <a href="{{route('pelaporann.show',$row->id)}}" class="btn btn-info mx-2"> View </a>
+                                    <!-- <a href="#" class="btn btn-success mx-2"> Menyetujui </a> -->
+                                    <form action="{{route('accpelaporann', $row->id)}}" method="post">
+                                        @csrf
+                                        @if($row->status=='disetujui')
+                                          <button class="btn btn-secondary" disabled type="submit"> Disetujui </button>
+                                          @else
+                                          <button class="btn btn-success" type="submit"> Menyetujui </button>
+                                        @endif
+                                    </form>
+                                  </div>
+                              </td>
+                              @endrole
+
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($data as $row)
-                            <tr>
-                                <td>{{++$i}}</td>
-                                <td>{{$row->judul_laporan}}</td>
-                                <td>{{$row->dasar_pelaksanaan}}</td>
-                                <td>{{$row->instansi}}</td>
-                                <td>{{$row->waktu_mulai}} sampai {{$row->waktu_selesai}}</td>
-                                <td>{{$row->tanggal_surat}}</td>
-
-                                @role('karyawan')
-                                <td>
-                                    <div class="d-flex justify-content-evenly">
-                                      <a href="{{route('pelaporann.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                      <a href="{{route('pelaporann.show',$row->id)}}" class="btn btn-info mx-2"> Cetak </a>
-                                      <!-- <a href="#" class="btn btn-success"> Upload </a> -->
-                                      <form action="{{route('pelaporann.destroy', $row->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger" type="submit"> Hapus </button>
-                                      </form>
-                                      <!-- <a href="#" class="btn btn-info"> Cetak </a>
-                                      <a href="#" class="btn btn-success"> Download </a> -->
-                                    </div>
-                                </td>
-                                @endrole
-
-                                @role('keuangan')
-                                <td>
-                                    <div class="d-flex justify-content-evenly align-items-center">
-                                      <a href="{{route('pelaporann.show',$row->id)}}" class="btn btn-info mx-2"> View </a>
-                                      <a href="#" class="btn btn-success mx-2"> Menyetujui </a>
-                                    </div>
-                                </td>
-                                @endrole
-
-                              </tr>
-                            @endforeach
-                        </tbody>
-                        <!-- <tr>
-                          <td>2</td>
-                          <td>Hasan Basri</td>
-                          <td>2017-01-09</td>
-                          <td><div class="badge badge-success">Active</div></td>
-                          <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Kusnadi</td>
-                          <td>2017-01-11</td>
-                          <td><div class="badge badge-danger">Not Active</div></td>
-                          <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                        </tr> -->
-                      </table>
-                    </div>
+                          @endforeach
+                      </tbody>
+                    </table>
                   </div>
-                  <!-- <div class="card-footer text-right">
-                    <nav class="d-inline-block">
-                      <ul class="pagination mb-0">
-                        <li class="page-item disabled">
-                          <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                        </li>
-                      </ul>
-                    </nav>
-                </div> -->
-              </div>
+                </div>
               </div>
             </div>
           </div>

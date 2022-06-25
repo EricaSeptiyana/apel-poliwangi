@@ -70,6 +70,7 @@ class PerorangannController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request);
         $data = Perorangann::all();
         $request->validate([
             'nomor_permohonan'=>'required',
@@ -92,8 +93,8 @@ class PerorangannController extends Controller
             // 'string_jenissurat' => 'required',
             // 'year_tahunsurat' => 'required',
             'nama_penandatangan' => 'required',
-            'nip_penandatangan' => 'required',
-            'jabatan_penandatangan' => 'required',
+            // 'nip_penandatangan' => 'required',
+            // 'jabatan_penandatangan' => 'required',
         ]);
         
         // $data_disposisi = new disposisi([
@@ -105,7 +106,7 @@ class PerorangannController extends Controller
         // $data_disposisi->save();
 
         $tipe_surat="perorangan";
-        $data_perorangann=new kelompokk([
+        $data_perorangann = kelompokk::create([
             'user_id'=>Auth::user()->id,
             'jabatan' => $request->get('jabatan'),
             // 'nama'=>$data->name,
@@ -136,9 +137,7 @@ class PerorangannController extends Controller
             'tipe_surat' =>'perorangan',
             'status' => 'belum disetujui'
         ]);
-
-        $data_perorangann->save();
-
+        
         $penugasankaryawan=new penugasankaryawan([
             'user_id'=>Auth::user()->id,
             'name'=>Auth::user()->name,
@@ -150,7 +149,7 @@ class PerorangannController extends Controller
         $penugasankaryawan->save();
     
 
-        return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Berhasil Diajukan');
+        // return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Berhasil Diajukan');
     }
 
     /**
@@ -241,8 +240,8 @@ class PerorangannController extends Controller
                 'tempat'=>'required',
                 'penutup'=>'required',
                 'nama_penandatangan' => 'required',
-                'nip_penandatangan' => 'required',
-                'jabatan_penandatangan' => 'required',
+                // 'nip_penandatangan' => 'required',
+                // 'jabatan_penandatangan' => 'required',
             ]);
 
             $perorangann = perorangann::find($id);
@@ -285,9 +284,11 @@ class PerorangannController extends Controller
     public function destroy($id)
     {
         //
-        $perorangann=perorangann::find($id);
+        penugasankaryawan::where('kelompokk_id', $id)->delete();
 
+        $perorangann=perorangann::find($id);
         $perorangann->delete();
+
         return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Perorangan Berhasil Dihapus');
     }
 

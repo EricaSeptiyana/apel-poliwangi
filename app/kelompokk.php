@@ -9,7 +9,6 @@ class kelompokk extends Model
     //
     protected $fillable=[
         'user_id',
-        // 'nomor_agenda',
         'nomor_permohonan',
         'lampiran',
         'hal',
@@ -22,8 +21,8 @@ class kelompokk extends Model
         'tempat',
         'penutup',
         'nama_penandatangan',
-        'nip_penandatangan',
-        'jabatan_penandatangan',
+        // 'nip_penandatangan',
+        // 'jabatan_penandatangan',
         'tipe_surat',
     ];
 

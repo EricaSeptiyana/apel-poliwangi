@@ -35,7 +35,7 @@
                         {{session()->get('gagal')}}
                         </div>
                     @endif
-                    <form action="{{route('kelompokk.store')}}" method="post" enctype="multipart/form-data" class="form=horizontal">
+                    <form action="{{route('disposisi.store')}}" method="post" enctype="multipart/form-data" class="form=horizontal">
                         @csrf
                         <div class="container">
                             <div class="row align-items-start">
@@ -43,40 +43,42 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="kelompokk_id" value="{{ request()->id }}">
                         <div class="col">
-                          <div class="row form-group">
-                              <div class="col col-md-3">
-                                  <label for="text-input" class=" form-control-label">Nomor Agenda</label>
-                              </div>
-                              <div class="col-3 col-md-3">
-                                  <input type="int" id="text-input" name="nomor_agenda" class="form-control" >
-                                  <small class="form-text text-muted"></small>
-                              </div>
-                          </div>
-                          <div class="row form-group">
-                              <div class="col col-md-3">
-                                  <label for="text-input" class=" form-control-label">Tanggal Terima</label>
-                              </div>
-                              <div class="col-3 col-md-3">
-                                  <input type="date" id="text-input" name="tanggal_terima" class="form-control">
-                                  <small class="form-text text-muted"></small>
-                              </div>
-                          </div>
-                          <div class="row form-group">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Nomor Agenda</label>
+                            </div>
+                            <div class="col-3 col-md-3">
+                                <input type="int" id="text-input" name="nomor_agenda" class="form-control" >
+                                <small class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="text-input" class=" form-control-label">Tanggal Terima</label>
+                            </div>
+                            <div class="col-3 col-md-3">
+                                <input type="date" id="text-input" name="tanggal_terima" class="form-control">
+                                <small class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        
+                        <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">Tanggal Surat</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="text" id="text-input" name="kelompokk_id"  disabled value="{{$disposisi->kelompokk->tanggal_permohonan}}" placeholder="Text" class="form-control">
+                                <input type="text" id="text-input" name="tanggal_permohonan"  disabled value="{{$disposisi->tanggal_permohonan}}" placeholder="Text" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <!-- <div class="row form-group">
+                        <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">Nomor Surat</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="string" id="text-input" name="nomor_permohonan"  disabled value="{{$disposisi->kelompokk->nomor_permohonan}}" class="form-control">
+                                <input type="string" id="text-input" name="nomor_permohonan"  disabled value="{{$disposisi->nomor_permohonan}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -85,7 +87,7 @@
                                 <label for="text-input" class=" form-control-label">Lampiran</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="string" id="text-input" name="lampiran"  disabled value="{{$disposisi->kelompokk->lampiran}}" class="form-control">
+                                <input type="string" id="text-input" name="lampiran"  disabled value="{{$disposisi->lampiran}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -94,7 +96,7 @@
                                 <label for="text-input" class=" form-control-label">Hal</label>
                             </div>
                             <div class="col-3 col-md-9">
-                                <input type="string" id="text-input" name="hal" value="{{$disposisi->kelompokk->hal}}" class="form-control">
+                                <input type="string" id="text-input" name="hal" disabled value="{{$disposisi->hal}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -103,10 +105,10 @@
                                 <label for="text-input" class=" form-control-label">Pengirim</label>
                             </div>
                             <div class="col-3 col-md-9">
-                                <input type="string" id="text-input" name="hal" disabled value="{{$disposisi->kelompokk->jabatan_penandatangan}}" class="form-control">
+                                <input type="string" id="text-input" name="hal" disabled value="{{$disposisi->jabatan_penandatangan}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
-                        </div> -->
+                        </div>
 
                         </div>
                         <div class="footer text-right">
