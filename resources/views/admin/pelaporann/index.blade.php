@@ -54,6 +54,7 @@
                               <td>{{$row->instansi}}</td>
                               <td>{{$row->waktu_mulai}} sampai {{$row->waktu_selesai}}</td>
                               <td>{{$row->tanggal_surat}}</td>
+                              <!-- <td>{{$row->pelaporann ? $row->pelaporann->status : 'Belum Disetujui'}}</td> -->
                               <td>{{$row->status}}</td>
 
                               @role('karyawan')

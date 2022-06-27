@@ -53,10 +53,10 @@
         <tr>
           <td>Tanggal Terima : 
             <!-- 22 Februari 2022 -->
-            {{$disposisi->tanggal_terima}}
+            $disposisi->tanggal_terima
           </td>
           <td>Nomor Agenda :</td>
-          <td>{{$disposisi->nomor_agenda}}</td>
+          <td>$disposisi->nomor_agenda</td>
         </tr>
     </table>
     <br>
@@ -64,31 +64,31 @@
         <tr>
           <td>Jenis Disposisi &emsp;:</td>
           <td>Pengirim : 
-            {{$data->jabatan_penandatangan}}
+            $data->jabatan_penandatangan
           </td>
         </tr>
         <tr>
             <td>Rahasia</td>
             <td>Nomor Surat : 
-              {{$data->nomor_permohonan}}
+              $data->nomor_permohonan
             </td>
         </tr>
         <tr>
             <td>Penting</td>
             <td>Tanggal Surat : 
-              {{$data->tanggal_permohonan}}
+              $data->tanggal_permohonan
             </td>
         </tr>
         <tr>
             <td>Segera</td>
             <td>Lampiran : 
-              {{$data->lampiran}}
+              $data->lampiran
             </td>
         </tr>
         <tr>
             <td>Biasa</td>
             <td>Perihal Surat : 
-              {{$data->hal}}
+              $data->hal
             </td>
         </tr>
     </table>

@@ -92,7 +92,7 @@
                                     <td>
                                       <div class="d-flex justify-content-evenly">
                                         @if($row->tipe_surat == 'perorangan')
-                                        <a href="{{route('kelompokk.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
+                                        <a href="{{route('perorangann.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
                                         @elseif($row->tipe_surat == 'kelompok')
                                         <a href="{{route('kelompokk.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
                                         @endif
@@ -213,7 +213,7 @@
                                     </td>
                                     <td>
                                       <div class="d-flex justify-content-evenly">
-                                        <a href="#" class="btn btn-success mx-2"> Download </a>
+                                        <a href="{{route('surattugas.show',$row->id)}}" class="btn btn-success mx-2"> Download </a>
                                         <button class="btn btn-info surattugasbtn" data-toggle="modal" data-target="#surattugasModalkelompokk">Kirim</button>
                                         <!-- <a href="#" class="btn btn-info"> Kirim </a> -->
                                         <!-- <form action="route('kelompokk.uploadsurattugas')" method="post" enctype='multipart/form-data'> -->

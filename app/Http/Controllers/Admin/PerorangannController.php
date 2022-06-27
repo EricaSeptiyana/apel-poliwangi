@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mavinoo\Batch\BatchFacade;
 use App\perorangann;
 use App\kelompokk;
 use App\penugasankaryawan;
@@ -70,7 +71,7 @@ class PerorangannController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request);
+        // dd($request);
         $data = Perorangann::all();
         $request->validate([
             'nomor_permohonan'=>'required',
@@ -149,7 +150,7 @@ class PerorangannController extends Controller
         $penugasankaryawan->save();
     
 
-        // return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Berhasil Diajukan');
+        return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Berhasil Diajukan');
     }
 
     /**
@@ -207,13 +208,15 @@ class PerorangannController extends Controller
     public function edit($id)
     {
         //
-        $data_perorangann=perorangann::all();
+        $data_perorangann=kelompokk::all();
         $data_User=User::all();
         $datalogin=Auth::user();
-        $selectUser=perorangann::find($id);
+        $selectUser=kelompokk::find($id);
         $pagename='Update Surat Tugas Perorangan';
-        $data=perorangann::find($id);
-        return view('admin.perorangann.edit', compact('data', 'pagename', 'selectUser', 'data_perorangann' , 'data_User', 'datalogin'));
+        $data=kelompokk::find($id);
+        // $dataPenugasan = penugasankaryawan::find($id);
+        $datapenugasan=penugasankaryawan::all()->where('kelompokk_id', $id);
+        return view('admin.perorangann.edit', compact('data', 'pagename', 'selectUser', 'data_perorangann' , 'data_User', 'datalogin','datapenugasan'));
     }
 
     /**
@@ -243,8 +246,8 @@ class PerorangannController extends Controller
                 // 'nip_penandatangan' => 'required',
                 // 'jabatan_penandatangan' => 'required',
             ]);
-
-            $perorangann = perorangann::find($id);
+           
+            $perorangann = kelompokk::find($id);
             $perorangann->nomor_permohonan = $request->get('nomor_permohonan');
             $perorangann->lampiran = $request->get('lampiran');
             $perorangann->hal = $request->get('hal');
@@ -260,9 +263,12 @@ class PerorangannController extends Controller
             $perorangann->nama_penandatangan = $request->get('nama_penandatangan');
             $perorangann->nip_penandatangan = $request->get('nip_penandatangan');
             $perorangann->jabatan_penandatangan = $request->get('jabatan_penandatangan');
+          
 
             $perorangann->save();
+            
         }
+        
         // else{
         //     $request->validate([
         //         'nomor_agenda'=>['unique:peroranganns']
@@ -272,6 +278,40 @@ class PerorangannController extends Controller
         //     $perorangann->nomor_agenda = $request->get('nomor_agenda');
         //     $perorangann->save();
         // }
+        
+
+        // $data_penugasan = [
+        //     'lama' => [],
+        //     'baru' => []
+        // ];
+       
+        //     if ($request->get('name')) {
+        //         array_push($data_penugasan['lama'], [
+        //             'kelompokk_id' => $id,
+        //             'name' => $request->get('name'),
+        //             'nip' => $request->get('nip'),
+        //             'jabatan' => $request->get('jabatan'),
+        //             'updated_at' => date('Y-m-d H:i:s'),
+        //         ]);
+        //     }
+        //     else {
+        //         array_push($data_penugasan['baru'], [
+                    
+        //             'kelompokk_id' => $id,
+        //             'name' => $request->get('name'),
+        //             'nip' => $request->get('nip'),
+        //             'jabatan' => $request->get('jabatan'),
+        //             'created_at' => date('Y-m-d H:i:s'),
+        //             'updated_at' => date('Y-m-d H:i:s'),
+        //         ]);
+
+        //     }
+        
+        // BatchFacade::update(new penugasankaryawan, $data_penugasan['lama'], 'name');
+        // if (empty($request->get('name'))) {
+        //     penugasankaryawan::insert($data_penugasan['baru']);
+        // }
+
         return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Perorangan Berhasil Diupdate');
     }
 
@@ -284,12 +324,12 @@ class PerorangannController extends Controller
     public function destroy($id)
     {
         //
-        penugasankaryawan::where('kelompokk_id', $id)->delete();
+        // penugasankaryawan::where('kelompokk_id', $id)->delete();
 
-        $perorangann=perorangann::find($id);
-        $perorangann->delete();
+        // $perorangann=perorangann::find($id);
+        // $perorangann->delete();
 
-        return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Perorangan Berhasil Dihapus');
+        // return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Perorangan Berhasil Dihapus');
     }
 
     public function acc(Request $request, $id)
@@ -303,18 +343,7 @@ class PerorangannController extends Controller
         $perorangann->status='disetujui';
         $perorangann->save();
 
-        // return view('admin.perorangann.index');
-        // return view('admin.perorangann.index', compact('data', 'pagename', 'i','acc'));
-        // return redirect()->route('perorangann.index');
         return redirect()->back();
     }
-
-    // public function findnip(Request $request, $id)
-    // {
-    //     //
-    //     $p=Product::select('nip')->where('id', $request->id)->first();
-    //     return response()->json($p);
-       
-    // }
 
 }

@@ -157,8 +157,8 @@
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Nama Penanda Tangan</label>
                                     </div>
-                                    <div class="form-control col-6 col-md-6">
-                                        <select name='nama_penandatangan' class="namapenandatangan">
+                                    <div class="col-6 col-md-6">
+                                        <select name='nama_penandatangan' class="form-control">
                                             <option value="" label="pilih nama penanda tangan"></option>
                                             @foreach($data_User as $User)
                                             @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
@@ -170,7 +170,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
                                     </div>
@@ -187,7 +187,7 @@
                                         <input type="text" id="text-input" name="jabatan_penandatangan" class="form-control">
                                         <small class="form-text text-muted"></small>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use App\User;
 use App\jabatan;
 use App\prodi;
@@ -22,7 +23,9 @@ class ProfileController extends Controller
         $pagename='Profile Karyawan';
         $datalogin=Auth::user();
         $user=User::find($datalogin->id);
-        return view('admin.user.profile', compact('pagename','datalogin', 'user'));
+        $data_jabatan=jabatan::all();
+        $data_prodi=prodi::all();
+        return view('admin.user.profile', compact('pagename','datalogin', 'user', 'data_jabatan', 'data_prodi'));
     }
 
     /**
@@ -69,12 +72,14 @@ class ProfileController extends Controller
         $id_user=Auth::user()->id;
         $pagename='Edit Karyawan';
         $user=User::find($id_user);
-        $data_jabatan=jabatan::find($id);
-        $data_prodi=prodi::find($id);
+        $data_jabatan=jabatan::all();
+        $data_prodi=prodi::all();
+        // $data_jabatan=jabatan::find($id);
+        // $data_prodi=prodi::find($id);
         $allRoles=Role::all();
         $userRole=$user->roles->pluck('id')->all();
 
-        return view('admin.user.edit', compact('pagename'));
+        return view('admin.user.edit', compact('pagename', 'data_jabatan', 'data_prodi'));
     }
 
     /**
@@ -91,9 +96,13 @@ class ProfileController extends Controller
         $user->name=$request->name;
         $user->username=$request->username;
         $user->nip=$request->nip;
-        $user->jabatan=$request->jabatan;
-        $user->prodi=$request->prodi;
+        $user->jabatan_id = $request->jabatan_id;
+        $user->prodi_id = $request->prodi_id;
         $user->email=$request->email;
+        if($request->hasFile('ttd')) {
+            $request->file('ttd')->move('ttd/', $request->file('ttd')->getClientOriginalName());
+            $user->ttd = $request->file('ttd')->getClientOriginalName();
+        }
         // $user->password=$request->password;
         $user->save();
         return back();

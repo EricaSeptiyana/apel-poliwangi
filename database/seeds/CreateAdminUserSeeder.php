@@ -16,51 +16,124 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $data_user = [
-          [
-            'name'=>'Super Admin',
-            'username'=>'superadmin',
-            'nip'=>'12345670',
-            'email'=>'superadmin@gmail.com',
-            'password'=>bcrypt('12345678'),
-          ],
-          [
-            'name'=>'Sekretaris Direktur',
-            'username'=>'sekdir',
-            'nip'=>'12345671',
-            'email'=>'sekdir@gmail.com',
-            'password'=>bcrypt('12345678'),
-          ],
-          [
-            'name'=>'Bagian Kepegawaian',
-            'username'=>'kepegawaian',
-            'nip'=>'12345672',
-            'email'=>'kepegawaian@gmail.com',
-            'password'=>bcrypt('12345678'),
-          ],
-          [
-            'name'=>'Bagian Keuangan',
-            'username'=>'keuangan',
-            'nip'=>'12345673',
-            'email'=>'keuangan@gmail.com',
-            'password'=>bcrypt('12345678'),
-          ]
-        ];
+      $user=User::create([
+        'name'=>'Super Admin',
+        'username'=>'superadmin',
+        'nip'=>'12345670',
+        'email'=>'superadmin@gmail.com',
+        'password'=>bcrypt('12345678'),
+      ]);
+      $role=Role::create(['name'=>'superadmin']);
+      $permissions=Permission::pluck('id','id',)->all();
+      $role->syncPermissions($permissions);
+      $user->assignRole([$role->id]);
 
-        $data_role = [
-          ['name'=>'superadmin'],
-          ['name'=>'sekdir'],
-          ['name'=>'kepegawaian'],
-          ['name'=>'keuangan']
-        ];
+      $sekdir=User::create([
+          'name'=>'Sekretaris Direktur',
+          'username'=>'sekdir',
+          'nip'=>'12345671',
+          'email'=>'sekdir@gmail.com',
+          'password'=>bcrypt('12345678'),
+      ]);
+      $role=Role::create(['name'=>'sekdir']);
+      $permissions=Permission::pluck('id','id',)->all();
+      $role->syncPermissions($permissions);
+      $sekdir->assignRole([$role->id]);
 
-        foreach ($data_user as $i => $user) {
-          $user=User::firstOrCreate($user);
-          $role=Role::firstOrCreate($data_role[$i]);
-          $permissions=Permission::pluck('id','id',)->all();
-          $role->syncPermissions($permissions);
-          $user->assignRole([$role->id]);
-        }
+      $kepegawain=User::create([
+          'name'=>'Bagian Kepegawaian',
+          'username'=>'kepegawaian',
+          'nip'=>'12345672',
+          'email'=>'kepegawaian@gmail.com',
+          'password'=>bcrypt('12345678'),
+      ]);
+      $role=Role::create(['name'=>'kepegawaian']);
+      $permissions=Permission::pluck('id','id',)->all();
+      $role->syncPermissions($permissions);
+      $kepegawain->assignRole([$role->id]);
+
+      $keuangan=User::create([
+          'name'=>'Bagian Keuangan',
+          'username'=>'keuangan',
+          'nip'=>'12345673',
+          'email'=>'keuangan@gmail.com',
+          'password'=>bcrypt('12345678'),
+      ]);
+      $role=Role::create(['name'=>'keuangan']);
+      $permissions=Permission::pluck('id','id',)->all();
+      $role->syncPermissions($permissions);
+      $keuangan->assignRole([$role->id]);
+
+      $karyawan=User::create([
+          'name'=>'Erica',
+          'username'=>'karyawan',
+          'nip'=>'12345674',
+          'email'=>'erica@gmail.com',
+          'password'=>bcrypt('12345678'),
+      ]);
+      $role=Role::create(['name'=>'karyawan']);
+      $permissions=Permission::pluck('id','id',)->all();
+      $role->syncPermissions($permissions);
+      $karyawan->assignRole([$role->id]);
+
+      $kajur=User::create([
+          'name'=>'Kajur',
+          'username'=>'kajur',
+          'nip'=>'12345675',
+          'email'=>'kajur@gmail.com',
+          'password'=>bcrypt('12345678'),
+      ]);
+      $role=Role::create(['name'=>'kajur']);
+      $permissions=Permission::pluck('id','id',)->all();
+      $role->syncPermissions($permissions);
+      $kajur->assignRole([$role->id]);
+
+
+        // $data_user = [
+        //   [
+        //     'name'=>'Super Admin',
+        //     'username'=>'superadmin',
+        //     'nip'=>'12345670',
+        //     'email'=>'superadmin@gmail.com',
+        //     'password'=>bcrypt('12345678'),
+        //   ],
+        //   [
+        //     'name'=>'Sekretaris Direktur',
+        //     'username'=>'sekdir',
+        //     'nip'=>'12345671',
+        //     'email'=>'sekdir@gmail.com',
+        //     'password'=>bcrypt('12345678'),
+        //   ],
+        //   [
+        //     'name'=>'Bagian Kepegawaian',
+        //     'username'=>'kepegawaian',
+        //     'nip'=>'12345672',
+        //     'email'=>'kepegawaian@gmail.com',
+        //     'password'=>bcrypt('12345678'),
+        //   ],
+        //   [
+        //     'name'=>'Bagian Keuangan',
+        //     'username'=>'keuangan',
+        //     'nip'=>'12345673',
+        //     'email'=>'keuangan@gmail.com',
+        //     'password'=>bcrypt('12345678'),
+        //   ]
+        // ];
+
+        // $data_role = [
+        //   ['name'=>'superadmin'],
+        //   ['name'=>'sekdir'],
+        //   ['name'=>'kepegawaian'],
+        //   ['name'=>'keuangan']
+        // ];
+
+        // foreach ($data_user as $i => $user) {
+        //   $user=User::firstOrCreate($user);
+        //   $role=Role::firstOrCreate($data_role[$i]);
+        //   $permissions=Permission::pluck('id','id',)->all();
+        //   $role->syncPermissions($permissions);
+        //   $user->assignRole([$role->id]);
+        // }
         
         $data_jabatan = [
           [

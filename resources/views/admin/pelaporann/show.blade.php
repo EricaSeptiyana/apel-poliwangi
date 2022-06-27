@@ -79,44 +79,34 @@
       </tr>
     </table> -->
     <br>
-    <table>
+    <table style="margin-left: 10px; text-align: left;">
       <tr>
-        <td>I</td>
-        <td>Dasar Pelaksanaan</td>
-        <td width="490">:
+        <td>I. Dasar Pelaksanaan</td>
+        <td>:
         {{$data->dasar_pelaksanaan}}
         </td>
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
-    </table>
-    <br>
-    <table>
+      <br>
       <tr>
-        <td>II</td>
-        <td>Maksud Perjalanan Dinas</td>
-        <td width="443">:
+        <td>II. Maksud Perjalanan Dinas</td>
+        <td>:
         {{$data->maksud_perjalanandinas}}
         </td>
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
-    </table>
-    <br>
-    <table>
+      <br>
       <tr>
-        <td>III</td>
-        <td>Dinas/Instansi yang dikunjungi</td>
-        <td width="403">:
+        <td>III.Dinas/Instansi yang dikunjungi</td>
+        <td>:
         {{$data->instansi}}
         </td>
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
-    </table>
-    <br>
-    <table>
+      <br>
       <tr>
-        <td>IV</td>
-        <td>Waktu Pelaksanaan</td>
-        <td width="470">:
+        <td>IV. Waktu Pelaksanaan</td>
+        <td>:
           {{$hari}},
           {{$tanggal}}
           - 
@@ -127,19 +117,15 @@
         </td>
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
-    </table>
-    <br>
-    <table>
+      <br>
       <tr>
-        <td>V</td>
-        <td>Hasil</td>
-        <td width="558">:
-        {{$data->hasil}}
+        <td>V. Hasil</td>
+        <td>:
+          {{$data->hasil}}
         </td>
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
     </table>
-    <br>
     <table width="625">
       <tr>
         <td>
@@ -161,7 +147,7 @@
             <td width="400"></td>
             <td class="text2">Yang Membuat,<br><br><br><br><br><br>
             {{$data->penanda_tangan}}
-            <!-- {{$data->penanda_tangan}} -->
+            
             </td>
         </tr>
       </table>

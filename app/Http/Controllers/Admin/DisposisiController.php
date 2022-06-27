@@ -37,7 +37,7 @@ class DisposisiController extends Controller
         // $disposisi = disposisi::all();
         $pagename="Form Input Surat Disposisi";
         $data=kelompokk::all();
-
+        
         return view('admin.disposisi.create', compact('pagename', 'data'));
     }
 

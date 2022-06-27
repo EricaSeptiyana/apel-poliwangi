@@ -108,8 +108,8 @@ class KelompokkController extends Controller
         $data_kelompokk->tempat = $request->tempat;
         $data_kelompokk->penutup = $request->penutup;
         $data_kelompokk->nama_penandatangan = $request->nama_penandatangan;
-        $data_kelompokk->nip_penandatangan = $request->nip_penandatangan;
-        $data_kelompokk->jabatan_penandatangan = $request->jabatan_penandatangan;
+        // $data_kelompokk->nip_penandatangan = $request->nip_penandatangan;
+        // $data_kelompokk->jabatan_penandatangan = $request->jabatan_penandatangan;
         $data_kelompokk->tipe_surat = $tipe_surat;
         $data_kelompokk->save();
 
@@ -212,17 +212,12 @@ class KelompokkController extends Controller
         $selectUser=kelompokk::find($id);
         
         $pagename_kelompok='Update Surat Tugas Kelompok';
-        $pagename_perorangan='Update Surat Tugas Perorangan';
-        $pagename_disposisi='Form Surat Disposisi';
-        $pagename_surattugas='Form Surat Tugas';
+        // $pagename_perorangan='Update Surat Tugas Perorangan';
+        // $pagename_disposisi='Form Surat Disposisi';
+        // $pagename_surattugas='Form Surat Tugas';
         $data=kelompokk::find($id);
         $datapenugasan=penugasankaryawan::all()->where('kelompokk_id', $id);
-        return view('admin.kelompokk.edit', compact('i', 'datapenugasan', 'data', 'pagename_kelompok', 'pagename_perorangan', 'pagename_disposisi', 'pagename_surattugas', 'selectUser', 'data_kelompokk' , 'data_User', 'datalogin'));
-        // if(){
-        //     return view('admin.kelompokk.edit', compact('i', 'datapenugasan', 'data', 'pagename', 'pagename_disposisi', 'pagename_surattugas', 'selectUser', 'data_kelompokk' , 'data_User', 'datalogin'));
-        // }else{
-        //     return view('admin.kelompokk.edit', compact('i', 'datapenugasan', 'data', 'pagename', 'pagename_disposisi', 'pagename_surattugas', 'selectUser', 'data_kelompokk' , 'data_User', 'datalogin'));
-        // }
+        return view('admin.kelompokk.edit', compact('i', 'datapenugasan', 'data', 'pagename_kelompok', 'selectUser', 'data_kelompokk' , 'data_User', 'datalogin'));
     }
 
     /**
@@ -349,7 +344,7 @@ class KelompokkController extends Controller
         // $perorangann->delete();
         
 
-        return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Kelompok Berhasil Dihapus');
+        return redirect('admin/kelompokk')->with('sukses','Permohonan Surat Tugas Berhasil Dihapus');
     }
 
     public function acc(Request $request, $id)

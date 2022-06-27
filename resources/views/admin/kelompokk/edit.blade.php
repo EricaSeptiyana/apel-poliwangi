@@ -4,41 +4,12 @@
 
 <div class="section-body">
 <div class="section-header" style="top: 0; position: sticky; z-index: 890">
-    @role('karyawan')
-        @if($selectUser->tipe_surat == 'kelompok')
         <h5>{{$pagename_kelompok}}</h5>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
             <div class="breadcrumb-item"><a href="{{route('kelompokk.index')}}">Surat Tugas</a></div>
             <div class="breadcrumb-item">{{ $pagename_kelompok }}</div>
         </div>
-        @elseif($selectUser->tipe_surat == 'perorangan')
-        <h5>{{$pagename_perorangan}}</h5>
-        <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="{{route('kelompokk.index')}}">Surat Tugas</a></div>
-            <div class="breadcrumb-item">{{ $pagename_perorangan }}</div>
-        </div>
-        @endif
-    @endrole
-
-    @role('sekdir')
-        <h5>{{$pagename_disposisi}}</h5>
-        <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="{{route('kelompokk.index')}}">Surat Tugas</a></div>
-            <div class="breadcrumb-item">{{ $pagename_disposisi }}</div>
-        </div>
-    @endrole
-
-    @role('kepegawaian')
-        <h5>{{$pagename_surattugas}}</h5>
-        <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="{{route('kelompokk.index')}}">Surat Tugas</a></div>
-            <div class="breadcrumb-item">{{ $pagename_surattugas }}</div>
-        </div>
-    @endrole
 </div>
 <div class="col-12">
     <div class="card">
@@ -46,21 +17,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        @role('karyawan')
-                            @if($selectUser->tipe_surat == 'kelompok')
-                                <h4>{{$pagename_kelompok}}</h4>
-                            @elseif($selectUser->tipe_surat == 'perorangan')
-                                <h4>{{$pagename_perorangan}}</h4>
-                            @endif
-                        @endrole
-
-                        @role('sekdir')
-                            <h4>{{$pagename_disposisi}}</h4>
-                        @endrole
-
-                        @role('kepegawaian')
-                            <h4>{{$pagename_surattugas}}</h4>
-                        @endrole
+                        <h4>{{$pagename_kelompok}}</h4>
                     </div>
                     <div class="card-body card-block">
                         @if($errors->any())
@@ -84,196 +41,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            @role('sekdir')
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nomor Agenda</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="int" id="text-input" name="nomor_agenda" class="form-control"value="{{$data->nomor_agenda}}" >
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tanggal Terima</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="tanggal_terima" placeholder="Text" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tanggal Surat</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="tanggal_permohonan"  disabled value="{{$data->tanggal_permohonan}}" placeholder="Text" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nomor Surat</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="string" id="text-input" name="nomor_permohonan"  disabled value="{{$data->nomor_permohonan}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Lampiran</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="string" id="text-input" name="lampiran"  disabled value="{{$data->lampiran}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Hal</label>
-                                </div>
-                                <div class="col-3 col-md-9">
-                                    <input type="string" id="text-input" name="hal" value="{{$data->hal}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Pengirim</label>
-                                </div>
-                                <div class="col-3 col-md-9">
-                                    <input type="string" id="text-input" name="hal" value="{{$data->jabatan_penandatangan}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            @endrole
 
-
-                            @role('kepegawaian')
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nomor Surat Tugas</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="int" id="text-input" name="nomor_agenda" class="form-control"value="{{$data->nomor_surattugas}}" >
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="textarea-input" class=" form-control-label">Pembuka</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="pembuka_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">
-                                        Yang bertanda tangan di bawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut:
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="textarea-input" class=" form-control-label">Kegiatan</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="jenis_kegiatan" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->jenis_kegiatan}}</textarea>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Hari, Tanggal Pelaksanaan</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="waktu_pelaksanaan" value="{{$data->waktu_pelaksanaan}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Pukul Pelaksanaan</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="time" id="text-input" name="pukul_pelaksanaan" value="{{$data->pukul_pelaksanaan}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Waktu Selesai</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="waktu_selesai" value="{{$data->waktu_selesai}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tempat</label>
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <input type="text" id="text-input" name="tempat" value="{{$data->tempat}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="textarea-input" class=" form-control-label">Penutup</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="penutup_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">
-                                        Demikian Surat Tugas ini untuk dilaksanakan dengan penuh tanggung jawab, serta dipersiapkan dengan sebaik-baiknya.
-                                    </textarea>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tanggal Pembuatan Surat Tugas</label>
-                                </div>
-                                <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="tanggal_surattugas" placeholder="Text" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Nama Penanda Tangan</label>
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <select name='namattd_surattugas' class="form-control">
-                                        <option value="" label="pilih nama penanda tangan"></option>
-                                        @foreach($data_User as $User)
-                                        @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
-                                            <option value="{{$User->id}}">
-                                                {{ $User->name }}
-                                            </option>  
-                                        @endif   
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <input type="text" id="text-input" name="nipttd_surattugas" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Jabatan Penanda Tangan</label>
-                                </div>
-                                <div class="col-6 col-md-6">
-                                    <input type="text" id="text-input" name="jabatanttd_surattugas" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                            </div>
-                            @endrole
-
-                            @role('karyawan')
-                            @if($selectUser->tipe_surat == 'kelompok')
+                            <!-- @if($selectUser->tipe_surat == 'kelompok') -->
                             <div class="col">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
@@ -403,8 +172,8 @@
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Nama Atasan</label>
                                     </div>
-                                    <div class="form-control col-6 col-md-6">
-                                        <select name='nama_penandatangan' class="namapenandatangan">
+                                    <div class="col-6 col-md-6">
+                                        <select name='nama_penandatangan' class="form-control">
                                             @foreach($data_User as $User)
                                             @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
                                                 <option value="{{$User->id}}"
@@ -418,7 +187,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">NIP / NIK Atasan</label>
                                     </div>
@@ -427,23 +196,6 @@
                                         <small class="form-text text-muted"></small>
                                     </div>
                                 </div>
-                                <!-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <select name='nip_penandatangan' class="form-control">
-                                            @foreach($data_User as $User)
-                                                <option value={{$User->nip}}
-                                                    @if($User->nip==$data->nip_penandatangan)
-                                                        selected
-                                                    @endif
-                                                >
-                                                    {{$User->nip}}</option>    
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Jabatan Penanda Tangan</label>
@@ -452,7 +204,7 @@
                                         <input type="text" id="text-input" name="jabatan_penandatangan" value="{{$data->jabatan_penandatangan}}" class="form-control">
                                         <small class="form-text text-muted"></small>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>  
                             <!-- PENUGASAN KARYAWAN -->
                             <div class="card">
@@ -525,7 +277,7 @@
                                     </div>                                 
                                 </div>
                             </div>
-                            @elseif($selectUser->tipe_surat == 'perorangan')
+                            <!-- @elseif($selectUser->tipe_surat == 'perorangan')
                             <div class="col">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
@@ -688,22 +440,13 @@
                                     </div>
                                 </div>
                             </div>
-                            @endif
+                            @endif -->
+
+
                             <!-- {{$selectUser->tipe_surat}} -->
-                            @endrole
                             <div class="footer text-right">
                                 <!-- <button class="btn btn-primary mr-1" type="submit">Update</button> -->
-                                @role('karyawan')
                                 <button class="btn btn-primary mr-1" type="submit">Update</button>
-                                @endrole
-                
-                                @role('sekdir')
-                                <button class="btn btn-primary mr-1" type="submit">Simpan</button>
-                                @endrole
-            
-                                @role('kepegawaian')
-                                <button class="btn btn-primary mr-1" type="submit">Simpan</button>
-                                @endrole
             
                                 <a class="btn btn-danger text-white" href="{{route('kelompokk.index')}}" type="reset">Kembali</a>
                             </div>
@@ -720,14 +463,6 @@
     let data_user = JSON.parse('{!! $data_User !!}')
     $(document).ready(function(){
         $(document).on('change', '.namapenandatangan', function(){
-
-
-            // var cat_id=$(this).val();
-            // console.log(cat_id);
-        // });
-
-        // $(document).on('change', '.namapenandatangan', function(){
-            // var nip_id=$(this).val();
 
             let namapenandatangan = $('.namapenandatangan option').filter(':selected').val()
             let nip = data_user.filter(data => data.name == namapenandatangan)[0].nip

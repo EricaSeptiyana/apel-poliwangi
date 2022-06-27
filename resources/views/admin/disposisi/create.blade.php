@@ -69,7 +69,7 @@
                                 <label for="text-input" class=" form-control-label">Tanggal Surat</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="text" id="text-input" name="tanggal_permohonan"  disabled value="{{$disposisi->tanggal_permohonan}}" placeholder="Text" class="form-control">
+                                <input type="text" id="text-input" name="tanggal_permohonan"  disabled value="$data->tanggal_permohonan" placeholder="Text" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 <label for="text-input" class=" form-control-label">Nomor Surat</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="string" id="text-input" name="nomor_permohonan"  disabled value="{{$disposisi->nomor_permohonan}}" class="form-control">
+                                <input type="string" id="text-input" name="nomor_permohonan"  disabled value="$data->nomor_permohonan" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                 <label for="text-input" class=" form-control-label">Lampiran</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="string" id="text-input" name="lampiran"  disabled value="{{$disposisi->lampiran}}" class="form-control">
+                                <input type="string" id="text-input" name="lampiran"  disabled value="$data->lampiran" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                 <label for="text-input" class=" form-control-label">Hal</label>
                             </div>
                             <div class="col-3 col-md-9">
-                                <input type="string" id="text-input" name="hal" disabled value="{{$disposisi->hal}}" class="form-control">
+                                <input type="string" id="text-input" name="hal" disabled value="$data->hal" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                 <label for="text-input" class=" form-control-label">Pengirim</label>
                             </div>
                             <div class="col-3 col-md-9">
-                                <input type="string" id="text-input" name="hal" disabled value="{{$disposisi->jabatan_penandatangan}}" class="form-control">
+                                <input type="string" id="text-input" name="hal" disabled value="$data->jabatan_penandatangan" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>

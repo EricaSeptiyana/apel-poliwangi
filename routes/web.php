@@ -42,10 +42,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function(){
     // Route::resource('/undangan', 'Admin\UndanganController');
     
     // KARYAWAN
-    Route::resource('/perorangann', 'Admin\PerorangannController');
     Route::get('/findnip', 'Admin\PerorangannController@findnip');
     Route::get('/perorangann/cetakperorangann', 'Admin\PerorangannController@cetak')->name('perorangann.cetak');
     Route::resource('/kelompokk', 'Admin\KelompokkController');
+    Route::resource('/perorangann', 'Admin\PerorangannController');
     // Route::post('/kelompokk/suratdisposisi', [App\Http\Controllers\Admin\KelompokkController::class, 'suratdisposisi'])->name('kelompokk.suratdisposisi');
     // Route::put('/kelompokk/uploadsurattugas', [App\Http\Controllers\Admin\KelompokkController::class, 'uploadsurattugas'])->name('kelompokk.uploadsurattugas');
     Route::resource('/penugasankaryawan', 'Admin\PenugasankaryawanController');
