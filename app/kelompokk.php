@@ -40,4 +40,17 @@ class kelompokk extends Model
     {
         return $this->hasOne(disposisi::class);
     }
+    public function surat()
+    {
+        return $this->hasOne(surattugas::class);
+    }
+
+    //RELASI TAG2 KARYAWAN
+    public function karyawan()
+    {
+        return $this->hasMany(penugasankaryawan::class);
+    }
+     
+
+
 }

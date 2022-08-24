@@ -17,10 +17,20 @@
     table tr td {
       text-align: justify;
       font-size: 15px;
+      /* font-style: ; */
     }
     table tr .text {
       text-align: right;
       font-size: 15px;
+    }
+    .center {
+  margin-left: auto;
+  margin-right: auto;
+    text-align: justify;
+}
+.wrapContent {
+      position: relative;
+      top: -20px;
     }
     @page {
       size: auto;
@@ -49,23 +59,24 @@
       <td colspan="2"><b>_________________________________________________________________________________</b><br></td>
     </tr> -->
     <br>
+    
     <table>
       <tr>
-        <td>Nomor &emsp; :</td>
+        <td>Nomor</td>
         <td width="549">
-          {{$data->nomor_permohonan}}
+          : {{$data->nomor_permohonan}}
         </td>
       </tr>
       <tr>
-        <td>Lampiran :</td>
+        <td>Lampiran </td>
         <td width="549">
-          {{$data->lampiran}}
+          : {{$data->lampiran}}
         </td>
       </tr>
       <tr>
-        <td>Hal &emsp; &emsp; :</td>
-        <td width="549">
-          {{$data->hal}}
+        <td class="headerContent">Hal</td>
+        <td class="kegiatanContent" width="549">
+         : {{$data->hal}}
         </td>
       </tr>
     </table>
@@ -101,28 +112,26 @@
         <td width="520"> Jumat, 25 Februari 2022 - 26 Februari 2022</td>
       </tr> -->
       <tr>
-        <td>Hari, Tanggal :</td>
+        <td>Hari, Tanggal </td>
         <td width="520"> 
-          {{$hari}},
-          {{$tanggal}}
-          - 
-          {{$data->waktu_selesai}}
+          :
+        {{Carbon\Carbon::parse($data->waktu_pelaksanaan)->isoFormat('dddd, D MMMM Y')}}
+
+          {{$data->waktu_selesai ? '- '.Carbon\Carbon::parse($data->waktu_selesai)->isoFormat('dddd, D MMMM Y') : ' '}}
       </td>
       </tr>
       <tr>
-        <td>Pukul &emsp; &emsp; &ensp;:</td>
+        <td>Pukul</td>
         <td width="520"> 
-          {{$data->pukul_pelaksanaan}}
+        : {{Carbon\Carbon::parse($data->pukul_pelaksanaan)->format('h:i')}}
           - selesai
         </td>
-        <!-- <td width="520"> 10.00 WIB - selesai</td> -->
       </tr>
       <tr>
-        <td>Tempat &emsp; &emsp; :</td>
+        <td>Tempat</td>
         <td width="520">
-          {{$data->tempat}}
+          : {{$data->tempat}}
         </td>
-        <!-- <td width="520"> Ruang E1.7 Gedung 454 Politeknik Negeri Banyuwangi</td> -->
       </tr>
     </table>
     <br>
@@ -132,46 +141,99 @@
             <font size="3">
               {{$data->penutup}}
             </font>
-          <!-- <font size="3"> Maka dengan ini kami mengajukan permohonan surat tugas untuk panitia karyawan program penjajakan kerjasama tersebut. Demikian surat permohonan ini kami sampaikan. Atas perhatian Bapak, kami mengucapkan terima kasih. </font> -->
         </td>
       </tr>
       <br>
-      <table width="600">
+      
+      <table  width="600">
+        <br>
         <tr>
           <td width="400"></td>
           <td class="text2">
             Banyuwangi, 
-            {{$data->tanggal_permohonan}}
+            {{Carbon\Carbon::parse($data->tanggal_permohonan)->isoFormat('D MMMM Y')}}
         </td>
-          <!-- <td class="text2">Banyuwangi, 13 Januari 2022</td> -->
         </tr>
         <br>
         <tr>
           <td width="400"></td>
           <td class="text2">
-            {{$data->jabatan_penandatangan}}
+            {{$data->nama_jabatan}}
             ,
-            <br><br><br>
-            {{$data->nama_penandatangan}}
+         
+            @empty($data->ttd)
+            <br><br>
+            @else
+            <br>
+            <img src="{{ asset('public/file/'.$data->ttd)}}"  height="70">
+            <br>
+            @endempty
+            <br>
+            {{$data->name}}
           </td>
-          <!-- <td class="text2">Ketua Unit,<br><br><br><br><br><br>Bapak Wiyono</td> -->
         </tr>
         <tr>
             <td width="400"></td>
-            <td class="text2">
-              NIP./NIK.
-              {{$data->nip_penandatangan}}
+            <td width="230" class="text2">
+              NIP./NIK. {{$data->nip}}
             </td>
-            <!-- <td class="text2">NIP. 199119192738263</td> -->
           </tr>
       </table>
     </table>
   </center>
+  
+  <center>
+    <tr >
+    <table style="margin-top: 250px;" width="625" class="border-bottom border-dark solid">
+        <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="105" height="105"></td>
+        <td>
+          <center>
+              <font size="5">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</font><br>
+              <!-- <font size="4">RISET, DAN TEKNOLOGI</font><br> -->
+              <font size="5"><b>POLITEKNIK NEGERI BANYUWANGI</b></font><br>
+              <font size="3">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</font><br>
+              <font size="3">Telepon / Faks : (0333) 636780</font><br>
+              <font size="3">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</font><br>
+          <center>
+        </td>
+        
+      </table>
+    </tr>
+    <br>
+    <!-- <table border="1"  class="center" cellpadding="5" width="625"> -->
+    <tr>
+        <td class="text3 " >
+          <b>List Data Nama Karyawan Kegiatan {{$data->jenis_kegiatan}}</b>
+        </td>
+    </tr>
+    <br>
+    <!-- </table> -->
+         
+    <table border="1"  class="center" cellpadding="5" width="625" >
+       
+      <tr>
+          <th>No</th>
+          <th>Nama</th>
+          <th>NIP/NIK</th>
+          <th>Jabatan</th>
+      </tr>
+      
+      @foreach($karyawan as $datakaryawan)
+      <tr>
+        <td>{{$i++}}</td>
+        <td>{{$datakaryawan->name}}</td>
+        <td>{{$datakaryawan->nip}}</td>
+        <td>{{$datakaryawan->jabatan}}</td>
+      </tr>
+      @endforeach
+    </table>
+  </center>
   <div class="container-lg text-center mt-4 mb-4 pt-4">
-      <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button>
-      <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a>
   </div>
-  <script>
+  <script type="text/javascript">
+       window.print();
+  </script>
+  <!-- <script>
         function Cetakan() {
             var x = document.getElementsByName("cetak");
             var y = document.getElementsByName("selanjutnya");
@@ -208,6 +270,27 @@
             }
             
         }
+  </script> -->
   </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    var words = [];
+
+    function getWords(elements) {
+      elements.contents().each(function() {
+        if ($(this).contents().length > 0) return getWords($(this));
+        if ($(this).text()) words = words.concat($(this).text().split(","));
+      })
+
+    }
+
+    getWords($(".kegiatanContent"));
+    console.log(words[1].length);
+    const kegiatan = $(".headerContent")
+    if (words[1].length > 9) {
+      kegiatan.addClass('wrapContent');
+    }
+  </script>
+
 </body>
 </html>

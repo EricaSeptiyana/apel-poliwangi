@@ -26,9 +26,15 @@
       size: auto;
       margin:0;
     }
+
+    .wrapContent {
+      position: relative;
+      top: -10px;
+    }
   </style>
 </head>
 <body>
+
   <center>
     <tr>
       <table width="625" class="border-bottom border-dark solid">
@@ -48,20 +54,23 @@
     <tr>
       <!-- <td colspan="2"><b>_________________________________________________________________________________</b><br></td> -->
     </tr>
+
     <br>
-    <table width="625">
-      <tr>
-        <td class="text3"><b>SURAT TUGAS</b></td>
+    <table width="300">
+      <tr >
+        <td style="position: relative; left: 25%;;" class="text3" ><b>SURAT TUGAS</b></td>
       </tr>
       <tr>
-        <td class="text3">Nomor: 651725/PL/KP/2022</td>
+        <td class="text3">Nomor</td>
+        <td>: {{$surat? $surat->nomor_surattugas : '-'}}</td>
+      
       </tr>
     </table>
     <br>
     <table width="625">
       <tr>
         <td>
-          <font size="3">Yang bertanda tangan di bawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut: </font>
+          <font size="3">{{$data->pembuka}}</font>
         </td>
       </tr>
     </table>
@@ -77,16 +86,16 @@
     <br>
     <table>
       <tr>
-        <td>Nama &emsp; :</td>
-        <td width="549">Suntiwi</td>
+        <td>Nama</td>
+        <td width="549">: {{$karyawan->name}}</td>
       </tr>
       <tr>
-        <td>NIP/NIK :</td>
-        <td width="549"> 1234567890111213</td>
+        <td>NIP/NIK </td>
+        <td width="549">: {{$karyawan->nip}}</td>
       </tr>
       <tr>
-        <td>Jabatan &ensp; :</td>
-        <td width="549"></td>
+        <td>Jabatan </td>
+        <td width="549">: {{$karyawan->jabatan}}</td>
       </tr>
     </table>
     <br>
@@ -100,44 +109,58 @@
     <br>
     <table>
       <tr>
-        <td>Kegiatan :</td>
-        <td width="550">Seminar</td>
+      <td id="headerContent">Kegiatan </td>
+        <td width="550" id="kegiatanContent">: {{$data->jenis_kegiatan}}</td>
       </tr>
       <tr>
-        <td>Waktu :</td>
-        <td width="550"> 10.00 WIB - selesai</td>
+        <td>Waktu </td>
+        <td width="550">: 
+        {{Carbon\Carbon::parse($data->waktu_pelaksanaan)->isoFormat('dddd, D MMMM Y')}}
+
+          {{$data->waktu_selesai ? '- '.Carbon\Carbon::parse($data->waktu_selesai)->isoFormat('dddd, D MMMM Y') : ' '}}
+      </td>
       </tr>
       <tr>
-        <td>Tempat :</td>
-        <td width="550"> Ruang E1.7 Gedung 454 Politeknik Negeri Banyuwangi</td>
+        <td>Tempat </td>
+        <td width="550">: {{$data->tempat}}</td>
       </tr>
     </table>
     <br>
     <table width="619">
       <tr>
         <td>
-          <font size="3"> Demikian Surat Tugas ini untuk dilaksanakan dengan penuh tanggung jawab, serta dipersiapkan dengan sebaik-baiknya.</font>
+          <font size="3"> {{$data->penutup}}.</font>
         </td>
       </tr>
       <br>
-      <table width="600">
+      <table width="625">
         <tr>
           <td width="400"></td>
-          <td class="text2">Banyuwangi, 13 Januari 2022</td>
+          <td class="text2">Banyuwangi, {{Carbon\Carbon::parse($data->tanggal_permohonan)->isoFormat('D MMMM Y')}}.</td>
         </tr>
         <br>
         <tr>
           <td width="400"></td>
-          <td class="text2">Direktur,<br><br><br><br><br><br>Bapak Wiyono</td>
+      
+          <td width="230" class="text2"> {{$surat? $surat->nama_jabatan: '-'}}
+          <br>
+          <br>
+          {{$surat? $surat->name: '-'}}
+            <br>
+            NIP/NIK  {{$surat? $surat->nip: '-'}}
+        </td>
         </tr>
       </table>
     </table>
   </center>
   <div class="container-lg text-center mt-4 mb-4 pt-4">
-      <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button>
-      <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a>
+      <!-- <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button>
+      <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a> -->
   </div>
-  <script>
+  <script type="text/javascript">
+       window.print();
+  </script>
+  <!-- <script>
         function Cetakan() {
             var x = document.getElementsByName("cetak");
             var y = document.getElementsByName("selanjutnya");
@@ -174,6 +197,25 @@
             }
             
         }
+  </script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    var words = [];
+
+    function getWords(elements) {
+      elements.contents().each(function() {
+        if ($(this).contents().length > 0) return getWords($(this));
+        if ($(this).text()) words = words.concat($(this).text().split(" "));
+      })
+
+    }
+
+    getWords($("#kegiatanContent"));
+    console.log(words[1].length);
+    const kegiatan = $("#headerContent")
+    if (words[1].length > 9) {
+      kegiatan.addClass('wrapContent');
+    }
   </script>
 </body>
 </html>

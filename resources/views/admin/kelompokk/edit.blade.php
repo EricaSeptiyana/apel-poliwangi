@@ -42,7 +42,6 @@
                                 </div>
                             </div>
 
-                            <!-- @if($selectUser->tipe_surat == 'kelompok') -->
                             <div class="col">
                                 <div class="row form-group">
                                     <div class="col col-md-3">
@@ -73,7 +72,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Tanggal Surat</label>
+                                        <label for="text-input" class=" form-control-label">Tanggal Pengajuan Surat</label>
                                     </div>
                                     <div class="col-3 col-md-3">
                                         <input type="date" id="text-input" name="tanggal_permohonan" value="{{$data->tanggal_permohonan}}" placeholder="Text" class="form-control">
@@ -96,33 +95,6 @@
                                         <textarea name="pembuka" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->pembuka}}</textarea>
                                     </div>
                                 </div>
-                                <!-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Nama</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input" placeholder="{{$datalogin->name}}" name="nama" disabled value="{{$datalogin->name}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP/NIPPPK</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input" placeholder="{{$datalogin->nip}}" name="nip" disabled value="{{$datalogin->nip}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Jabatan</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input" placeholder="{{$datalogin->jabatan->nama_jabatan}}" name="jabatan" value="{{$datalogin->jabatan->nama_jabatan}}" disabled class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div> -->
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Hari, Tanggal</label>
@@ -164,7 +136,7 @@
                                         <label for="textarea-input" class=" form-control-label">Penutup</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->pembuka}}</textarea>
+                                        <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->penutup}}</textarea>
                                     </div>
                                 </div>
 
@@ -176,35 +148,20 @@
                                         <select name='nama_penandatangan' class="form-control">
                                             @foreach($data_User as $User)
                                             @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                                @if($datalogin->prodi_id == $User->prodi_id)
                                                 <option value="{{$User->id}}"
-                                                    @if($User->name==$data->nama_penandatangan)
+                                                    @if($User->id==$data->nama_penandatangan)
                                                         selected
                                                     @endif
                                                 >
-                                                    {{$User->name}}</option> 
+                                                {{ $User->name }}                                                 
+                                                </option> 
+                                                @endif
                                             @endif   
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <!-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP / NIK Atasan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <input type="text" id="text-input" name="nip_penandatangan" value="{{$data->nip_penandatangan}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Jabatan Penanda Tangan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <input type="text" id="text-input" name="jabatan_penandatangan" value="{{$data->jabatan_penandatangan}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div> -->
                             </div>  
                             <!-- PENUGASAN KARYAWAN -->
                             <div class="card">
@@ -277,173 +234,7 @@
                                     </div>                                 
                                 </div>
                             </div>
-                            <!-- @elseif($selectUser->tipe_surat == 'perorangan')
-                            <div class="col">
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Nomor</label>
-                                    </div>
-                                    <div class="col-3 col-md-3"><input type="string" id="text-input" name="nomor_permohonan" value="{{$data->nomor_permohonan}}" class="form-control">
-                                    <small class="form-text text-muted"></small>
-                                </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Lampiran</label>
-                                        </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input" name="lampiran" value="{{$data->lampiran}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Hal</label>
-                                    </div>
-                                    <div class="col-3 col-md-9">
-                                        <input type="string" id="text-input" name="hal" value="{{$data->hal}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Tanggal Surat</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="date" id="text-input" name="tanggal_permohonan" value="{{$data->tanggal_permohonan}}" placeholder="Text" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="textarea-input" class=" form-control-label">Kegiatan</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <textarea name="jenis_kegiatan" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->jenis_kegiatan}}</textarea>
-                                        </div>
-                                </div>
-                                <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="textarea-input" class=" form-control-label">Pembuka</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <textarea name="pembuka" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->pembuka}}</textarea>
-                                        </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Nama</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input" placeholder="{{$datalogin->name}}" name="nama" disabled value="{{$datalogin->name}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP/NIPPPK</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input" placeholder="{{$datalogin->nip}}" name="nip" disabled value="{{$datalogin->nip}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Jabatan</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="string" id="text-input"  name="jabatan" value="{{$data}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Hari, Tanggal</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="date" id="text-input" name="waktu_pelaksanaan" value="{{$data->waktu_pelaksanaan}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Pukul Pelaksanaan</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="time" id="text-input" name="pukul_pelaksanaan" value="{{$data->pukul_pelaksanaan}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Waktu Selesai</label>
-                                    </div>
-                                    <div class="col-3 col-md-3">
-                                        <input type="date" id="text-input" name="waktu_selesai" value="{{$data->waktu_selesai}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Tempat</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <input type="text" id="text-input" name="tempat" value="{{$data->tempat}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="textarea-input" class=" form-control-label">Penutup</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->pembuka}}</textarea>
-                                        </div>
-                                </div>
-
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class="form-control-label">Nama Penanda Tangan</label>
-                                    </div>
-                                    <div class="form-control col-6 col-md-6">
-                                        <select name='nama_penandatangan' class="namapenandatangan">
-                                            @foreach($data_User as $User)
-                                            @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
-                                                <option value="{{$User->id}}"
-                                                    @if($User->name==$data->nama_penandatangan)
-                                                        selected
-                                                    @endif
-                                                >
-                                                    {{$User->name}}</option> 
-                                            @endif   
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <input type="string" id="text-input" name="nip_penandatangan" value="{{$data->nip_penandatangan}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Jabatan Penanda Tangan</label>
-                                    </div>
-                                    <div class="col-6 col-md-6">
-                                        <input type="string" id="text-input" name="jabatan_penandatangan" value="{{$data->jabatan_penandatangan}}" class="form-control">
-                                        <small class="form-text text-muted"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif -->
-
-
-                            <!-- {{$selectUser->tipe_surat}} -->
+                           
                             <div class="footer text-right">
                                 <!-- <button class="btn btn-primary mr-1" type="submit">Update</button> -->
                                 <button class="btn btn-primary mr-1" type="submit">Update</button>
@@ -459,8 +250,8 @@
 </div>
 
 <!-- penandatangan / atasan di tampilan karyawan-->
-<script type="text/javascript">
-    let data_user = JSON.parse('{!! $data_User !!}')
+<!-- <script type="text/javascript">
+    let data_user = JSON.parse(`{!! $data_User !!}`)
     $(document).ready(function(){
         $(document).on('change', '.namapenandatangan', function(){
 
@@ -477,26 +268,6 @@
 
         });
     });
-</script>
-
-<!-- penandatangan / atasan di tampilan kepegawaian-->
-<!-- <script type="text/javascript">
-    let data_user = JSON.parse('{!! $data_User !!}')
-    $(document).ready(function(){
-        $(document).on('change', '.namattd_surattugas', function(){
-            let namattd_surattugas = $('.namattd_surattugas option').filter(':selected').val()
-            let nip = data_user.filter(data => data.name == nipttd_surattugas)[0].nip
-            let jabatan = data_user.filter(data => data.name == jabatanttd_surattugas)[0].jabatan
-            $('[name="nipttd_surattugas"]').val(nip)
-            $('[name="jabatanttd_surattugas"]').val(jabatan)
-            
-            console.log(namattd_surattugas, $('[name="nipttd_surattugas"]'));
-            console.log(namattd_surattugas, $('[name="jabatanttd_surattugas"]'));
-            console.log(data_user.nip);
-            console.log(data_user.jabatan);
-
-        });
-    });
 </script> -->
 
 <!-- penugasan karyawan -->
@@ -504,9 +275,22 @@
 
     let currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
 
+    let data_user_new = JSON.parse(`{!! $data_User !!}`)
+    function refresh_input_nama_listener() {
+        $('[name="name[]"]').on('change', null).off('change');
+        $('[name="name[]"]').on('change', function() {
+            let nama = $(this).val();
+            let input_nip_element = $(this).closest('tr').children()[2] // nip/nik input form
+            let nip = data_user_new.filter(data => data.name == nama)[0].nip
+            $(input_nip_element).children('[name="nip[]"]').val(nip)
+        });
+    }
+
     $('#addkaryawan').on('click', function(){
         addkaryawan();
     });
+
+
     function addkaryawan(){
 
         console.log(currentIndex);
@@ -520,9 +304,11 @@
                                 <option value='' label='pilih karyawan'></option>
                                 @foreach($data_User as $User)
                                 @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
-                                    <option value="{{$User->name}}">
-                                        {{$User->name}}
-                                    </option>  
+                                    @if($datalogin->prodi_id == $User->prodi_id)
+                                        <option value="{{$User->name}}">
+                                            {{$User->name}}
+                                        </option>  
+                                    @endif
                                 @endif
                                 @endforeach
                             </select>
@@ -548,13 +334,16 @@
                     </th>
                 </td>
             </tr>
-        `;
-        $('#karyawan').append(karyawan);
+            `;
+            $('#karyawan').append(karyawan);
+            refresh_input_nama_listener();
+        
         $('.deleteRow').unbind().on('click', function(){
             console.log(parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1);
             $(this).parent().parent().remove();
             currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
         });
+
     };
     $('.deleteRow').on('click', function(){
         $(this).parent().parent().remove();

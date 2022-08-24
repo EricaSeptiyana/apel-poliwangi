@@ -34,6 +34,7 @@
                     <form action="{{route('perorangann.update', $data->id)}}" method="post" enctype="multipart/form-data" class="form=horizontal">
                         @method('PATCH')
                         @csrf
+                       
                         <div class="container">
                             <div class="row align-items-start">
                                 <div class="col">
@@ -69,7 +70,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class=" form-control-label">Tanggal Surat</label>
+                                    <label for="text-input" class=" form-control-label">Tanggal Pengajuan Surat</label>
                                 </div>
                                 <div class="col-3 col-md-3">
                                     <input type="date" id="text-input" name="tanggal_permohonan" value="{{$data->tanggal_permohonan}}" placeholder="Text" class="form-control">
@@ -98,6 +99,7 @@
                                 </div>
                                 <div class="col-3 col-md-3">
                                 @foreach($datapenugasan as $penugasan)
+                                <input type="hidden" name="kelompokk_id" value="{{ $penugasan->kelompokk_id }}"> <br/>
                                     <input type="string" id="text-input" name="name" value="{{$penugasan->name}}" placeholder="{{$penugasan->name}}" disabled class="form-control">
                                     <small class="form-text text-muted"></small>
                                     <!-- {{$datapenugasan}} -->
@@ -164,24 +166,26 @@
                                         <label for="textarea-input" class=" form-control-label">Penutup</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->pembuka}}</textarea>
+                                        <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">{{$data->penutup}}</textarea>
                                     </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="text-input" class="form-control-label">Nama Penanda Tangan</label>
+                                    <label for="text-input" class="form-control-label">Nama Atasan</label>
                                 </div>
                                 <div class="col-6 col-md-6">
                                     <select name='nama_penandatangan' class="form-control">
                                         @foreach($data_User as $User)
                                         @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                            @if($datalogin->prodi_id == $User->prodi_id)
                                             <option value="{{$User->id}}"
-                                                @if($User->name==$data->nama_penandatangan)
+                                                @if($User->id==$data->nama_penandatangan)
                                                     selected
                                                 @endif
                                             >
                                                 {{$User->name}}</option> 
+                                            @endif
                                         @endif   
                                         @endforeach
                                     </select>
@@ -221,7 +225,7 @@
 
 <!-- penandatangan / atasan -->
 <script type="text/javascript">
-    let data_user = JSON.parse('{!! $data_User !!}')
+    let data_user = JSON.parse(`{!! $data_User !!}`)
     $(document).ready(function(){
         $(document).on('change', '.namapenandatangan', function(){
 

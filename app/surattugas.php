@@ -21,4 +21,8 @@ class surattugas extends Model
     public function disposisi(){
         return $this->hasOne(disposisi::class);
     }
+     public function kelompokk(){
+        return $this->belongsTo(kelompokks::class);
+    }
+
 }

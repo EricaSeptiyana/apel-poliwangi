@@ -7,7 +7,7 @@
     <h5>{{$pagename}}</h5>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
-      <div class="breadcrumb-item"><a href="{{route('surattugas.index')}}">Disposisi</a></div>
+      <div class="breadcrumb-item"><a href="{{route('kelompokk.index')}}">Surat Tugas</a></div>
       <div class="breadcrumb-item">{{ $pagename }}</div>
     </div>
 </div>
@@ -35,8 +35,12 @@
                         {{session()->get('gagal')}}
                         </div>
                     @endif
-                    <form action="{{route('kelompokk.store')}}" method="post" enctype="multipart/form-data" class="form=horizontal">
+                    @foreach($dataSurattugas as $surat)
+                    <form action="{{route('surattugas.update',['surattuga'=>$surat->nomor_surattugas])}}" method="post" enctype="multipart/form-data" class="form=horizontal">
+                         @method('PATCH')
                         @csrf
+                 
+                        <!-- <input type="text" name="kelompokk_id" value="{{ request()->id }}"> -->
                         <div class="container">
                             <div class="row align-items-start">
                                 <div class="col">
@@ -49,8 +53,10 @@
                                     <label for="text-input" class=" form-control-label">Nomor Surat Tugas</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="int" id="text-input" name="nomor_surattugas" class="form-control" disabled value="$data->nomor_surattugas" >
+                                    
+                                    <input type="int" id="text-input" name="nomor_surattugas" class="form-control" value="{{$surat->nomor_surattugas.'/PL36/KP/2022'}}"  >
                                     <small class="form-text text-muted"></small>
+                    @endforeach
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -58,17 +64,15 @@
                                     <label for="textarea-input" class=" form-control-label">Pembuka</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <textarea name="pembuka_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">
-                                        Yang bertanda tangan di bawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut:
-                                    </textarea>
+                                    <textarea name="pembuka_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">Yang bertanda tangan di bawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut:</textarea>
                                 </div>
                             </div>
-                            <!-- <div class="row form-group">
+                            <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="textarea-input" class=" form-control-label">Kegiatan</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <textarea name="jenis_kegiatan" id="textarea-input" rows="9" style="height: 100px" class="form-control" disabled placeholder="$data->jenis_kegiatan"></textarea>
+                                    <textarea name="jenis_kegiatan" id="textarea-input" rows="9" style="height: 100px" class="form-control" disabled placeholder="{{$data->jenis_kegiatan}}"></textarea>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -76,7 +80,7 @@
                                     <label for="text-input" class=" form-control-label">Hari, Tanggal Pelaksanaan</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="waktu_pelaksanaan" disabled value="$data->waktu_pelaksanaan" class="form-control">
+                                    <input type="date" id="text-input" name="waktu_pelaksanaan" disabled value="{{$data->waktu_pelaksanaan}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -85,7 +89,7 @@
                                     <label for="text-input" class=" form-control-label">Pukul Pelaksanaan</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="time" id="text-input" name="pukul_pelaksanaan" disabled value="$data->pukul_pelaksanaan" class="form-control">
+                                    <input type="time" id="text-input" name="pukul_pelaksanaan" disabled value="{{$data->pukul_pelaksanaan}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -94,7 +98,7 @@
                                     <label for="text-input" class=" form-control-label">Waktu Selesai</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="waktu_selesai" disabled value="$data->waktu_selesai" class="form-control">
+                                    <input type="date" id="text-input" name="waktu_selesai" disabled value="{{$data->waktu_selesai}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -103,18 +107,16 @@
                                     <label for="text-input" class=" form-control-label">Tempat</label>
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <input type="text" id="text-input" name="tempat" disabled value="$data->tempat" class="form-control">
+                                    <input type="text" id="text-input" name="tempat" disabled value="{{$data->tempat}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="textarea-input" class=" form-control-label">Penutup</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <textarea name="penutup_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">
-                                        Demikian Surat Tugas ini untuk dilaksanakan dengan penuh tanggung jawab, serta dipersiapkan dengan sebaik-baiknya.
-                                    </textarea>
+                                    <textarea name="penutup_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">Demikian Surat Tugas ini untuk dilaksanakan dengan penuh tanggung jawab, serta dipersiapkan dengan sebaik-baiknya.</textarea>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -135,9 +137,11 @@
                                         <option value="" label="pilih nama penanda tangan"></option>
                                         @foreach($data_User as $User)
                                         @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                           @if(str_contains(strtolower($User->username), 'direktur'))
                                             <option value="{{$User->id}}">
                                                 {{ $User->name }}
                                             </option>  
+                                            @endif
                                         @endif   
                                         @endforeach
                                     </select>
@@ -177,7 +181,7 @@
 
 <!-- penandatangan / atasan -->
 <script type="text/javascript">
-    let data_user = JSON.parse('{!! $data_User !!}')
+    let data_user = JSON.parse(`{!! $data_User !!}`)
     $(document).ready(function(){
         $(document).on('change', '.namapenandatangan_surattugas', function(){
 

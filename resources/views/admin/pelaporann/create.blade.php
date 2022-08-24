@@ -75,9 +75,7 @@
                           <div class="row form-group">
                               <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Penutup</label></div>
                               <div class="col-12 col-md-9">
-                                <textarea name="penutup" id="textarea-input" rows="9" style="height: 150px" class="form-control">
-                                Demikian Laporan perjalanan dinas ini dibuat, sebagai bahan Laporan
-                                </textarea>
+                                <textarea name="penutup" id="textarea-input" rows="9" style="height: 150px" class="form-control">Demikian Laporan perjalanan dinas ini dibuat, sebagai bahan Laporan</textarea>
                               </div>
                           </div>
                           <div class="row form-group">
@@ -93,6 +91,10 @@
                               <div class="col-12 col-md-9"><input type="file" id="file-input" name="foto_kegiatan3" class="form-control-file"></div>
                           </div>
                           <div class="row form-group">
+                              <div class="col col-md-3"><label for="file-input" class=" form-control-label">Dokumen Pendukung</label></div>
+                              <div class="col-12 col-md-9"><input type="file" id="file-input" name="dokumen_pendukung" class="form-control-file"></div>
+                          </div>
+                          <div class="row form-group">
                                 <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal Surat</label></div>
                                 <div class="col-3 col-md-3"><input type="date" id="text-input" name="tanggal_surat" placeholder="Text" class="form-control"><small class="form-text text-muted"></small></div>
                           </div>
@@ -103,9 +105,11 @@
                               <option value="" label="pilih penanda tangan"></option>
                                   @foreach($data_User as $User)
                                     @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                      @if(Auth::user()->prodi_id == $User->prodi_id)
                                       <option value="{{$User->id}}">
                                           {{$User->name}}
                                       </option>    
+                                      @endif
                                     @endif
                                   @endforeach
                               </select>

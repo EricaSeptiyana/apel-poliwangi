@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\perorangann;
 use App\kelompokk;
-use App\disposisi;
 use App\User;
+use App\disposisi;
+use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class DisposisiController extends Controller
 {
@@ -30,13 +32,14 @@ class DisposisiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        // $data_User=User::all();
-        // $disposisi = disposisi::all();
         $pagename="Form Input Surat Disposisi";
-        $data=kelompokk::all();
+        $data=kelompokk::find($request->id)
+        ->join('users', 'users.id','=','kelompokks.nama_penandatangan')
+        ->join('jabatans','jabatans.id', '=' ,'users.jabatan_id')
+        ->where('kelompokks.id' ,'=',$request->id)->get();
         
         return view('admin.disposisi.create', compact('pagename', 'data'));
     }
@@ -54,15 +57,19 @@ class DisposisiController extends Controller
             'tanggal_terima'=>'required',
         ]);
 
-        $data_disposisi=new disposisi([
-            'kelompokk_id' => $request->kelompokk_id,
-            'nomor_agenda' => $request->nomor_agenda,
-            'tanggal_terima' => $request->tanggal_terima,
-        ]);
-
-        $data_disposisi->save();
-
-        return redirect('admin/kelompokk')->with('sukses','Surat Disposisi Berhasil Dibuat');
+        try {
+            $data_disposisi=new disposisi([
+                'kelompokk_id' => $request->kelompokk_id,
+                'nomor_agenda' => $request->nomor_agenda,
+                'tanggal_terima' => $request->tanggal_terima,
+            ]);
+    
+            $data_disposisi->save();
+    
+            return redirect('admin/kelompokk')->with('sukses','Surat Disposisi Berhasil Dibuat');
+        } catch (\Exception $e) {
+           return Redirect::back()->withErrors(['Gagal'=>'Nomor Surat Agenda Sudah Digunakan']);
+        }
     }
 
     /**
@@ -74,27 +81,18 @@ class DisposisiController extends Controller
     public function show($id)
     {
         //
-        //
-        $disposisi=disposisi::find($id);
-        $data=kelompokk::find($id);
-        // $data=perorangann::With('user')->get();
-        // $data=perorangann::With('user')->get();
-        // $pagename="Form Input Surat Tugas Kelompok";
-        $data_tanggal= $data->waktu_pelaksanaan;
-        $tanggal=date('d F Y', strtotime($data_tanggal));
-        $day = date('D', strtotime($data_tanggal));
-        $list_hari =  array(
-            'Sun' => 'Minggu',
-            'Mon' => 'Senin',
-            'Tue' => 'Selasa',
-            'Wed' => 'Rabu',
-            'Thu' => 'Kamis',
-            'Fri' => 'Jumat',
-            'Sat' => 'Sabtu',
-        );
-        $hari=$list_hari[$day];
+        $datadisposisi=disposisi::select('*')->where('kelompokk_id',$id)->get();
+        foreach ($datadisposisi as $disposisi ) {
+          
+        }
+        
+        $data=kelompokk::find($id)
+        ->join('users', 'users.id', '=', 'kelompokks.nama_penandatangan')
+        ->join('jabatans', 'jabatans.id', '=', 'users.jabatan_id')
+        ->where('kelompokks.id', '=', $id)->get()->first();
+        // $jabatan=DB::table('penugasankaryawans')->where('kelompokk_id',$id)->get();
 
-        return view('admin.disposisi.show', compact('data', 'hari', 'tanggal', 'disposisi'));
+        return view('admin.disposisi.show', compact('data', 'disposisi'));
     }
 
     /**
@@ -106,12 +104,6 @@ class DisposisiController extends Controller
     public function edit($id)
     {
         //
-        // $data_disposisi=disposisi::all();
-        // $data_User=User::all();
-        // $selectUser=perorangann::find($id);
-        // $pagename='Update Surat Disposisi';
-        // $data=disposisi::find($id);
-        // return view('admin.disposisi.edit', compact('data', 'pagename', 'selectUser', 'data_disposisi' , 'data_User'));
     }
 
     /**
@@ -124,24 +116,6 @@ class DisposisiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // $request->validate([
-        //     'nomor_agenda'=>'required',
-        //     'jabatan_penandatangan' => 'required',
-        //     'nomor_permohonan'=>'required',
-        //     'tanggal_permohonan'=>'required', 
-        //     'lampiran'=>'required',
-        //     'hal'=>'required',
-        // ]);
-        // $disposisi = disposisi::find($id);
-        // $disposisi->nomor_agenda = $request->get('nomor_agenda');
-        // $disposisi->nomor_permohonan = $request->get('nomor_permohonan');
-        // $disposisi->lampiran = $request->get('lampiran');
-        // $disposisi->hal = $request->get('hal');
-        // $disposisi->tanggal_permohonan= $request->get('tanggal_permohonan');
-        // $disposisi->jabatan_penandatangan = $request->get('jabatan_penandatangan');
-
-        // $disposisi->save();
-        // return redirect('admin/disposisi')->with('sukses','Surat Disposisi Berhasil Diupdate');
     }
 
     /**
@@ -154,4 +128,6 @@ class DisposisiController extends Controller
     {
         //
     }
+
+   
 }
