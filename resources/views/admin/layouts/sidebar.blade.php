@@ -6,9 +6,8 @@
           <!-- <img src="{{asset('public/img/poltek.png')}}" alt="Logo"></a> -->
             <!-- <a href="index.html">Stisla</a> -->
           </div>
-          <div class="sidebar-brand sidebar-brand-sm">
+          <div class="sidebar-brand sidebar-brand-sm px-2">
           <img alt="image" src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="50">   
-            <!-- <a href="index.html">Stisla</a> -->
             <a class="navbar-brand" href="./"></a>
           </div>
           <div>
@@ -42,6 +41,8 @@
               <li class="nav-item"><a class="nav-link" href="{{url('/admin/kelompokk')}}"><i class="fas fa-columns"></i> <span>Surat Tugas</span></a></li>
               <li class="nav-item"><a class="nav-link" href="{{url('/admin/pelaporann')}}"><i class="far fa-file-alt"></i> <span>Laporan Perjadin</span></a></li>
               <!-- <li class="nav-item"><a class="nav-link" href="{{url('/admin/penugasankaryawan')}}"><i class="fas fa-fire"></i> <span>Penugasan Karyawan</span></a></li> -->
+            <li class="menu-header">PENGAJUAN SURAT TUGAS</li>
+              <li class="nav-item"><a class="nav-link" href="{{url('admin/arsip')}}"><i class="fas fa-archive"></i> <span>Arsip Surat</span></a></li>
             @endrole
 
             @role('kajur')
@@ -103,11 +104,11 @@
             @endrole
 
             </div>
-            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <!-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
               <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i> Documentation
               </a>
-            </div>
+            </div> -->
         </div>
         </aside>
       </div>

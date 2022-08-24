@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'APEL Poliwangi')
+@section('title', 'Surat Tugas Poliwangi')
 @section('content')
 <section class="section">
   <!-- background biru -->

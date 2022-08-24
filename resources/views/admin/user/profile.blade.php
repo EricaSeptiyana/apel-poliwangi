@@ -28,6 +28,7 @@
               <div class="card author-box card-primary">
                   <div class="card-body">
                     <div class="author-box-left">
+                      <!-- <a class="far fa-user author-box-picture" width="200"></a> -->
                       <img alt="image" src="{{asset('public/assets/img/avatar/avatar-1.png')}}" class="rounded-circle author-box-picture">
                       <div class="clearfix"></div>
                       <!-- <a href="#" class="btn btn-primary mt-3 follow-btn" data-follow-action="alert('follow clicked');" data-unfollow-action="alert('unfollow clicked');">Follow</a> -->
@@ -35,11 +36,10 @@
                     <div class="author-box-details mt-4">
                       <div class="author-box-name">
                         <a href="#">{{$datalogin->name}}
-                          <!-- {{$datalogin->username}} -->
                         </a>
                       </div>
                       <div class="author-box-job">
-                        {{$datalogin->jabatan->nama_jabatan}}
+                      {{$user->jabatan->nama_jabatan}}
                       </div>
                     </div>
                     <div class="author-box-description">
@@ -49,16 +49,15 @@
                       <div class="mx-4">
                         <p>Nama &emsp; &emsp; &emsp; &emsp;: 
                           {{$datalogin->name}}
-                          <!-- {{$datalogin->username}} -->
                         </p>
                         <p>NIP/NIK &emsp; &emsp; &emsp; : 
                           {{$datalogin->nip}}
                         </p>
                         <p>Jabatan &emsp; &emsp; &emsp; &ensp;: 
-                          {{$datalogin->jabatan->nama_jabatan}}
+                          {{$user->jabatan->nama_jabatan}}
                         </p>
                         <p>Program Studi &emsp;: 
-                          {{$datalogin->prodi->nama_prodi}}
+                          {{$user->prodi->nama_prodi}}
                         </p>
                         <p>Email &emsp; &emsp; &emsp; &emsp;: 
                           {{$datalogin->email}}
@@ -91,7 +90,7 @@
                       <div class="text-muted d-inline font-weight-normal">
                         <div class="slash">
                         </div>
-                        {{$datalogin->jabatan}}
+                        $datalogin->jabatan
                       </div>
                     </div>
                     Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
@@ -115,7 +114,7 @@
               </div>
               <div class="col-12 col-md-12 col-lg-7">
                 <div class="card">
-                    <form action="{{route('profile.update', $user->id)}}" method="post" class="needs-validation" novalidate="">
+                    <form action="{{route('profile.update', $user->id)}}" method="post" class="needs-validation" novalidate="" enctype='multipart/form-data'>
                         @csrf
                         @method('PATCH')
                     <div class="card-header">
@@ -152,21 +151,56 @@
                             </div>
                             <div class="form-group col-md-5 col-12">
                                 <label>Foto TTD</label>
-                                <input type="file" name="ttd" class="form-control" value="">
+                                <input type="file" name="ttd"class="form-control-file" value="{{old('ttd')}}">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-7 col-12">
+                            <div class="row form-group col-md-7 col-12">
+                              <div class="col-md-7 col-12">
+                                <label for="text-input" class=" form-control-label">Nama Jabatan</label>
+                              </div>
+                              <div class="col-6 col-md-12">
+                                  <select name='jabatan_id' class="form-control">
+                                    @if(is_array($data_jabatan) || $data_jabatan instanceof Traversable)
+                                        @foreach($data_jabatan as $jabatan)
+                                            <option 
+                                                value="{{$jabatan->id}}"
+                                                {{ ($jabatan->nama_jabatan == $user->jabatan->nama_jabatan) ? 'selected' : '' }}
+                                            >
+                                                {{$jabatan->nama_jabatan}}
+                                            </option>    
+                                        @endforeach
+                                    @endif
+                                  </select>
+                              </div>
+                            </div>
+                            <div class="row form-group col-md-6 col-12">
+                                <div class="col-md-12 col-12">
+                                  <label for="text-input" class=" form-control-label">Nama Prodi</label>
+                                </div>
+                                <div class="col-6 col-md-12">
+                                    <select name='prodi_id' class="form-control">
+                                        @foreach($data_prodi as $prodi)
+                                            <option 
+                                              value="{{$prodi->id}}" 
+                                              {{ $prodi->nama_prodi == $user->prodi->nama_prodi ? 'selected' : '' }}
+                                            >
+                                                {{$prodi->nama_prodi}}
+                                            </option>    
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group col-md-7 col-12">
                                 <label>Jabatan</label>
-                                <input type="text" name="jabatan" class="form-control" value="{{$datalogin->jabatan->nama_jabatan}}" required="">
+                                <input type="text" name="jabatan" class="form-control" value="$jabatan->nama_jabatan">
                                 <div class="invalid-feedback">
-                                Please fill in the email
                                 </div>
                             </div>
                             <div class="form-group col-md-5 col-12">
                                 <label>Program Studi</label>
-                                <input type="text" name="prodi" class="form-control" value="{{$datalogin->prodi->nama_prodi}}">
-                            </div>
+                                <input type="text" name="prodi" class="form-control" value="$datalogin->prodi->nama_prodi">
+                            </div> -->
                         </div>
                         <!-- <div class="row">
                             <div class="form-group col-md-7 col-12">
@@ -179,10 +213,7 @@
                               </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-7 col-12">
-                                <label>Foto TTD</label>
-                                <input type="file" name="ttd" class="form-control" value="">
-                            </div>
+                        
                         </div> -->
 
                         <!-- <div class="row">

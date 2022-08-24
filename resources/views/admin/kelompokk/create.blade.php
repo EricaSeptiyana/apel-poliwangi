@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col col-md-3">
-                                        <label for="text-input" class=" form-control-label">Tanggal Surat</label>
+                                        <label for="text-input" class=" form-control-label">Tanggal Pengajuan Surat</label>
                                     </div>
                                     <div class="col-3 col-md-3">
                                         <input type="date" id="text-input" name="tanggal_permohonan" placeholder="Text" class="form-control">
@@ -99,9 +99,7 @@
                                         <label for="textarea-input" class=" form-control-label">Pembuka</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="pembuka" id="textarea-input" rows="9" style="height: 100px" class="form-control">
-                                            Sehubungan dengan akan dilaksanakan kegiatan (nama kegiatan), dengan nama pegawai berikut:
-                                        </textarea>
+                                        <textarea name="pembuka" id="textarea-input" rows="9" style="height: 100px" class="form-control">Sehubungan dengan akan dilaksanakan kegiatan (nama kegiatan), yang akan dilaksanakan pada:</textarea>
                                     </div>
                                 </div>
                                 
@@ -147,9 +145,7 @@
                                         <label for="textarea-input" class=" form-control-label">Penutup</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">
-                                            maka dengan ini saya mengajukan permohonan surat tugas untuk (Kegiatan). Demikian surat permohonan ini kami sampaikan. Atas perhatiannya, diucapkan terima kasih.
-                                        </textarea>
+                                        <textarea name="penutup" id="textarea-input" rows="9" style="height: 100px" class="form-control">Maka dengan ini saya mengajukan permohonan surat tugas untuk (Kegiatan). Demikian surat permohonan ini kami sampaikan. Atas perhatiannya, diucapkan terima kasih.</textarea>
                                     </div>
                                 </div>
 
@@ -157,20 +153,26 @@
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Nama Penanda Tangan</label>
                                     </div>
-                                    <div class="form-control col-6 col-md-6">
-                                        <select name='nama_penandatangan' class="namapenandatangan">
+                                    <div class="col-6 col-md-6">
+                                      
+                                   
+                                        <select name='nama_penandatangan' class="form-control">
                                             <option value="" label="pilih nama penanda tangan"></option>
+                                           
                                             @foreach($data_User as $User)
+                                            
                                             @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                                @if($datalogin->prodi_id == $User->prodi_id)
                                                 <option value="{{$User->id}}">
-                                                    {{ $User->name }}
+                                                {{ $User->name }} 
                                                 </option>  
+                                                @endif
                                             @endif   
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row form-group">
+                                <!-- <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">NIP Penanda Tangan</label>
                                     </div>
@@ -187,7 +189,7 @@
                                         <input type="text" id="text-input" name="jabatan_penandatangan" class="form-control">
                                         <small class="form-text text-muted"></small>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
 
@@ -221,7 +223,7 @@
                                             </thead>
                                             <tbody id="karyawan">
                                                 <tr>
-                                                    <td>{{++$i}}</td>
+                                                    <td class="index-number">{{$i++}}</td>
                                                     <td>
                                                         {{$datalogin->name}}
                                                         <input 
@@ -240,6 +242,7 @@
                                                         >
                                                         {{$datalogin->nip}}
                                                     </td>
+                                                  
                                                     <td><input type="text" name="jabatan[]" class="form-control"></td>
                                                     <th><a href="javascriipt:void(0)" id="remove" class="btn btn-danger deleteRow">-</a></th>
                                                 </tr>
@@ -264,9 +267,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
-<!-- penandatangan / atasan -->
-<script type="text/javascript">
-    let data_user_1 = JSON.parse('{!! $data_User !!}')
+<!-- penandatangan / atasan / GAK DI PAKEK-->
+<!-- <script type="text/javascript">
+    let data_user_1 = JSON.parse(`{!! $data_User !!}`)
     $(document).ready(function(){
         $(document).on('change', '.namapenandatangan', function(){
 
@@ -280,38 +283,47 @@
 
         });
     });
-</script>
+</script> -->
 
 <!-- penugasan karyawan -->
 <script type="text/javascript">
-    let data_user = JSON.parse('{!! $data_User !!}')
+    // nomor biar urut
+    let currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
+
+    let data_user = JSON.parse(`{!! $data_User !!}`)
+ 
     function refresh_input_nama_listener() {
         $('[name="name[]"]').on('change', null).off('change');
         $('[name="name[]"]').on('change', function() {
             let nama = $(this).val();
-            let input_nip_element = $(this).closest('tr').children()[2] // nip/nik input form
+            let input_nip_element = $(this).closest('tr').children()[2] // nip input, ada [] karna array
             let nip = data_user.filter(data => data.name == nama)[0].nip
-            $(input_nip_element).children('[name="nip[]').val(nip)
+            $(input_nip_element).children('[name="nip[]"]').val(nip)
+            
         });
     }
 
-    $('#addkaryawan').on('click', function(){
+    //UNTUK FORM
+    $('#addkaryawan').on('click',  function(){
         addkaryawan();
+        
     });
     function addkaryawan(){
-        var karyawan = `
+             var karyawan = `
             <tr>
-                <td>{{++$i}}</td>
+            <td class="index-number">${currentIndex++}</td>
                     <td>
                         <div class='col'>
                             <select name='name[]' id='select' class='form-control'>
                                 <option value='' label='pilih karyawan'></option>
                                 @foreach($data_User as $User)
-                                @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
-                                    <option value="{{$User->name}}">
-                                        {{$User->name}}
-                                    </option> 
-                                @endif   
+                                    @if(!in_array($User->username, ['sekdir', 'kepegawaian', 'keuangan', 'superadmin', 'kajur']))
+                                        @if($datalogin->prodi_id == $User->prodi_id)
+                                            <option value="{{$User->name}}">
+                                                {{$User->name}}
+                                            </option> 
+                                        @endif
+                                    @endif   
                                 @endforeach
                             </select>
                         </div>
@@ -327,13 +339,18 @@
             </tr>
         `;
         $('#karyawan').append(karyawan);
+        
         refresh_input_nama_listener();
+        $('.deleteRow').unbind().on('click', function(){
+            console.log(parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1);
+            $(this).parent().parent().remove();
+            currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
+        });
     };
     $('#remove').live('click', function(){
         $(this).parent().parent().remove();
+        currentIndex = parseInt($('.index-number')[$('.index-number').length - 1].innerHTML) + 1;
     });
-    
-
 </script>
 
 

@@ -51,13 +51,12 @@
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Jabatan</label></div>
                         <div class="col-6 col-md-6">
-                            <select name='nama_jabatan' class="form-control">
+                            <select name='jabatan_id' class="form-control">
                             @if(is_array($data_jabatan) || $data_jabatan instanceof Traversable)
                                 @foreach($data_jabatan as $jabatan)
-                                    <option value={{$jabatan->nama_jabatan}}
-                                        @if($jabatan->nama_jabatan==$data->nama_jabatan)
-                                            selected
-                                        @endif
+                                    <option 
+                                        value="{{$jabatan->id}}"
+                                        {{ ($jabatan->nama_jabatan == $user->jabatan->nama_jabatan) ? 'selected' : '' }}
                                     >
                                         {{$jabatan->nama_jabatan}}
                                     </option>    
@@ -70,14 +69,14 @@
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Prodi</label></div>
                         <div class="col-6 col-md-6">
-                            <select name='nama_prodi' class="form-control">
-                                @foreach((array) $data_prodi as $prodi)
-                                    <option value={{$prodi->nama_prodi}}
-                                        @if($prodi->nama_prodi==$data->nama_prodi)
-                                            selected
-                                        @endif
+                            <select name='prodi_id' class="form-control">
+                                @foreach($data_prodi as $prodi)
+                                    <option 
+                                      value="{{$prodi->id}}" 
+                                      {{ $prodi->nama_prodi == $user->prodi->nama_prodi ? 'selected' : '' }}
                                     >
-                                        {{$prodi->nama_prodi}}</option>    
+                                        {{$prodi->nama_prodi}}
+                                    </option>    
                                 @endforeach
                             </select>
                         </div>

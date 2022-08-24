@@ -27,6 +27,7 @@ class pelaporann extends Model
         'penutup',
         'tempat',
         'foto_kegiatan',
+        'user_id',
         // 'lokasi_fotokegiatan',
         'foto_kegiatan2',
         // 'lokasi_fotokegiatan2',
@@ -34,6 +35,7 @@ class pelaporann extends Model
         // 'lokasi_fotokegiatan3',
         // 'file_undangan',
         // 'file_disposisi',
+        'dokumen_pendukung',
         'tanggal_surat',
         'penanda_tangan',
     ];
