@@ -39,11 +39,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function perorangann()
-    {
-        return $this->hasMany(perorangann::class);
-    }
-
     public function kelompokk()
     {
         return $this->hasMany(kelompokk::class);

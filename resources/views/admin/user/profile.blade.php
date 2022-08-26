@@ -28,6 +28,7 @@
               <div class="card author-box card-primary">
                   <div class="card-body">
                     <div class="author-box-left">
+                      <!-- <a class="far fa-user author-box-picture" width="200"></a> -->
                       <img alt="image" src="{{asset('public/assets/img/avatar/avatar-1.png')}}" class="rounded-circle author-box-picture">
                       <div class="clearfix"></div>
                       <!-- <a href="#" class="btn btn-primary mt-3 follow-btn" data-follow-action="alert('follow clicked');" data-unfollow-action="alert('unfollow clicked');">Follow</a> -->
@@ -113,7 +114,7 @@
               </div>
               <div class="col-12 col-md-12 col-lg-7">
                 <div class="card">
-                    <form action="{{route('profile.update', $user->id)}}" method="post" class="needs-validation" novalidate="">
+                    <form action="{{route('profile.update', $user->id)}}" method="post" class="needs-validation" novalidate="" enctype='multipart/form-data'>
                         @csrf
                         @method('PATCH')
                     <div class="card-header">
@@ -150,7 +151,7 @@
                             </div>
                             <div class="form-group col-md-5 col-12">
                                 <label>Foto TTD</label>
-                                <input type="file" name="ttd" class="form-control" value="">
+                                <input type="file" name="ttd"class="form-control-file" value="{{old('ttd')}}">
                             </div>
                         </div>
                         <div class="row">
@@ -212,10 +213,7 @@
                               </span>
                               @enderror
                             </div>
-                            <div class="form-group col-md-7 col-12">
-                                <label>Foto TTD</label>
-                                <input type="file" name="ttd" class="form-control" value="">
-                            </div>
+                        
                         </div> -->
 
                         <!-- <div class="row">

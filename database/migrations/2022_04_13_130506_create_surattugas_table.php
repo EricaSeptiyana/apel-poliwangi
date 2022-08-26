@@ -15,14 +15,14 @@ class CreateSurattugasTable extends Migration
     {
         Schema::create('surattugas', function (Blueprint $table) {
             $table->id();
-            // $table->integer('kelompokk_id')->nullable();
-            $table->integer('nomor_surattugas')->unique()->nullable();
-            $table->string('pembuka')->nullable();
-            $table->string('penutup')->nullable();
+            $table->integer('kelompokk_id')->nullable();
+            $table->string('nomor_surattugas')->unique()->nullable();
+            $table->text('pembuka')->nullable();
+            $table->text('penutup')->nullable();
             $table->string('namattd_surattugas')->nullable();
             // $table->string('nipttd_surattugas')->nullable();
             // $table->string('jabatanttd_surattugas')->nullable();
-            // $table->date('tanggal_surattugas')->nullable();
+            $table->date('tanggal_surattugas')->nullable();
             $table->string('file_surattugas')->nullable();
             $table->timestamps();
         });

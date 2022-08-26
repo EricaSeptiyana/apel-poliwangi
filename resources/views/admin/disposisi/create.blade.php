@@ -5,9 +5,12 @@
 <div class="section-body">
 <div class="section-header">
     <h5>{{$pagename}}</h5>
+    @if($errors->any())
+    <h4>{{$errors->first()}}</h4>
+    @endif
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="{{url('/admin')}}">Dashboard</a></div>
-      <div class="breadcrumb-item"><a href="{{route('disposisi.index')}}">Disposisi</a></div>
+      <div class="breadcrumb-item"><a href="{{route('kelompokk.index')}}">Disposisi</a></div>
       <div class="breadcrumb-item">{{ $pagename }}</div>
     </div>
 </div>
@@ -63,13 +66,13 @@
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
-                        
+                        @foreach($data as $surat)
                         <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">Tanggal Surat</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="text" id="text-input" name="tanggal_permohonan"  disabled value="$data->tanggal_permohonan" placeholder="Text" class="form-control">
+                                <input type="text" id="text-input" name="tanggal_permohonan"  disabled value="{{$surat->tanggal_permohonan}}" placeholder="Text" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -78,7 +81,7 @@
                                 <label for="text-input" class=" form-control-label">Nomor Surat</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="string" id="text-input" name="nomor_permohonan"  disabled value="$data->nomor_permohonan" class="form-control">
+                                <input type="string" id="text-input" name="nomor_permohonan"  disabled value="{{$surat->nomor_permohonan}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -87,7 +90,7 @@
                                 <label for="text-input" class=" form-control-label">Lampiran</label>
                             </div>
                             <div class="col-3 col-md-3">
-                                <input type="string" id="text-input" name="lampiran"  disabled value="$data->lampiran" class="form-control">
+                                <input type="string" id="text-input" name="lampiran"  disabled value="{{$surat->lampiran}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
@@ -96,20 +99,21 @@
                                 <label for="text-input" class=" form-control-label">Hal</label>
                             </div>
                             <div class="col-3 col-md-9">
-                                <input type="string" id="text-input" name="hal" disabled value="$data->hal" class="form-control">
+                                <input type="string" id="text-input" name="hal" disabled value="{{$surat->hal}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
+                       
                         <div class="row form-group">
                             <div class="col col-md-3">
                                 <label for="text-input" class=" form-control-label">Pengirim</label>
                             </div>
                             <div class="col-3 col-md-9">
-                                <input type="string" id="text-input" name="hal" disabled value="$data->jabatan_penandatangan" class="form-control">
+                                <input type="string" id="text-input" name="hal" disabled value="{{$surat->nama_jabatan}}" class="form-control">
                                 <small class="form-text text-muted"></small>
                             </div>
                         </div>
-
+                            @endforeach
                         </div>
                         <div class="footer text-right">
                             <button class="btn btn-primary mr-1" type="submit">Simpan</button>

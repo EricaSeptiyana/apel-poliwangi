@@ -23,6 +23,7 @@ class ProfileController extends Controller
         $pagename='Profile Karyawan';
         $datalogin=Auth::user();
         $user=User::find($datalogin->id);
+
         $data_jabatan=jabatan::all();
         $data_prodi=prodi::all();
         return view('admin.user.profile', compact('pagename','datalogin', 'user', 'data_jabatan', 'data_prodi'));
@@ -92,19 +93,26 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user=User::find($id);
-        $user->name=$request->name;
-        $user->username=$request->username;
-        $user->nip=$request->nip;
-        $user->jabatan_id = $request->jabatan_id;
-        $user->prodi_id = $request->prodi_id;
-        $user->email=$request->email;
-        if($request->hasFile('ttd')) {
-            $request->file('ttd')->move('ttd/', $request->file('ttd')->getClientOriginalName());
-            $user->ttd = $request->file('ttd')->getClientOriginalName();
+
+    User::where('id',$id)->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'jabatan_id'=>$request->jabatan_id,
+            'prodi_id'=>$request->prodi_id,
+        ]);
+        if ($request->ttd != null) {
+            if($request->hasFile('ttd')) {
+                $request->file('ttd')->move('public/file/', $request->file('ttd')->getClientOriginalName());
+                User::where('id',$id)->update([
+                    'name'=>$request->name,
+                    'email'=>$request->email,
+                    'jabatan_id'=>$request->jabatan_id,
+                    'prodi_id'=>$request->prodi_id,
+                    'ttd' =>$request->file('ttd')->getClientOriginalName(),
+                ]);
+            }   
         }
-        // $user->password=$request->password;
-        $user->save();
+        
         return back();
     }
 

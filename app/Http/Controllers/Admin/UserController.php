@@ -81,26 +81,7 @@ class UserController extends Controller
 
         $user->assignRole($request->role_user);
         return redirect()->route('user.index')->with ('sukses', 'User berhasil dibuat');
-        //
-        // $this->validate($request, [
-        //     'txtnama_user'=>'required',
-        //     'txt_username'=>'required',
-        //     'txt_nip'=>'required',
-        //     'txtemail_user'=>'required|email|unique:user, email',
-        //     'txtpassword_user'=>'required|save:txtkonfirmasipassword_user',
-        //     'role_user'=>'required'
-        // ]);
-
-        // $user=new User();
-        // $user->name=$request->txtnama_user;
-        // $user->username=$request->txt_username;
-        // $user->nip=$request->txt_nip;
-        // $user->email=$request->txtemail_user;
-        // $user->password=$request->Hash::make($request->txtpassword_user);
-        // $user->save();
-
-        // $user->assignRole($request->role_user);
-        // return redirect()->route('users.index')->with('sukses', 'User berhasil dibuat');
+        
     }
 
     /**
@@ -180,23 +161,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
+        $id_user=$request->input('id_user');
         $user=User::find($id);
         $user->delete();
 
         return redirect()->route('user.index')->with ('sukses', 'User berhasil dihapus');
     }
-
-    // public function profile($id)
-    // {
-    //     //
-    //     $title = "My Profile";
-    //     $user = User::where('id', Auth::user()->id)->first();
-
-    //     return view('user.profile', compact('tittle', 'user'));
-    // }
 
     /**
      * Store a newly created resource in storage.
@@ -204,14 +177,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function importUser(Request $request)
     {
-        // dd($request->file('excel-karyawan'));
-        // $request->validate([
-        //     'file' => 'required|max:10000|mimes:xlsx,xls',
-        // ]);
         $file=$request->file('excel-karyawan');
-        // dd($file);
         Excel::import(new UserImport    , $file);
         return redirect()->back();
     }

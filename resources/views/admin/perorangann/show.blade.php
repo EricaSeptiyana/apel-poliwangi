@@ -52,6 +52,8 @@
       <!-- <td colspan="2"></td> -->
     </tr>
     <br>
+   
+    <!-- font size 15 -->
     <table>
       <tr>
         <td>Nomor &emsp; :</td>
@@ -97,15 +99,7 @@
             </td>
         </tr>
     </table>
-    <!-- <br>
-    <table width="625">
-      <tr>
-        <td>
-          <font size="2"> Dalam rangka pelaksanaan Koordinasi Tenaga Kependidikan di lingkungan Politeknik Negeri Banyuwangi
-            <br>Tahun 2021, maka kami mengundang Bapaka/ Ibu untuk hadir pada: </font>
-        </td>
-      </tr>
-    </table> -->
+
     <br>
     <table>
       <tr>
@@ -120,12 +114,14 @@
           {{$data->user->nip}}
         </td>
       </tr>
+      @foreach($jabatan as $userjabatan)
       <tr>
         <td>Jabatan &emsp; :</td>
         <td width="549">
-          {{$data->jabatan}}
+        {{$userjabatan->jabatan}}
         </td>
       </tr>
+      @endforeach
     </table>
     <br>
     <table width="624">
@@ -144,16 +140,16 @@
           Hari, Tanggal :
         </td>
         <td width="520"> 
-          {{$hari}},
-          {{$tanggal}}
-          - 
-          {{$data->waktu_selesai}}
+        {{Carbon\Carbon::parse($data->waktu_mulai)->isoFormat('dddd, D MMMM Y')}}
+
+          {{$data->waktu_selesai ? '- '.Carbon\Carbon::parse($data->waktu_selesai)->isoFormat('dddd, D MMMM Y') : ' '}}
+
         </td>
       </tr>
       <tr>
         <td>Pukul &emsp; &emsp; &ensp;:</td>
         <td width="520"> 
-          {{$data->pukul_pelaksanaan}}
+        {{Carbon\Carbon::parse($data->pukul_pelaksanaan)->format('h:i')}}
           - selesai
         </td>
         <!-- <td width="20">- selesai</td> -->
@@ -181,35 +177,42 @@
           <td width="400"></td>
           <td class="text2">
             Banyuwangi, 
-            {{$data->tanggal_permohonan}}
+            {{Carbon\Carbon::parse($data->tanggal_permohonan)->isoFormat('D MMMM Y')}}
           <!-- {{$data->tanggal_permohonan}} -->
           </td>
         </tr>
         <br>
         <tr>
           <td width="400"></td>
-          <td class="text2">
+          <td class="text2" width="250">
             {{$data->jabatan_penandatangan}}
-            ,
-            <br><br><br>
-            {{$data->nama_penandatangan}}
+            <br> 
+            @empty($data->ttd) 
+            @else
+            <img src="{{ asset('public/file/'.$data->ttd)}}"  height="40">
+            <br>
+            @endempty
+       
+            {{$data->name}}
           </td>
         </tr>
         <tr>
             <td width="400"></td>
             <td class="text2">
-              NIP./NIK.
-              {{$data->nip_penandatangan}}
+              NIP./NIK.{{$data->nip}}
             </td>
           </tr>
       </table>
     </table>
   </center>
   <div class="container-lg text-center mt-4 mb-4 pt-4">
-      <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button>
-      <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a>
+      <!-- <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button> -->
+      <!-- <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a> -->
   </div>
-  <script>
+  <script type="text/javascript">
+       window.print();
+  </script>
+  <!-- <script>
         function Cetakan() {
             var x = document.getElementsByName("cetak");
             var y = document.getElementsByName("selanjutnya");
@@ -246,6 +249,6 @@
             }
             
         }
-  </script>
+  </script> -->
 </body>
 </html>

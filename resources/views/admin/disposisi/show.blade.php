@@ -26,12 +26,19 @@
       size: auto;
       margin:0;
     }
+    .wrapContent {
+      position: relative;
+      top: -20px;
+    }
+   .border-table {
+  border: 1px solid black;
+}
   </style>
 </head>
 <body>
   <center>
     <tr>
-      <table width="625" class="border-bottom border-dark solid">>
+      <table width="625" class="border-bottom border-dark solid">
         <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="105" height="105"></td>
         <td>
           <center>
@@ -48,75 +55,74 @@
     <!-- <tr>
       <td colspan="2"><b>_________________________________________________________________________________</b><br></td>
     </tr> -->
-    <br>
-    <table border="1" cellpadding="5" width="625">
-        <tr>
-          <td>Tanggal Terima : 
+
+    <table class="border-table" cellpadding="5" width="625">
+        <tr >
+          <td class="border-table">Tanggal Terima : 
             <!-- 22 Februari 2022 -->
-            $disposisi->tanggal_terima
+            {{Carbon\Carbon::parse($disposisi->tanggal_terima)->isoFormat('D MMMM Y')}}
           </td>
-          <td>Nomor Agenda :</td>
-          <td>$disposisi->nomor_agenda</td>
+          <td class="border-table">Nomor Agenda : </td>
+          <td>{{$disposisi->nomor_agenda}}</td>
         </tr>
     </table>
     <br>
-    <table cellpadding="5" width="625">
+    <table  cellpadding="5" width="625">
         <tr>
-          <td>Jenis Disposisi &emsp;:</td>
-          <td>Pengirim : 
-            $data->jabatan_penandatangan
-          </td>
+          <td>Jenis Disposisi :</td>
+
+          <td>Pengirim </td>
+          <td>: {{$data->nama_jabatan}}  </td>
+
         </tr>
         <tr>
-            <td>Rahasia</td>
-            <td>Nomor Surat : 
-              $data->nomor_permohonan
-            </td>
+            <td><input type="radio" name="" id=""> Rahasia</td>
+            <td>Nomor Surat</td>
+            <td>: {{$data->nomor_permohonan}}</td>
         </tr>
         <tr>
-            <td>Penting</td>
-            <td>Tanggal Surat : 
-              $data->tanggal_permohonan
-            </td>
+            <td><input type="radio" name="" id=""> Penting</td>
+            <td>Tanggal Surat</td>
+            <td>: {{Carbon\Carbon::parse($data->tanggal_permohonan)->isoFormat('D MMMM Y')}}  </td>
+
         </tr>
         <tr>
-            <td>Segera</td>
-            <td>Lampiran : 
-              $data->lampiran
-            </td>
+            <td><input type="radio" name="" id=""> Segera</td>
+            <td>Lampiran</td>
+            <td>: {{$data->lampiran}}</td>
         </tr>
         <tr>
-            <td>Biasa</td>
-            <td>Perihal Surat : 
-              $data->hal
-            </td>
+            <td class="headerContent"><input type="radio" name="" id=""> Biasa</td>
+            <td class="headerContent">Perihal Surat</td>
+             <td width="370" id="kegiatanContent">:{{$data->hal}}</td>
+            
         </tr>
     </table>
     <br>
-    <table border="1" cellpadding="5" width="625">
+    <table  class="border-table" cellpadding="5" width="625">
       <tr bgcolor="white">
-          <th>DARI</th>
-          <th>KEPADA</th>
-          <th>ISI DISPOSISI</th>
-          <th>PARAF</th>
+          <th  class="border-table">DARI</th>
+          <th  class="border-table">KEPADA</th>
+          <th  class="border-table">ISI DISPOSISI</th>
+          <th  class="border-table">PARAF</th>
       </tr>
       <tr>
-        <td>Direktur</td>
-        <td>
+        <td  class="border-table">Direktur</td>
+        <td  class="border-table">
             Wadir I <br>
             Plt. Wadir II <br>
             Plt. Wadir III <br>
         </td>
-        <td></td>
-        <td></td>
+        <td  class="border-table"></td>
+        <td  class="border-table"></td>
       </tr>
       <tr>
-        <td>
+        <td  class="border-table">
             Wadir I <br>
             Plt. Wadir II <br>
             Plt. Wadir III <br>
         </td>
-        <td>
+        <td  class="border-table">
             Ka. Jur............. <br>
             Ka. Prodi........... <br>
             Ka. Unit............ <br>
@@ -124,11 +130,11 @@
             .................... <br>
             ....................
         </td>
-        <td></td>
-        <td></td>
+        <td  class="border-table"></td>
+        <td  class="border-table"></td>
       </tr>
       <tr>
-        <td>
+        <td  class="border-table">
             Ka. Jur............. <br> 
             Ka. Prodi........... <br> 
             Ka. Unit............ <br> 
@@ -136,7 +142,7 @@
             .................... <br>
             ....................
         </td>
-        <td>
+        <td  class="border-table">
             .................... <br>
             .................... <br>
             .................... <br>
@@ -144,17 +150,20 @@
             .................... <br>
             ....................
         </td>
-        <td></td>
-        <td></td>
+        <td  class="border-table"></td>
+        <td  class="border-table"></td>
       </tr>
       
     </table>
   </center>
   <div class="container-lg text-center mt-4 mb-4 pt-4">
-      <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button>
-      <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a>
+      <!-- <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button>
+      <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a> -->
   </div>
-  <script>
+  <script type="text/javascript">
+       window.print();
+  </script>
+  <!-- <script>
         function Cetakan() {
             var x = document.getElementsByName("cetak");
             var y = document.getElementsByName("selanjutnya");
@@ -191,6 +200,25 @@
             }
             
         }
+  </script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    var words = [];
+
+    function getWords(elements) {
+      elements.contents().each(function() {
+        if ($(this).contents().length > 0) return getWords($(this));
+        if ($(this).text()) words = words.concat($(this).text().split(" "));
+      })
+
+    }
+
+    getWords($("#kegiatanContent"));
+    console.log(words[1].length);
+    const kegiatan = $(".headerContent")
+    if (words[1].length > 4) {
+      kegiatan.addClass('wrapContent');
+    }
   </script>
 </body>
 </html>

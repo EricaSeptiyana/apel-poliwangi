@@ -25,7 +25,7 @@
                   <h4>{{$pagename}}</h4>
                   <div class="card-header-action">
                     <div class="input-group">
-                      <a href="{{route('user.create')}}" class="btn btn-primary pull-right mx-2"> Tambah </a>
+                      <!-- <a href="{{route('user.create')}}" class="btn btn-primary pull-right mx-2"> Tambah </a> -->
                       <!-- <a href="{{url('user')}}" class="btn btn-warning pull-right mx-2"> Import Data User Excel </a> -->
 
                       <button class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Import Data Karyawan</button>
@@ -54,7 +54,7 @@
                                   </div>
                                 </div>
                                 <div class="modal-footer bg-whitesmoke br">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Kembali</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                               </div>
@@ -104,14 +104,38 @@
                                   @endif
                                 </td>
                                 <td>
-
-                                      <div class="d-flex justify-content-evenly">
-                                        <a href="{{route('user.edit',$row->id)}}" class="btn btn-primary"> Edit </a>
-                                        <form action="{{route('user.destroy', $row->id)}}" method="post">
-                                              @csrf
-                                              @method('DELETE')
-                                              <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
-                                        </form>
+                                  <div class="d-flex justify-content-evenly">
+                                    <a href="{{route('user.edit',$row->id)}}" class="btn btn-primary mx-2"> Edit </a>
+                                    <!-- <form action="{{route('user.destroy', $row->id)}}" method="post">
+                                          @csrf
+                                          @method('DELETE')
+                                          <button class="btn btn-danger mx-2" type="submit"> Hapus </button>
+                                    </form> -->
+                                    <button class="btn btn-danger hapususer" type="" data-toggle="modal" data-target="#deleteuser" value="{{$row->id}}"> Hapus </button>
+                                    <form action="{{route('user.destroy', $row->id)}}" method="post">
+                                      @csrf
+                                      @method('DELETE')
+                                      <div class="modal fade" tabindex="-1" role="dialog" id="deleteuser" data-backdrop="false">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header text-danger">
+                                              <h5>Hapus Surat</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div class="row">
+                                                <input type="hidden" id="id_user" name="id_user">
+                                                <h6>Apakah Anda Yakin Ingin Menghapusnya?</h6>
+                                              </div>
+                                            </div>
+                                            <div class="modal-footer bg-whitesmoke br">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                              <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
                                 </td>
                               </tr>
                             @endforeach
@@ -147,12 +171,6 @@
 @endsection
 
 @section('script')
-<!-- <script>
-  function mediumModal(id)
-  {
-    $('#mediumModal').modal('show')
-  }
-</script> -->
 <script>
   var myModal = document.getElementById('myModal')
   var myInput = document.getElementById('myInput')
@@ -160,5 +178,13 @@
   myModal.addEventListener('shown.bs.modal', function () {
     myInput.focus()
   })
+</script>
+
+<script>
+  $(document).on('click', '.hapususer', function() {
+    var id_user = $(this).val();
+    // alert(surattugas_id);
+    $('#id_user').val(id_user);
+  });
 </script>
 @endsection

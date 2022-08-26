@@ -87,53 +87,6 @@ class CreateAdminUserSeeder extends Seeder
       $permissions=Permission::pluck('id','id',)->all();
       $role->syncPermissions($permissions);
       $kajur->assignRole([$role->id]);
-
-
-        // $data_user = [
-        //   [
-        //     'name'=>'Super Admin',
-        //     'username'=>'superadmin',
-        //     'nip'=>'12345670',
-        //     'email'=>'superadmin@gmail.com',
-        //     'password'=>bcrypt('12345678'),
-        //   ],
-        //   [
-        //     'name'=>'Sekretaris Direktur',
-        //     'username'=>'sekdir',
-        //     'nip'=>'12345671',
-        //     'email'=>'sekdir@gmail.com',
-        //     'password'=>bcrypt('12345678'),
-        //   ],
-        //   [
-        //     'name'=>'Bagian Kepegawaian',
-        //     'username'=>'kepegawaian',
-        //     'nip'=>'12345672',
-        //     'email'=>'kepegawaian@gmail.com',
-        //     'password'=>bcrypt('12345678'),
-        //   ],
-        //   [
-        //     'name'=>'Bagian Keuangan',
-        //     'username'=>'keuangan',
-        //     'nip'=>'12345673',
-        //     'email'=>'keuangan@gmail.com',
-        //     'password'=>bcrypt('12345678'),
-        //   ]
-        // ];
-
-        // $data_role = [
-        //   ['name'=>'superadmin'],
-        //   ['name'=>'sekdir'],
-        //   ['name'=>'kepegawaian'],
-        //   ['name'=>'keuangan']
-        // ];
-
-        // foreach ($data_user as $i => $user) {
-        //   $user=User::firstOrCreate($user);
-        //   $role=Role::firstOrCreate($data_role[$i]);
-        //   $permissions=Permission::pluck('id','id',)->all();
-        //   $role->syncPermissions($permissions);
-        //   $user->assignRole([$role->id]);
-        // }
         
         $data_jabatan = [
           [
@@ -144,6 +97,10 @@ class CreateAdminUserSeeder extends Seeder
             'id' => 2,
             'nama_jabatan' => 'Ketua Jurusan'
           ],
+          [
+            'id' => 3,
+            'nama_jabatan' => 'Direktur'
+          ],
         ];
         foreach ($data_jabatan as $jabatan) {
           jabatan::firstOrCreate($jabatan);
@@ -152,15 +109,19 @@ class CreateAdminUserSeeder extends Seeder
         $data_prodi = [
           [
             'id' => 1,
-            'nama_prodi' => 'TI'
+            'nama_prodi' => 'Teknik Informatika'
           ],
           [
             'id' => 2,
-            'nama_prodi' => 'TPHT'
+            'nama_prodi' => 'Teknik Pengolahan Hasil Ternak'
           ],
           [
             'id' => 3,
-            'nama_prodi' => 'Teknik'
+            'nama_prodi' => 'Teknik Sipil'
+          ],
+          [
+            'id' => 4,
+            'nama_prodi' => 'Kesekretariatan'
           ],
         ];
         foreach ($data_prodi as $prodi) {

@@ -21,17 +21,16 @@ class CreateKelompokksTable extends Migration
             $table->string('hal');
             $table->date('tanggal_permohonan');
             $table->string('jenis_kegiatan');
-            $table->string('pembuka');
+            $table->text('pembuka');
             $table->date('waktu_pelaksanaan');
-            $table->time('pukul_pelaksanaan')->nullable();
+            $table->time('pukul_pelaksanaan');
             $table->date('waktu_selesai')->nullable();
             $table->string('tempat');
-            $table->string('penutup');
+            $table->text('penutup');
             $table->string('nama_penandatangan');
             // $table->string('nip_penandatangan');
             // $table->string('jabatan_penandatangan');
             $table->string('tipe_surat');
-
             $table->string('status')->nullable();
             $table->timestamps();
         });
