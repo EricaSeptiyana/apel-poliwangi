@@ -406,7 +406,7 @@ class KelompokkController extends Controller
 
         return redirect('admin/kelompokk')->with('sukses', 'Surat Disposisi Berhasil dikirim');
         } catch (\Exception $e) {
-            return Redirect::back()->withErrors(['Gagal'=>'Nomor Surat Tugas Sudah Digunakan']);
+            return Redirect::back()->withErrors(['Gagal'=>'Gagal Mengirim Surat Disposisi']);
         }
     }
 

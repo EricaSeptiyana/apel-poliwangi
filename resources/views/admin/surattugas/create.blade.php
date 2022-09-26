@@ -36,7 +36,7 @@
                         </div>
                     @endif
                     @foreach($dataSurattugas as $surat)
-                    <form action="{{route('surattugas.update',['surattuga'=>$surat->nomor_surattugas])}}" method="post" enctype="multipart/form-data" class="form=horizontal">
+                    <form action="{{route('surattugas.update',$surat->id)}}" method="post" enctype="multipart/form-data" class="form=horizontal">
                          @method('PATCH')
                         @csrf
                  
@@ -67,20 +67,23 @@
                                     <textarea name="pembuka_surattugas" id="textarea-input" rows="9" style="height: 100px" class="form-control">Yang bertanda tangan di bawah ini, Direktur Politeknik Negeri Banyuwangi menugaskan Pegawai sebagai berikut:</textarea>
                                 </div>
                             </div>
+                    
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="textarea-input" class=" form-control-label">Kegiatan</label>
                                 </div>
-                                <div class="col-12 col-md-9">
-                                    <textarea name="jenis_kegiatan" id="textarea-input" rows="9" style="height: 100px" class="form-control" disabled placeholder="{{$data->jenis_kegiatan}}"></textarea>
+                                <div class="col-6 col-md-6">
+                                    <input type="text" id="text-input" name="jenis_kegiatan"  value="{{$data->jenis_kegiatan}}" class="form-control">
+                                    <small class="form-text text-muted"></small>
                                 </div>
                             </div>
+                            <input type="text" id="text-input" name="id_surat" hidden value="{{$data->id}}" class="form-control">
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="text-input" class=" form-control-label">Hari, Tanggal Pelaksanaan</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="waktu_pelaksanaan" disabled value="{{$data->waktu_pelaksanaan}}" class="form-control">
+                                    <input type="date" id="text-input" name="waktu_pelaksanaan"  value="{{$data->waktu_pelaksanaan}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -89,7 +92,7 @@
                                     <label for="text-input" class=" form-control-label">Pukul Pelaksanaan</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="time" id="text-input" name="pukul_pelaksanaan" disabled value="{{$data->pukul_pelaksanaan}}" class="form-control">
+                                    <input type="time" id="text-input" name="pukul_pelaksanaan"  value="{{$data->pukul_pelaksanaan}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -98,7 +101,7 @@
                                     <label for="text-input" class=" form-control-label">Waktu Selesai</label>
                                 </div>
                                 <div class="col-3 col-md-3">
-                                    <input type="date" id="text-input" name="waktu_selesai" disabled value="{{$data->waktu_selesai}}" class="form-control">
+                                    <input type="date" id="text-input" name="waktu_selesai"  value="{{$data->waktu_selesai}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>
@@ -107,7 +110,7 @@
                                     <label for="text-input" class=" form-control-label">Tempat</label>
                                 </div>
                                 <div class="col-6 col-md-6">
-                                    <input type="text" id="text-input" name="tempat" disabled value="{{$data->tempat}}" class="form-control">
+                                    <input type="text" id="text-input" name="tempat"  value="{{$data->tempat}}" class="form-control">
                                     <small class="form-text text-muted"></small>
                                 </div>
                             </div>

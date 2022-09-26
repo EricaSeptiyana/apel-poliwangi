@@ -36,12 +36,9 @@ class DisposisiController extends Controller
     {
         //
         $pagename="Form Input Surat Disposisi";
-        $data=kelompokk::find($request->id)
-        ->join('users', 'users.id','=','kelompokks.nama_penandatangan')
-        ->join('jabatans','jabatans.id', '=' ,'users.jabatan_id')
-        ->where('kelompokks.id' ,'=',$request->id)->get();
-        
-        return view('admin.disposisi.create', compact('pagename', 'data'));
+        $data=kelompokk::find($request->id)->where('kelompokks.id' ,'=',$request->id)->get();
+        $data_User = User::all();
+        return view('admin.disposisi.create', compact('pagename', 'data','data_User'));
     }
 
     /**
@@ -57,6 +54,8 @@ class DisposisiController extends Controller
             'tanggal_terima'=>'required',
         ]);
 
+       
+       
         try {
             $data_disposisi=new disposisi([
                 'kelompokk_id' => $request->kelompokk_id,
@@ -65,10 +64,19 @@ class DisposisiController extends Controller
             ]);
     
             $data_disposisi->save();
+            $data_surat = kelompokk::find($request->id_surat);
+            $data_surat->tanggal_permohonan = $request->tanggal_permohonan;
+            $data_surat->nomor_permohonan = $request->nomor_permohonan;
+            $data_surat->lampiran = $request->lampiran;
+            $data_surat->hal = $request->hal;
+            $data_surat->nama_penandatangan = $request->nama_penandatangan;
+            $data_surat->save();
+
+            
     
             return redirect('admin/kelompokk')->with('sukses','Surat Disposisi Berhasil Dibuat');
         } catch (\Exception $e) {
-           return Redirect::back()->withErrors(['Gagal'=>'Nomor Surat Agenda Sudah Digunakan']);
+           return Redirect::back()->withErrors(['Gagal'=>'Surat Disposisi Gagal dibuat']);
         }
     }
 
@@ -81,7 +89,7 @@ class DisposisiController extends Controller
     public function show($id)
     {
         //
-        $datadisposisi=disposisi::select('*')->where('kelompokk_id',$id)->get();
+        $datadisposisi=disposisi::where('kelompokk_id',$id)->get();
         foreach ($datadisposisi as $disposisi ) {
           
         }
@@ -89,6 +97,7 @@ class DisposisiController extends Controller
         $data=kelompokk::find($id)
         ->join('users', 'users.id', '=', 'kelompokks.nama_penandatangan')
         ->join('jabatans', 'jabatans.id', '=', 'users.jabatan_id')
+        ->join('prodis as p', 'p.id', '=', 'users.prodi_id')
         ->where('kelompokks.id', '=', $id)->get()->first();
         // $jabatan=DB::table('penugasankaryawans')->where('kelompokk_id',$id)->get();
 

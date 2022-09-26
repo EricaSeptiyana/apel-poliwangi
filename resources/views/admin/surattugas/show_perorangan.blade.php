@@ -7,6 +7,9 @@
   <title>Surat Tugas Perorangan</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <style>
+      * {
+      font-family: 'Times New Roman', Times, serif;
+    }
     table tr .text2{
       text-align: left;
     }
@@ -27,27 +30,22 @@
       margin:0;
     }
 
-    .wrapContent {
-      position: relative;
-      top: -10px;
-    }
   </style>
 </head>
 <body>
 
   <center>
-    <tr>
+  <tr>
       <table width="625" class="border-bottom border-dark solid">
         <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="105" height="105"></td>
-        <td>
+        <td class="kopContent">
           <center>
-              <font size="5">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</font><br>
-              <!-- <font size="4">RISET, DAN TEKNOLOGI</font><br> -->
-              <font size="5"><b>POLITEKNIK NEGERI BANYUWANGI</b></font><br>
-              <font size="3">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</font><br>
-              <font size="3">Telepon / Faks : (0333) 636780</font><br>
-              <font size="3">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</font><br>
-          <center>
+            <p style="font-size: 16pt; margin:auto">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</p>
+            <p style="font-size: 14pt;margin:auto"><b>POLITEKNIK NEGERI BANYUWANGI</b></p>
+            <p style="font-size: 12pt;margin:auto">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</p>
+            <p style="font-size: 12pt;margin:auto">Telepon / Faks : (0333) 636780</p>
+            <p style="font-size: 12pt;margin:auto">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</p>
+            <center>
         </td>
       </table>
     </tr>
@@ -58,19 +56,20 @@
     <br>
     <table width="300">
       <tr >
-        <td style="position: relative; left: 25%;;" class="text3" ><b>SURAT TUGAS</b></td>
+        <td style="text-align:center;" class="text3" ><b>SURAT TUGAS</b></td>
       </tr>
       <tr>
-        <td class="text3">Nomor</td>
+        <!-- <td class="text3">Nomor</td>
         <td>: {{$surat? $surat->nomor_surattugas : '-'}}</td>
-      
+       -->
+       <td class="text3">Nomor: {{$surat? $surat->nomor_surattugas: '-'}}</td>
       </tr>
     </table>
     <br>
     <table width="625">
       <tr>
         <td>
-          <font size="3">{{$data->pembuka}}</font>
+          <font size="3">{{$surat->pembuka}}</font>
         </td>
       </tr>
     </table>
@@ -87,15 +86,15 @@
     <table>
       <tr>
         <td>Nama</td>
-        <td width="549">: {{$karyawan->name}}</td>
+        <td width="567">: {{$karyawan->name}}</td>
       </tr>
       <tr>
         <td>NIP/NIK </td>
-        <td width="549">: {{$karyawan->nip}}</td>
+        <td width="567">: {{$karyawan->nip}}</td>
       </tr>
       <tr>
         <td>Jabatan </td>
-        <td width="549">: {{$karyawan->jabatan}}</td>
+        <td width="567">: {{$karyawan->jabatan}}</td>
       </tr>
     </table>
     <br>
@@ -108,13 +107,13 @@
     </table>
     <br>
     <table>
-      <tr>
-      <td id="headerContent">Kegiatan </td>
-        <td width="550" id="kegiatanContent">: {{$data->jenis_kegiatan}}</td>
+      <tr style="vertical-align: top;">
+      <td >Kegiatan </td>
+        <td width="570" >: {{$data->jenis_kegiatan}}</td>
       </tr>
       <tr>
         <td>Waktu </td>
-        <td width="550">: 
+        <td width="570">: 
         {{Carbon\Carbon::parse($data->waktu_pelaksanaan)->isoFormat('dddd, D MMMM Y')}}
 
           {{$data->waktu_selesai ? '- '.Carbon\Carbon::parse($data->waktu_selesai)->isoFormat('dddd, D MMMM Y') : ' '}}
@@ -122,14 +121,14 @@
       </tr>
       <tr>
         <td>Tempat </td>
-        <td width="550">: {{$data->tempat}}</td>
+        <td width="570">: {{$data->tempat}}</td>
       </tr>
     </table>
     <br>
     <table width="619">
       <tr>
         <td>
-          <font size="3"> {{$data->penutup}}.</font>
+          <font size="3"> {{$surat->penutup}}.</font>
         </td>
       </tr>
       <br>
@@ -143,6 +142,8 @@
           <td width="400"></td>
       
           <td width="230" class="text2"> {{$surat? $surat->nama_jabatan: '-'}}
+          <br>
+          <br>
           <br>
           <br>
           {{$surat? $surat->name: '-'}}
@@ -198,24 +199,6 @@
             
         }
   </script> -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script>
-    var words = [];
-
-    function getWords(elements) {
-      elements.contents().each(function() {
-        if ($(this).contents().length > 0) return getWords($(this));
-        if ($(this).text()) words = words.concat($(this).text().split(" "));
-      })
-
-    }
-
-    getWords($("#kegiatanContent"));
-    console.log(words[1].length);
-    const kegiatan = $("#headerContent")
-    if (words[1].length > 9) {
-      kegiatan.addClass('wrapContent');
-    }
-  </script>
+ 
 </body>
 </html>

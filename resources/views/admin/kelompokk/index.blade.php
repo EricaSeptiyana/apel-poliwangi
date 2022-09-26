@@ -121,7 +121,7 @@
                       </form> -->
 
                       <!-- modal hapus -->
-                      <!-- <button class="btn btn-danger hapussurat" type="" data-toggle="modal" data-target="#deletesurat" value="{{$row->id}}"> Hapus </button>
+                      <button class="btn btn-danger hapussurat" type="" data-toggle="modal" data-target="#deletesurat" value="{{$row->id}}"> Hapus </button>
                       <form action="{{route('kelompokk.destroy', $row->id)}}" method="post">
                         @csrf
                         @method('DELETE')
@@ -144,7 +144,7 @@
                             </div>
                           </div>
                         </div>
-                      </form> -->
+                      </form>
                     </div>
                   </td>
                   @endrole
@@ -315,11 +315,22 @@
                   </td>
                   <td>
                     <div class="d-flex justify-content-evenly">
+                      
                       @empty($row->surat->namattd_surattugas)
-
+                      
                       <a href="{{route('surattugas.create',['id' => $row->id])}}" class="btn btn-warning mx-2"> Buat </a>
                       @else
                       <a href="#" class="btn btn-secondary disabled"> Buat </a>
+                      @endempty
+
+                      @empty($row->surat->pembuka)
+                      <a href="#" class="btn btn-secondary disabled mx-2"> View </a>
+                      @else
+                      @if($row->tipe_surat == 'perorangan')
+                      <a href="{{route('surattugas.show',$row->id)}}" target="blank" class="btn btn-primary mx-2"> View </a>
+                      @elseif($row->tipe_surat == 'kelompok')
+                      <a href="{{route('surattugaskelompok',$row->id)}}" target="blank" class="btn btn-primary mx-2"> View </a>
+                      @endif
                       @endempty
 
                       @empty($row->surat->file_surattugas)

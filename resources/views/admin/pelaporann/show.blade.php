@@ -8,10 +8,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <style>
-    
-    .penutup{
-      text-align:right;
+       * {
+      font-family: 'Times New Roman', Times, serif;
     }
+ 
     table tr .text2{
       text-align: left;
     }
@@ -45,18 +45,17 @@
 </head>
 <body>
   <center>
-    <tr>
+  <tr>
       <table width="625" class="border-bottom border-dark solid">
-        <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}"" width="105" height="105"></td>
-        <td>
+        <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="105" height="105"></td>
+        <td class="kopContent">
           <center>
-              <font size="5">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</font><br>
-              <!-- <font size="4">RISET, DAN TEKNOLOGI</font><br> -->
-              <font size="5"><b>POLITEKNIK NEGERI BANYUWANGI</b></font><br>
-              <font size="3">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</font><br>
-              <font size="3">Telepon / Faks : (0333) 636780</font><br>
-              <font size="3">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</font><br>
-          <center>
+            <p style="font-size: 16pt; margin:auto">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</p>
+            <p style="font-size: 14pt;margin:auto"><b>POLITEKNIK NEGERI BANYUWANGI</b></p>
+            <p style="font-size: 12pt;margin:auto">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</p>
+            <p style="font-size: 12pt;margin:auto">Telepon / Faks : (0333) 636780</p>
+            <p style="font-size: 12pt;margin:auto">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</p>
+            <center>
         </td>
       </table>
     </tr>
@@ -95,7 +94,7 @@
     </table> -->
     <br>
     <table width="625" class="main-content" style="margin-left: 10px; text-align: left; margin-top:-130px;">
-        <tr>
+        <tr style="vertical-align: top;">
           
           <td >I. Dasar Pelaksanaan</td>
           <td>:
@@ -105,7 +104,7 @@
         </tr>
   
       <br>
-      <tr>
+      <tr style="vertical-align: top;">
         <td >II. Maksud Perjalanan Dinas</td>
         <td>:
         {{$data->maksud_perjalanandinas}}
@@ -121,7 +120,7 @@
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
       <br>
-      <tr>
+      <tr style="vertical-align: top;">
       <!-- isoFormat('dddd, D MMMM Y'); -->
         <td>IV. Waktu Pelaksanaan</td>
         <td>:
@@ -133,23 +132,24 @@
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
       <br>
-      <tr>
-        <td class="headerContent" >V. Hasil</td>
-        <td widht="300" class="kegiatanContent">: {{$data->hasil}}
+      <tr style="vertical-align: top;">
+        <td>V. Hasil</td>
+        <td widht="300" >: {{$data->hasil}}
         </td>
         <!-- <td width="549">Suntiwi</td> -->
       </tr>
     </table>
     <table width="625">
       <tr >
+        <td width="282"></td>
         <td class="penutup">
-            <font size="3">
+            <font size="3" >
             {{$data->penutup}}
             </font>
         </td>
       </tr>
       <br>
-      <table width="600">
+      <table width="600" style="margin-bottom: 400px;">
         <tr>
         <td width ="400"></td>
           <td class="text2">Banyuwangi,
@@ -159,7 +159,8 @@
         <br>
         <tr >
           <td width ="400"></td>
-              <td class="text2">Yang Membuat,   
+              <td class="text2">Yang Membuat,  
+                <br> 
               @empty($data->ttd)
               <br>
               @else
@@ -181,18 +182,17 @@
   </center>
   
   <center>
-  <tr >
-      <table width="625" class="border-bottom border-dark solid" style="margin-top:250px;">
+  <tr>
+      <table width="625" class="border-bottom border-dark solid">
         <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="105" height="105"></td>
-        <td>
+        <td class="kopContent">
           <center>
-              <font size="5">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</font><br>
-              <!-- <font size="4">RISET, DAN TEKNOLOGI</font><br> -->
-              <font size="5"><b>POLITEKNIK NEGERI BANYUWANGI</b></font><br>
-              <font size="3">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</font><br>
-              <font size="3">Telepon / Faks : (0333) 636780</font><br>
-              <font size="3">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</font><br>
-          <center>
+            <p style="font-size: 16pt; margin:auto">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</p>
+            <p style="font-size: 14pt;margin:auto"><b>POLITEKNIK NEGERI BANYUWANGI</b></p>
+            <p style="font-size: 12pt;margin:auto">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</p>
+            <p style="font-size: 12pt;margin:auto">Telepon / Faks : (0333) 636780</p>
+            <p style="font-size: 12pt;margin:auto">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</p>
+            <center>
         </td>
       </table>
     </tr>

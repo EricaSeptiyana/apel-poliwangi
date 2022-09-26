@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <title>Surat Permohonan Perorangan</title> -->
-  <title>  </title>
+  <title> </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <style>
-    table tr .text2{
+    * {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    table tr .text2 {
       text-align: left;
     }
-    table tr .text3{
-        text-align: center;
-        font-size: 18px;
-      }
+
+    table tr .text3 {
+      text-align: center;
+      font-size: 18px;
+    }
+
     table tr td {
       text-align: justify;
       font-size: 15px;
     }
+
     table tr .text {
       text-align: right;
       font-size: 15px;
     }
+
     @page {
       size: auto;
-      margin:0;
+      margin: 0;
     }
   </style>
 </head>
+
 <body>
   <center>
     <tr>
       <table width="625" class="border-bottom border-dark solid">
         <td><img src="{{ asset('public/assets/img/logo_poliwangi.png')}}" width="105" height="105"></td>
-        <td>
-          <center class="">
-              <font size="5">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</font><br>
-              <!-- <font size="4">RISET, DAN TEKNOLOGI</font><br> -->
-              <font size="5"><b>POLITEKNIK NEGERI BANYUWANGI</b></font><br>
-              <font size="3">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</font><br>
-              <font size="3">Telepon / Faks : (0333) 636780</font><br>
-              <font size="3">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</font><br>
+        <td class="kopContent">
           <center>
+            <p style="font-size: 16pt; margin:auto">KEMENTRIAN PENDIDIKAN, KEBUDAYAAN,<br>RISET, DAN TEKNOLOGI</p>
+            <p style="font-size: 14pt;margin:auto"><b>POLITEKNIK NEGERI BANYUWANGI</b></p>
+            <p style="font-size: 12pt;margin:auto">Jl. Raya Jember kilometer 13 Labanasem, Kabat, Banyuwangi, 68461</p>
+            <p style="font-size: 12pt;margin:auto">Telepon / Faks : (0333) 636780</p>
+            <p style="font-size: 12pt;margin:auto">Email : poliwangi@poliwangi.ac.id ; Website : http//www.poliwangi.ac.id</p>
+            <center>
         </td>
       </table>
     </tr>
@@ -52,25 +61,25 @@
       <!-- <td colspan="2"></td> -->
     </tr>
     <br>
-   
+
     <!-- font size 15 -->
     <table>
       <tr>
-        <td>Nomor &emsp; :</td>
-        <td width="549">
-          {{$data->nomor_permohonan}}
+        <td>Nomor</td>
+        <td width="567">
+          : {{$data->nomor_permohonan}}
         </td>
       </tr>
       <tr>
-        <td>Lampiran :</td>
-        <td width="549">
-          {{$data->lampiran}}
+        <td>Lampiran </td>
+        <td width="567">
+          : {{$data->lampiran}}
         </td>
       </tr>
-      <tr>
-        <td>Hal &emsp; &emsp; :</td>
-        <td width="549">
-          {{$data->hal}}
+      <tr style="vertical-align: top;">
+        <td>Hal</td>
+        <td width="567">
+          : {{$data->hal}}
         </td>
       </tr>
     </table>
@@ -86,39 +95,39 @@
             di tempat
           </font>
         </td>
-        
+
       </tr>
     </table>
     <br>
     <table width="625">
-        <tr>
-            <td>
-            <font size="3">
-              {{$data->pembuka}}
-            </font>
-            </td>
-        </tr>
+      <tr>
+        <td>
+          <font size="3">
+            {{$data->pembuka}}
+          </font>
+        </td>
+      </tr>
     </table>
 
     <br>
     <table>
       <tr>
-        <td>Nama &emsp; &ensp;:</td>
-        <td width="549">
-          {{$data->user->name}}
+        <td>Nama </td>
+        <td width="567">
+          : {{$data->user->name}}
         </td>
       </tr>
       <tr>
-        <td>NIP/NIK &emsp;:</td>
-        <td width="549">
-          {{$data->user->nip}}
+        <td>NIP/NIK</td>
+        <td width="567">
+          : {{$data->user->nip}}
         </td>
       </tr>
       @foreach($jabatan as $userjabatan)
       <tr>
-        <td>Jabatan &emsp; :</td>
-        <td width="549">
-        {{$userjabatan->jabatan}}
+        <td>Jabatan</td>
+        <td width="567">
+          : {{$userjabatan->jabatan}}
         </td>
       </tr>
       @endforeach
@@ -137,32 +146,32 @@
     <table>
       <tr>
         <td>
-          Hari, Tanggal :
+          Hari, Tanggal
         </td>
-        <td width="520"> 
-        {{Carbon\Carbon::parse($data->waktu_mulai)->isoFormat('dddd, D MMMM Y')}}
+        <td width="540">
+          : {{Carbon\Carbon::parse($data->waktu_mulai)->isoFormat('dddd, D MMMM Y')}}
 
           {{$data->waktu_selesai ? '- '.Carbon\Carbon::parse($data->waktu_selesai)->isoFormat('dddd, D MMMM Y') : ' '}}
 
         </td>
       </tr>
       <tr>
-        <td>Pukul &emsp; &emsp; &ensp;:</td>
-        <td width="520"> 
-        {{Carbon\Carbon::parse($data->pukul_pelaksanaan)->format('h:i')}}
+        <td>Pukul</td>
+        <td width="540">
+          : {{Carbon\Carbon::parse($data->pukul_pelaksanaan)->format('h:i')}}
           - selesai
         </td>
         <!-- <td width="20">- selesai</td> -->
       </tr>
       <tr>
-        <td>Tempat &emsp; &emsp; :</td>
-        <td width="520">
-          {{$data->tempat}}
+        <td>Tempat</td>
+        <td width="540">
+          : {{$data->tempat}}
         </td>
       </tr>
     </table>
     <!-- <br> -->
-    <table width="619">
+    <table width="621">
       <tr>
         <td>
           <!-- <font size="3"> Maka dengan ini kami mengajukan permohonan surat tugas untuk panitia karyawan program penjajakan kerjasama tersebut. Demikian surat permohonan ini kami sampaikan. Atas perhatian Bapak, kami mengucapkan terima kasih. </font> -->
@@ -176,9 +185,9 @@
         <tr>
           <td width="400"></td>
           <td class="text2">
-            Banyuwangi, 
+            Banyuwangi,
             {{Carbon\Carbon::parse($data->tanggal_permohonan)->isoFormat('D MMMM Y')}}
-          <!-- {{$data->tanggal_permohonan}} -->
+            <!-- {{$data->tanggal_permohonan}} -->
           </td>
         </tr>
         <br>
@@ -186,31 +195,31 @@
           <td width="400"></td>
           <td class="text2" width="250">
             {{$data->jabatan_penandatangan}}
-            <br> 
-            @empty($data->ttd) 
+            <br>
+            @empty($data->ttd)
             @else
-            <img src="{{ asset('public/file/'.$data->ttd)}}"  height="40">
+            <img src="{{ asset('public/file/'.$data->ttd)}}" height="40">
             <br>
             @endempty
-       
+
             {{$data->name}}
           </td>
         </tr>
         <tr>
-            <td width="400"></td>
-            <td class="text2">
-              NIP./NIK.{{$data->nip}}
-            </td>
-          </tr>
+          <td width="400"></td>
+          <td class="text2">
+            NIP./NIK.{{$data->nip}}
+          </td>
+        </tr>
       </table>
     </table>
   </center>
   <div class="container-lg text-center mt-4 mb-4 pt-4">
-      <!-- <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button> -->
-      <!-- <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a> -->
+    <!-- <button name="cetak" type="button" id="cetak" value="Cetak" onclick="Cetakan()" class="btn btn-primary" style="margin-right: 4cm;">cetak</button> -->
+    <!-- <a href="{{ url('admin/kelompokk/') }}" name="selanjutnya" id="selanjutnya" class="btn btn-success">Kembali</a> -->
   </div>
   <script type="text/javascript">
-       window.print();
+    window.print();
   </script>
   <!-- <script>
         function Cetakan() {
@@ -251,4 +260,5 @@
         }
   </script> -->
 </body>
+
 </html>

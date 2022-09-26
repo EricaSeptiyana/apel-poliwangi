@@ -31,14 +31,14 @@ class SurattugasController extends Controller
     public function create(Request $request)
     {
         //
-        $pagename="Form Input Surat Tugas";
-        $data_User=User::all();
-        $data=kelompokk::find($request->id);
-        $dataSurattugas=surattugas::select('*')
-            ->where('kelompokk_id',$request->id)
+        $pagename = "Form Input Surat Tugas";
+        $data_User = User::all();
+        $data = kelompokk::find($request->id);
+        $dataSurattugas = surattugas::select('*')
+            ->where('kelompokk_id', $request->id)
             ->get();
-        
-        return view('admin.surattugas.create', compact('pagename', 'data_User','data','dataSurattugas'));
+
+        return view('admin.surattugas.create', compact('pagename', 'data_User', 'data', 'dataSurattugas'));
     }
 
     /**
@@ -53,28 +53,30 @@ class SurattugasController extends Controller
         //
         // $data = Disposisi::all();
         $request->validate([
-            'tanggal_surattugas'=>'required',
-            'namattd_surattugas'=>'required', 
+            'tanggal_surattugas' => 'required',
+            'namattd_surattugas' => 'required',
         ]);
-      
-        if ($request->tanggal_surattugas == null){
-            return Redirect::back()->withErrors(['Gagal'=>'Mohon isi tanggal penanda tangan atau tanggal ']);    
+
+        if ($request->tanggal_surattugas == null) {
+            return Redirect::back()->withErrors(['Gagal' => 'Mohon isi tanggal penanda tangan atau tanggal ']);
         }
         try {
-        $data_surattugas=new surattugas([
-            'nomor_surattugas' => $request->get('nomor_surattugas'),
-            'pembuka' => $request->get('pembuka_surattugas'),
-            'penutup' => $request->get('penutup_surattugas'),
-            'tanggal_surattugas' => $request->get('tanggal_surattugas'),
-            'namattd_surattugas' => $request->get('namattd_surattugas'),
-            'nipttd_surattugas' => $request->get('nipttd_surattugas'),
-            'jabatanttd_surattugas' => $request->get('jabatanttd_surattugas'),
-        ]);
-        $data_surattugas->save();
-        return redirect('admin/kelompokk')->with('sukses','Surat Tugas Berhasil Dibuat');
+            $data_surattugas = new surattugas([
+                'nomor_surattugas' => $request->get('nomor_surattugas'),
+                'pembuka' => $request->get('pembuka_surattugas'),
+                'penutup' => $request->get('penutup_surattugas'),
+                'tanggal_surattugas' => $request->get('tanggal_surattugas'),
+                'namattd_surattugas' => $request->get('namattd_surattugas'),
+                'nipttd_surattugas' => $request->get('nipttd_surattugas'),
+                'jabatanttd_surattugas' => $request->get('jabatanttd_surattugas'),
+            ]);
+            $data_surattugas->save();
 
+
+
+            return redirect('admin/kelompokk')->with('sukses', 'Surat Tugas Berhasil Dibuat');
         } catch (\Exception $e) {
-        return Redirect::back()->withErrors(['Gagal'=>'Nomor Surat Tugas Sudah Digunakan']);
+            return Redirect::back()->withErrors(['Gagal' => 'Nomor Surat Tugas Sudah Digunakan']);
         }
     }
 
@@ -85,38 +87,39 @@ class SurattugasController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //SHOW SURAT TUGAS PERORANGAN
+    //SHOW SURAT TUGAS PERORANGAN
     public function show($id)
     {
         //
-        $datakaryawan=penugasankaryawan::select('*')->where('kelompokk_id', $id)->get();
+        $datakaryawan = penugasankaryawan::select('*')->where('kelompokk_id', $id)->get();
         foreach ($datakaryawan as $karyawan) {
-           
         }
-        $data=kelompokk::find($id);
-        
-        $surat=surattugas::join('users as u', 'surattugas.namattd_surattugas' , '=', 'u.id')
-        ->where('surattugas.kelompokk_id', $id)
-        ->get()
-        ->first();
+        $data = kelompokk::find($id);
 
-        return view('admin.surattugas.show_perorangan', compact('data','karyawan','surat'));
+        $surat = surattugas::join('users as u', 'surattugas.namattd_surattugas', '=', 'u.id')
+            ->join('jabatans as j', 'u.jabatan_id','=','j.id')  
+            ->where('surattugas.kelompokk_id', $id)
+            ->get()
+            ->first();
+
+        return view('admin.surattugas.show_perorangan', compact('data', 'karyawan', 'surat'));
     }
 
     //SHOW SURAT TUGAS KELOMPOKK
     public function showKelompok($id)
     {
         //
-        $karyawan=penugasankaryawan::all()->where('kelompokk_id', $id);
-        $data=kelompokk::find($id);
-        
-        $surat=surattugas::join('users as u', 'surattugas.namattd_surattugas' , '=', 'u.id')
-        ->where('surattugas.kelompokk_id', $id)
-        ->get()
-        ->first();
-        $i=1;
+        $karyawan = penugasankaryawan::all()->where('kelompokk_id', $id);
+        $data = kelompokk::find($id);
 
-        return view('admin.surattugas.show_kelompok', compact('data', 'karyawan','i','surat'));
+        $surat = surattugas::join('users as u', 'surattugas.namattd_surattugas', '=', 'u.id')
+            ->join('jabatans as j', 'u.jabatan_id','=','j.id')
+            ->where('surattugas.kelompokk_id', $id)
+            ->get()
+            ->first();
+        $i = 1;
+
+        return view('admin.surattugas.show_kelompok', compact('data', 'karyawan', 'i', 'surat'));
     }
 
     /**
@@ -128,14 +131,14 @@ class SurattugasController extends Controller
     public function edit($id)
     {
         //
-        $pagename="Form Input Surat Tugas";
-        $data_User=User::all();
-        $data=kelompokk::find($id);
-        $dataSurattugas=surattugas::select('*')
-            ->where('kelompokk_id',$id)
+        $pagename = "Form Input Surat Tugas";
+        $data_User = User::all();
+        $data = kelompokk::find($id);
+        $dataSurattugas = surattugas::select('*')
+            ->where('kelompokk_id', $id)
             ->get();
-  
-        return view('admin.surattugas.create', compact('pagename', 'data_User','data','dataSurattugas'));
+
+        return view('admin.surattugas.create', compact('pagename', 'data_User', 'data', 'dataSurattugas'));
     }
 
     /**
@@ -145,28 +148,36 @@ class SurattugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
 
         //
-        $request->validate([
-            'tanggal_surattugas'=>'required',
-            'namattd_surattugas'=>'required', 
-        ]);
-    
-        try{
-        surattugas::where('nomor_surattugas',$id)
-            ->update([ 
-            'pembuka' => $request->pembuka_surattugas,
-            'nomor_surattugas' => $request->nomor_surattugas,
-            'penutup' => $request->penutup_surattugas,
-            'tanggal_surattugas' => $request->tanggal_surattugas,
-            'namattd_surattugas' => $request->namattd_surattugas,
-        ]);
 
-        return redirect('admin/kelompokk')->with('sukses','Surat Tugas Berhasil Dibuat');
+        $request->validate([
+            'tanggal_surattugas' => 'required',
+            'namattd_surattugas' => 'required',
+        ]);
+        try {
+            $data =  surattugas::find($id);
+
+            $data->pembuka = $request->pembuka_surattugas;
+            $data->nomor_surattugas = $request->nomor_surattugas;
+            $data->penutup = $request->penutup_surattugas;
+            $data->tanggal_surattugas = $request->tanggal_surattugas;
+            $data->namattd_surattugas = $request->namattd_surattugas;
+            $data->save();
+            $data_surat = kelompokk::find($request->id_surat);
+
+            $data_surat->waktu_pelaksanaan = $request->waktu_pelaksanaan;
+            $data_surat->pukul_pelaksanaan = $request->pukul_pelaksanaan;
+            $data_surat->waktu_selesai = $request->waktu_selesai;
+            $data_surat->tempat = $request->tempat;
+
+            $data_surat->save();
+
+            return redirect('admin/kelompokk')->with('sukses', 'Surat Tugas Berhasil Dibuat');
         } catch (\Exception $e) {
-            return Redirect::back()->withErrors(['Gagal'=>'Nomor Surat Tugas Sudah Digunakan']);
+            return Redirect::back()->withErrors(['Gagal' => $e->getMessage()]);
         }
     }
 
@@ -183,23 +194,22 @@ class SurattugasController extends Controller
 
 
     //KIRIM SURAT TUGAS
-    public function sendLetter(Request $request, $id){
+    public function sendLetter(Request $request, $id)
+    {
         $request->validate([
             'file_surattugas' => 'required',
         ]);
 
         $dataSurattugas = surattugas::where('kelompokk_id', $id);
-   
 
-        if($request->hasFile('file_surattugas')) {
+
+        if ($request->hasFile('file_surattugas')) {
             $request->file('file_surattugas')->move('public/file/', $request->file('file_surattugas')->getClientOriginalName());
         }
 
         //UPDATE SURAT TUGAS
-        $dataSurattugas->update(['file_surattugas'=>$request->file('file_surattugas')->getClientOriginalName()]);
+        $dataSurattugas->update(['file_surattugas' => $request->file('file_surattugas')->getClientOriginalName()]);
 
-        return redirect('admin/kelompokk')->with('sukses','Surat Tugas Berhasil dikirim');
+        return redirect('admin/kelompokk')->with('sukses', 'Surat Tugas Berhasil dikirim');
     }
-
 }
-

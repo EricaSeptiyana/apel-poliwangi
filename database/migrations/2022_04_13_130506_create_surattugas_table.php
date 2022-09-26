@@ -16,7 +16,7 @@ class CreateSurattugasTable extends Migration
         Schema::create('surattugas', function (Blueprint $table) {
             $table->id();
             $table->integer('kelompokk_id')->nullable();
-            $table->string('nomor_surattugas')->unique()->nullable();
+            $table->string('nomor_surattugas')->nullable();
             $table->text('pembuka')->nullable();
             $table->text('penutup')->nullable();
             $table->string('namattd_surattugas')->nullable();

@@ -51,6 +51,9 @@ class kelompokk extends Model
         return $this->hasMany(penugasankaryawan::class);
     }
      
+    public function penandatangan(){
+        return $this->hasOne(User::class,'id','nama_penandatangan');
+    }
 
 
 }
